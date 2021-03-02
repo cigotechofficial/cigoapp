@@ -26,7 +26,9 @@ SECRET_KEY = '97quixm#*05p9d5f(w%11f96nutg82dw*+lgdn)bfp$3xi@@oh'
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
 
-ALLOWED_HOSTS = ['cigoproduction.ap-south-1.elasticbeanstalk.com', 'www.cigo.co.in', 'cigo.co.in']
+
+ALLOWED_HOSTS = ['cigostaging.ap-south-1.elasticbeanstalk.com','cigoproduction.ap-south-1.elasticbeanstalk.com', 'www.cigo.co.in', 'cigo.co.in']
+
 # ALLOWED_HOSTS = ['*']
 
 
