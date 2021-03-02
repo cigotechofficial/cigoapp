@@ -2,6 +2,10 @@ branch-defaults:
   default:
     environment: null
     group_suffix: null
+  dev:
+    environment: CigoStaging
+  master:
+    environment: CigoProduction
 global:
   application_name: Cigo
   branch: null
