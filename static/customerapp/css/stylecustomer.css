@@ -1,0 +1,39 @@
+.hidden{
+	display: none !important;
+}
+
+.abc{
+	font-size: 3vh;
+}
+body {
+  /* The image used */
+  background-image: url("https://i.pinimg.com/originals/59/71/b6/5971b6ff0f900f92d27a64cec0c7f2ab.jpg");
+
+  /* Full height */
+  /*height: 100%;*/
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+.whitetext{
+  color: white;
+}
+  
+
+/*.card-body {
+  margin: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 15vw;
+  height: 15vw;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: pointer;
+  background-color: whitesmoke;
+  font-size: 8vw;
+  border-radius: 50%;
+  box-shadow: 1rem 1rem 1rem 0.05rem grey;
+}*/

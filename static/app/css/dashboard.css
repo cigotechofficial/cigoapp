@@ -1,0 +1,56 @@
+.bg {
+    background-color: white;
+    background-repeat: no-repeat;
+    background-size: cover; 
+    color: black;
+
+}
+
+.modal-content {
+    color: black
+}
+.hidden{
+    display: none !important;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+#waiterid{
+  height: 200px;
+  overflow-y: scroll;
+}
+#tabletextid {
+  height: 200px;
+  overflow-y: scroll;
+}
+#orderdetails {
+  height: 200px;
+  overflow-y: scroll;
+}
+#verifypaymenttable {
+  height: 200px;
+  overflow-y: scroll;
+}
+#neworder {
+  height: 200px;
+  overflow-y: scroll;
+}
+#cookingtable {
+  height: 200px;
+  overflow-y: scroll;
+}
+/*--------------------------------------waiter----------------------------*/
+#neworderwaiter {
+  height: 200px;
+  overflow-y: scroll;
+}
+#cooking {
+  height: 200px;
+  overflow-y: scroll;
+}
+#endsessionid {
+  height: 200px;
+  overflow-y: scroll;
+}
+

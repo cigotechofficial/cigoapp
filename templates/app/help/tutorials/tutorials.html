@@ -1,0 +1,37 @@
+{% extends "app/appbase.html" %}
+{% load static %}
+{% block title %}home{% endblock title %}
+{% block helpactive %}active{% endblock helpactive %}
+{% block helpactivemanager %}active{% endblock helpactivemanager %}
+{% block body %}
+<!-- Begin Page Content -->
+<link href="{% static 'help/css/hover.css' %}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="mobirise/style.css">
+<div class="container-fluid">
+    <div class="row mbr-gallery mt-4">
+        {% for i in tutorials %}
+        <!-- start of video -->
+        <div class="col-12 col-md-6 col-lg-4 item gallery-image my-5" data-toggle="modal" data-target="#{{i.modalcode}}">
+            <div class="hovereffect">
+                <img width="373" height="210" class="img-responsive" src={{i.thumbnaillink}}>
+                <div class="overlay">
+                    <h2>{{i.videoname}}</h2>
+                    <a class="info"><i class="fas fa-play fa-2x text-gray-300"></i></a>
+                </div>
+            </div>
+            <h5 class="text-center">{{i.videoname}}</h5>
+        </div>
+        <!-- end of tutorial -->
+        <!-- Modal -->
+        <div class="modal fade" id="{{i.modalcode}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document" >
+                <div class="modal-content" >
+                    <iframe width="840" height="473" src={{i.videolink}} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<!-- End of Page Content -->
+{% endblock body %}

@@ -1,0 +1,36 @@
+{% extends "app/appbase.html" %}
+{% load static %}
+{% block title %}home{% endblock title %}
+{% block helpactive %}active{% endblock helpactive %}">
+{% block body %}
+<!-- Begin Page Content -->
+<link href="{% static 'help/css/hover.css' %}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="mobirise/style.css">
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h5 class="text-center "> Contact Product Specialist</h5>
+        </div>
+        <div class="card-body">
+            <div class="text-center">
+                <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 15rem;" src="{% static 'help/img/undraw_my_app_grf2.svg' %}" alt="">
+            </div>
+            <div class="mx-5">
+                <p class="text-center ">We at Cigo know that your time is valuable hence you don't have to wait to talk to customer care. We will call you within few minutes (depending on the call traffic)</p>
+            </div>
+            <div class="text-center mt-5">
+                <form action="/help/call/" method="POST" class="form-inline">
+                    {% csrf_token %}
+                    <div class="form-group mr-4">
+                        <label for="exampleInputEmail1">Your Name and Phone Number For Callback:</label>
+                        <input type="name" class="form-control" name="name" id="name" placeholder="Your Name" required >
+                        <input type="Phone" class="form-control" name="phone" id="phone" placeholder="Phone Number" required>
+                    </div>    
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Page Content -->
+{% endblock body %}

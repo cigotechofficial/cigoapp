@@ -1,0 +1,25 @@
+{% extends "customerapp/customerbase.html" %}
+{% load socialaccount %}
+{% block title %}
+login gmail
+{% endblock title %}
+{% block body %}
+<p style="text-align:center;"><img src="https://cigo-personal.s3.ap-south-1.amazonaws.com/rajputra/logoCigo4.png" style="width:250px;height:150px;"></p>
+
+  {% if user.is_authenticated %}
+  <p class="text-center">Welcome, {{ user.first_name }} !</p>
+ 
+  {% else %}
+  <a href="{% provider_login_url 'google' %}">Login with Google</a>
+  {% endif %}
+
+<p>Welcome {{request.user.first_name}}</p>
+
+        
+{% endblock body %}
+{% block js %}
+  <script>
+    var restaurantId = {{restaurantid}} ;
+    localStorage.setItem("restid", restaurantId);
+  </script>
+{% endblock js %} 
