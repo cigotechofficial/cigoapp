@@ -173,11 +173,11 @@ AUTHENTICATION_BACKENDS = (
  'allauth.account.auth_backends.AuthenticationBackend',
  )
 
-
+# ---------------------------for https ----------------------------------------
 # if os.getcwd() == '/app':
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_SSL_REDIRECT = True
-DEBUG = False
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# SECURE_SSL_REDIRECT = True
+# DEBUG = False
 
 
 AWS_ACCESS_KEY_ID = 'AKIA4KY24AYIV3KBBJCE'
