@@ -111,7 +111,7 @@ DATABASES = {
         'NAME':'postgres',
         'USER':'postgres',
         'PASSWORD':'rroonnyy',
-        'HOST':'cigoproddatabase.cjiavj7zji11.ap-south-1.rds.amazonaws.com',
+        'HOST':'aa687e5wvo7evp.cjiavj7zji11.ap-south-1.rds.amazonaws.com',
         'PORT':'5432'
 
     }
