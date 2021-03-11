@@ -107,10 +107,11 @@ WSGI_APPLICATION = 'cigo_version3.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME':'CigoProdDatabase',
+        # 'NAME':'CigoProdDatabase',
+        'NAME':'postgres',
         'USER':'postgres',
         'PASSWORD':'rroonnyy',
-        'HOST':'CigoProdDatabase.cjiavj7zji11.ap-south-1.rds.amazonaws.com',
+        'HOST':'cigoproddatabase.cjiavj7zji11.ap-south-1.rds.amazonaws.com',
         'PORT':'5432'
 
     }
