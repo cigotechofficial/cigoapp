@@ -97,24 +97,24 @@ WSGI_APPLICATION = 'cigo_version3.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-DATABASES = {
-	'default': {
-		'ENGINE': 'django.db.backends.sqlite3',
-		'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-	}
-}
-
 # DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME':'Cigo_Prod_Database',
-#         'USER':'postgres',
-#         'PASSWORD':'rroonnyy',
-#         'HOST':'aa18h4zua3mxkit.cjiavj7zji11.ap-south-1.rds.amazonaws.com',
-#         'PORT':'5432'
-
-#     }
+# 	'default': {
+# 		'ENGINE': 'django.db.backends.sqlite3',
+# 		'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+# 	}
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME':'CigoProdDatabase',
+        'USER':'postgres',
+        'PASSWORD':'rroonnyy',
+        'HOST':'CigoProdDatabase.cjiavj7zji11.ap-south-1.rds.amazonaws.com',
+        'PORT':'5432'
+
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
