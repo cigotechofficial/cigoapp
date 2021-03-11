@@ -73,90 +73,91 @@ def dashboard(request):
 
 		if group == 'Waiter':
 
-			waiter = Employee.objects.get(ph=request.user.username)
-			waiter_venueid=waiter.venue.venueid
-			venue=Venue.objects.get(venueid=waiter_venueid)
-			tablenos=list(range(1, venue.notables+1))
+			# waiter = Employee.objects.get(ph=request.user.username)
+			# waiter_venueid=waiter.venue.venueid
+			# venue=Venue.objects.get(venueid=waiter_venueid)
+			# tablenos=list(range(1, venue.notables+1))
 
 
-			table_selected=0
-			table_qr='none'
-			if request.method == 'POST':
-				table_selected=request.POST['tablenoselect']
-				restaurantid = venue.venueid
+			# table_selected=0
+			# table_qr='none'
+			# if request.method == 'POST':
+			# 	table_selected=request.POST['tablenoselect']
+			# 	restaurantid = venue.venueid
 
-				key = ''
-				for i in range(15):
-					key += random.choice(string.ascii_lowercase + string.digits)
+			# 	key = ''
+			# 	for i in range(15):
+			# 		key += random.choice(string.ascii_lowercase + string.digits)
 
-				hashingcode = key
+			# 	hashingcode = key
 				
-				filtereddata=CustomerAuthentication.objects.filter(restaurant=venue).filter(table_no=table_selected)
+			# 	filtereddata=CustomerAuthentication.objects.filter(restaurant=venue).filter(table_no=table_selected)
 
-				if len(filtereddata) == 0: 
-					customerauthentication = CustomerAuthentication(restaurant=venue, table_no=table_selected, hashcode=hashingcode)
-					customerauthentication.save()
+			# 	if len(filtereddata) == 0: 
+			# 		customerauthentication = CustomerAuthentication(restaurant=venue, table_no=table_selected, hashcode=hashingcode)
+			# 		customerauthentication.save()
 
-				else:
-					hashingcode=filtereddata[0].hashcode
+			# 	else:
+			# 		hashingcode=filtereddata[0].hashcode
 				
 
-				table_qr = 'cigo.co.in/customerapp/' + str(restaurantid) + '/' + str(table_selected) + '/' + hashingcode +'/welcome'
-				# table_qr = 'https://cigo.co.in/' + str(restaurantid) + '/' + str(table_selected) + '/' + hashingcode
-			# ---------------------------------------------end session waiter ---------------------------------------------------
-			orders = Order.objects.filter(restaurant=waiter_venueid)
-			venue = Venue.objects.get(venueid=waiter_venueid)
+			# 	table_qr = 'cigo.co.in/customerapp/' + str(restaurantid) + '/' + str(table_selected) + '/' + hashingcode +'/welcome'
+			# 	# table_qr = 'https://cigo.co.in/' + str(restaurantid) + '/' + str(table_selected) + '/' + hashingcode
+			# # ---------------------------------------------end session waiter ---------------------------------------------------
+			# orders = Order.objects.filter(restaurant=waiter_venueid)
+			# venue = Venue.objects.get(venueid=waiter_venueid)
 
-			t_list = list()
-			tables = orders.values('table_no').distinct()
+			# t_list = list()
+			# tables = orders.values('table_no').distinct()
 
-			tax = Gst.objects.all()[0]
-			cgst = tax.cgst
-			sgst = tax.sgst
+			# tax = Gst.objects.all()[0]
+			# cgst = tax.cgst
+			# sgst = tax.sgst
 			
-			for table in tables:
+			# for table in tables:
 
-				l = list()
-				table_orders=orders.filter(table_no=table['table_no'])
+			# 	l = list()
+			# 	table_orders=orders.filter(table_no=table['table_no'])
 				
-				for ords in table_orders:
-					totals = dict()
+			# 	for ords in table_orders:
+			# 		totals = dict()
 					
-					total_cgst = 0 
-					total_sgst = 0
-					for k,v in list(json.loads(ords.items_json).items()):
-						item_id = k[2:]
-						qty, item = v
-						# print(item_id)
-						prod_price = Menu.objects.filter(product_id=item_id)[0].price  
+			# 		total_cgst = 0 
+			# 		total_sgst = 0
+			# 		for k,v in list(json.loads(ords.items_json).items()):
+			# 			item_id = k[2:]
+			# 			qty, item = v
+			# 			# print(item_id)
+			# 			prod_price = Menu.objects.filter(product_id=item_id)[0].price  
 
-						prod_total = qty*prod_price
+			# 			prod_total = qty*prod_price
 						
-						totals.update({k:[prod_price, prod_total]})
-					ser = TableSerializer(ords)
-					ser_dict = dict(ser.data)
-					ser_dict["prices"] = totals
-					ser_dict["venue"] = waiter_venueid
+			# 			totals.update({k:[prod_price, prod_total]})
+			# 		ser = TableSerializer(ords)
+			# 		ser_dict = dict(ser.data)
+			# 		ser_dict["prices"] = totals
+			# 		ser_dict["venue"] = waiter_venueid
 					
-					l.append(ser_dict)
-				l.append(table)
-				t_list.append(l)
+			# 		l.append(ser_dict)
+			# 	l.append(table)
+			# 	t_list.append(l)
 
-			dumplist = json.dumps(t_list)
-			# print(t_list)
+			# dumplist = json.dumps(t_list)
+			# # print(t_list)
 
-			tableparams={
-			'restaurantname':venue.venuename,
-			'cgst':cgst,
-			'sgst':sgst,
-			'tablenos':tablenos,
-			'table_selected':table_selected,
-			'table_qr':table_qr,
-			't_list':t_list,
-			'dumplist':dumplist
+			# tableparams={
+			# 'restaurantname':venue.venuename,
+			# 'cgst':cgst,
+			# 'sgst':sgst,
+			# 'tablenos':tablenos,
+			# 'table_selected':table_selected,
+			# 'table_qr':table_qr,
+			# 't_list':t_list,
+			# 'dumplist':dumplist
 
-			}
-			return render(request,'app/dashboard/waiterDashboard.html',tableparams)
+			# }
+			# return render(request,'app/dashboard/waiterDashboard.html',tableparams)
+			return render(request,'app/dashboard/waiterDashboard.html')
 
 
 		daily_prices = []
