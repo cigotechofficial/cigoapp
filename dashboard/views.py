@@ -73,10 +73,10 @@ def dashboard(request):
 
 		if group == 'Waiter':
 
-			# waiter = Employee.objects.get(ph=request.user.username)
-			# waiter_venueid=waiter.venue.venueid
-			# venue=Venue.objects.get(venueid=waiter_venueid)
-			# tablenos=list(range(1, venue.notables+1))
+			waiter = Employee.objects.get(ph=request.user.username)
+			waiter_venueid=waiter.venue.venueid
+			venue=Venue.objects.get(venueid=waiter_venueid)
+			tablenos=list(range(1, venue.notables+1))
 
 
 			# table_selected=0
