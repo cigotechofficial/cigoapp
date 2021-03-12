@@ -51,7 +51,7 @@
         <!-- Text Logo - Use this if you don't have a graphic logo -->
         <!-- <a class="navbar-brand logo-text page-scroll" href="index.html">Aria</a> -->
         <!-- Image Logo -->
-        <a class="navbar-brand logo-image" href="./"><img src="{% static 'home/img/logohome.png' %}" alt="alternative"></a>
+        <a class="navbar-brand logo-image" href="./"><img src="{% static 'home/img/logo.png' %}" alt="alternative"></a>
         <!-- Mobile Menu Toggle Button -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-awesome fas fa-bars"></span>
@@ -113,16 +113,24 @@
     <!-- Header -->
     <header id="header" class="header">
         <div class="header-content">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                <strong>Message: </strong> {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endfor %}
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="text-container">
-                            <h2 style="color: white; font-size: x-large;">HOSPITALITY NEEDS A REVAMP -v2 </h2>
+                            <h2 style="color: white; font-size: x-large;">HOSPITALITY NEEDS A REVAMP</h2>
                             <h1>MAKE YOUR RESTAURANT <span id="js-rotating">SMART, TRENDY, INTELLIGENT, NEWAGE</span></h1>
                             <p class="p-heading p-large">Cigo is a platform helping you manage your restaurant efficiently. And the best part? Its absolutely FREE!</p>
                             <a class="btn btn-info page-scroll" href="#intro">Know More</a>
                             {% if user.is_authenticated %}
-                            <a class="btn btn-info" href="/dashboard" >Go To Dashboard</a>
+                            <a class="btn btn-info" href="/dashboard">Go To Dashboard</a>
                             {% else %}
                             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#signupModal">
                                 Get Started For Free
@@ -148,145 +156,133 @@
                         <br>
                         <hr>
                         <br>
-                         <ul class="list-unstyled li-space-lg">
+                        <ul class="list-unstyled li-space-lg">
                             <li class="media">
                                 <i class="fas fa-square"></i>
-                                <div class="media-body">Contactless Dining</div>
+                                <div class="media-body"> Contactless Dining</div>
                             </li>
                             <li class="media">
                                 <i class="fas fa-square"></i>
-                                <div class="media-body">No App Req.</div>
-                            </li>                            
+                                <div class="media-body"> No App Req.</div>
+                            </li>
                             <li class="media">
                                 <i class="fas fa-square"></i>
-                                <div class="media-body">Call Waiter Directly</div>
-                            </li>                            
+                                <div class="media-body"> Call Waiter Directly</div>
+                            </li>
                             <li class="media">
                                 <i class="fas fa-square"></i>
-                                <div class="media-body">Customer Happiness Index and Feedback</div>
-                            </li>                            
+                                <div class="media-body"> Customer Happiness Index and Feedback</div>
+                            </li>
                             <li class="media">
                                 <i class="fas fa-square"></i>
-                                <div class="media-body">Reduce Staff Costs</div>
-                            </li>                            
+                                <div class="media-body"> Reduce Staff Costs</div>
+                            </li>
                             <li class="media">
                                 <i class="fas fa-square"></i>
-                                <div class="media-body">Live Order Status</div>
+                                <div class="media-body"> Live Order Status</div>
                             </li>
                         </ul>
                     </div> <!-- end of text-container -->
                 </div> <!-- end of col -->
                 <div class="col-lg-7">
-                    <div class="image-container">
-                        <img class="img-fluid" src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=667&q=80" alt="alternative">
-                    </div> <!-- end of image-container -->
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/Vrb_OUTk-j8" allowfullscreen></iframe>
+                    </div>
                 </div> <!-- end of col -->
             </div> <!-- end of row -->
         </div> <!-- end of container -->
     </div> <!-- end of basic-1 -->
     <!-- end of intro -->
-    <!-- Description -->
-    <div class="cards-1">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <!-- Card -->
-                    <div class="card">
-                        <span class="fa-stack">
-                            <span class="hexagon"></span>
-                            <i class="fas fa-binoculars fa-stack-1x"></i>
-                        </span>
-                        <div class="card-body">
-                            <h4 class="card-title">Environment Analysis</h4>
-                            <p>The starting point of any success story is knowing your current position in the business environment</p>
-                        </div>
-                    </div>
-                    <!-- end of card -->
-                    <!-- Card -->
-                    <div class="card">
-                        <span class="fa-stack">
-                            <span class="hexagon"></span>
-                            <i class="fas fa-list-alt fa-stack-1x"></i>
-                        </span>
-                        <div class="card-body">
-                            <h4 class="card-title">Development Planning</h4>
-                            <p>After completing the environmental analysis the next stage is to design and plan your development strategy</p>
-                        </div>
-                    </div>
-                    <!-- end of card -->
-                    <!-- Card -->
-                    <div class="card">
-                        <span class="fa-stack">
-                            <span class="hexagon"></span>
-                            <i class="fas fa-chart-pie fa-stack-1x"></i>
-                        </span>
-                        <div class="card-body">
-                            <h4 class="card-title">Execution & Evaluation</h4>
-                            <p>In this phase you will focus on executing the actions plan and evaluating the results after each marketing campaign</p>
-                        </div>
-                    </div>
-                    <!-- end of card -->
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of cards-1 -->
-    <!-- end of description -->
     <div id="hiw" class="basic-1">
+        <!-- Description -->
+        <div class="cards-1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <!-- Card -->
+                        <div class="card">
+                            <span class="fa-stack">
+                                <span class="hexagon"></span>
+                                <i class="fas fa-qrcode  fa-stack-1x"></i>
+                            </span>
+                            <div class="card-body">
+                                <h4 class="card-title">Scan Qr Code</h4>
+                                <p>Customers have to scan Qr code with their phones to see catalogue of items </p>
+                            </div>
+                        </div>
+                        <!-- end of card -->
+                        <!-- Card -->
+                        <div class="card">
+                            <span class="fa-stack">
+                                <span class="hexagon"></span>
+                                <i class="fas fa-list-alt fa-stack-1x"></i>
+                            </span>
+                            <div class="card-body">
+                                <h4 class="card-title">Select and Order</h4>
+                                <p>Customers have to select item and quantity and order will be digitally placed</p>
+                            </div>
+                        </div>
+                        <!-- end of card -->
+                        <!-- Card -->
+                        <div class="card">
+                            <span class="fa-stack">
+                                <span class="hexagon"></span>
+                                <i class="fas fa-utensils fa-stack-1x"></i>
+                            </span>
+                            <div class="card-body">
+                                <h4 class="card-title">Food on Table</h4>
+                                <p>After the food is prepared, customers will get their food</p>
+                            </div>
+                        </div>
+                        <!-- end of card -->
+                    </div> <!-- end of col -->
+                </div> <!-- end of row -->
+            </div> <!-- end of container -->
+        </div> <!-- end of cards-1 -->
+        <!-- end of description -->
         <section class="text-gray-600 body-font">
             <div class="container px-5 py-24 mx-auto flex flex-wrap">
                 <div class="lg:w-1/2 w-full mb-10 lg:mb-0 rounded-lg overflow-hidden">
-                    <img alt="feature" class="object-cover object-center h-full w-full" src="https://images.unsplash.com/photo-1590846406792-0adc7f938f1d?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=3000&q=80">
+                    <img alt="feature" class="object-cover object-center h-full w-full" src="https://cigo-bucket.s3.ap-south-1.amazonaws.com/images/cigo+ss.jpg">
                 </div>
                 <div class="flex flex-col flex-wrap lg:py-6 -mb-10 lg:w-1/2 lg:pl-12 lg:text-left text-center">
                     <div class="flex flex-col mb-10 lg:items-start items-center">
-                        <div class="w-12 h-12 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-5">
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-6 h-6" viewBox="0 0 24 24">
-                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-                            </svg>
+                        <div class="w-20 h-20 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mr-auto ml-auto mb-2">
+                            <i class="fas fa-chart-line fa-2x"></i>
                         </div>
                         <div class="flex-grow">
-                            <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Shooting Stars</h2>
-                            <p class="leading-relaxed text-base">Blue bottle crucifix vinyl post-ironic four dollar toast vegan taxidermy. Gastropub indxgo juice poutine.</p>
-                            <a class="mt-3 text-indigo-500 inline-flex items-center">Learn More
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-                                    <path d="M5 12h14M12 5l7 7-7 7"></path>
-                                </svg>
-                            </a>
+                            <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Increases Sales</h2>
+                            <p class="leading-relaxed text-base">Seamless ordering, coupled with pictures encourages repeat orders.</p>
                         </div>
                     </div>
+                    <br>
                     <div class="flex flex-col mb-10 lg:items-start items-center">
-                        <div class="w-12 h-12 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-5">
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-6 h-6" viewBox="0 0 24 24">
-                                <circle cx="6" cy="6" r="3"></circle>
-                                <circle cx="6" cy="18" r="3"></circle>
-                                <path d="M20 4L8.12 15.88M14.47 14.48L20 20M8.12 8.12L12 12"></path>
-                            </svg>
+                        <div class="w-20 h-20 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mr-auto ml-auto mb-2">
+                            <i class="fas fa-comments fa-2x"></i>
                         </div>
                         <div class="flex-grow">
-                            <h2 class="text-gray-900 text-lg title-font font-medium mb-3">The Catalyzer</h2>
-                            <p class="leading-relaxed text-base">Blue bottle crucifix vinyl post-ironic four dollar toast vegan taxidermy. Gastropub indxgo juice poutine.</p>
-                            <a class="mt-3 text-indigo-500 inline-flex items-center">Learn More
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-                                    <path d="M5 12h14M12 5l7 7-7 7"></path>
-                                </svg>
-                            </a>
+                            <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Happiness Index & Feedback</h2>
+                            <p class="leading-relaxed text-base">Growth is very important and for that one needs feedback. Owner can get happiness index and feedback directly from customers.</p>
                         </div>
                     </div>
+                    <br>
                     <div class="flex flex-col mb-10 lg:items-start items-center">
-                        <div class="w-12 h-12 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-5">
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-6 h-6" viewBox="0 0 24 24">
-                                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
-                                <circle cx="12" cy="7" r="4"></circle>
-                            </svg>
+                        <div class="w-20 h-20 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mr-auto ml-auto mb-2">
+                            <i class="fas fa-exclamation-triangle fa-2x"></i>
                         </div>
                         <div class="flex-grow">
-                            <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Neptune</h2>
-                            <p class="leading-relaxed text-base">Blue bottle crucifix vinyl post-ironic four dollar toast vegan taxidermy. Gastropub indxgo juice poutine.</p>
-                            <a class="mt-3 text-indigo-500 inline-flex items-center">Learn More
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-                                    <path d="M5 12h14M12 5l7 7-7 7"></path>
-                                </svg>
-                            </a>
+                            <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Eliminates Human Error</h2>
+                            <p class="leading-relaxed text-base">As ordering is digital, there is no chance of confusion. Plus it enhances customer experience.</p>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="flex flex-col mb-10 lg:items-start items-center">
+                        <div class="w-20 h-20 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mr-auto ml-auto mb-2">
+                            <i class="fas fa-edit fa-2x"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Update Menu Instantly</h2>
+                            <p class="leading-relaxed text-base">Its very embarrassing situation when order choosen by customer is out of stock. Now Manager can update menu and it will not be shown to customer.</p>
                         </div>
                     </div>
                 </div>
@@ -298,17 +294,12 @@
         <section class="text-gray-600 body-font">
             <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
                 <div class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-                    <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Before they sold out
-                        <br class="hidden lg:inline-block">readymade gluten
+                    <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-400">Grow your Brand
                     </h1>
-                    <p class="mb-8 leading-relaxed">Copper mug try-hard pitchfork pour-over freegan heirloom neutra air plant cold-pressed tacos poke beard tote bag. Heirloom echo park mlkshk tote bag selvage hot chicken authentic tumeric truffaut hexagon try-hard chambray.</p>
-                    <div class="flex justify-center">
-                        <button class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Button</button>
-                        <button class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">Button</button>
-                    </div>
+                    <p class="mb-8 leading-relaxed text-white">Grow your brand to multiple outlets and manage from one dashboard. </p>
                 </div>
                 <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
-                    <img class="object-cover object-center rounded" alt="hero" src="https://images.unsplash.com/photo-1428515613728-6b4607e44363?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80">
+                    <img class="object-cover object-center rounded" alt="hero" src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=667&q=80">
                 </div>
             </div>
         </section>
@@ -326,16 +317,17 @@
                 <div class="col-lg-7 col-xl-6">
                     <div class="text-container">
                         <div class="section-title">ABOUT</div>
-                        <h2>We're Passionate About Delivering Growth Services</h2>
-                        <p>Our goal is to provide the right business growth services at the appropriate time so companies can benefit from the created momentum and thrive for a long period of time</p>
+                        <h2>We're Passionate About Helping Restaurants To Growth </h2>
+                        <p>Our goal is to provide tech products to restaurants at the appropriate time so thy can benefit from the created momentum and thrive for a long period of time</p>
+                        <br>
                         <ul class="list-unstyled li-space-lg">
                             <li class="media">
                                 <i class="fas fa-square"></i>
-                                <div class="media-body">Everything we recommend has direct positive impact</div>
+                                <div class="media-body">Every tech. products we provide have direct positive impact</div>
                             </li>
                             <li class="media">
                                 <i class="fas fa-square"></i>
-                                <div class="media-body">You will become an important partner of our company</div>
+                                <div class="media-body">Your restaurant will grow at exponential rate with Cigo </div>
                             </li>
                         </ul>
                         <!-- Counter -->
@@ -379,26 +371,26 @@
                 </div> <!-- end of col -->
                 <div class="col-lg-6">
                     <!-- Contact Form -->
-                <form action="./contactus" method="post">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <label for="name">Name:</label>
-                        <input type="name" class="form-control" id="name" name="name" aria-describedby="name">
-                    </div>
-                    <div class="form-group">
-                        <label for="notables">Phone No:</label>
-                        <input type="phone" class="form-control" name="ph" id="ph">
-                    </div>                    
-                    <div class="form-group">
-                        <label for="notables">Email:</label>
-                        <input type="email" class="form-control" name="email" id="email">
-                    </div>                    
-                    <div class="form-group">
-                        <label for="notables">Message:</label>
-                        <input type="text" class="form-control" name="message" id="message">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Send</button>
-                </form>
+                    <form action="./contactus" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="name" class="form-control" id="name" name="name" aria-describedby="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="notables">Phone No:</label>
+                            <input type="phone" class="form-control" name="ph" id="ph">
+                        </div>
+                        <div class="form-group">
+                            <label for="notables">Email:</label>
+                            <input type="email" class="form-control" name="email" id="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="notables">Message:</label>
+                            <input type="text" class="form-control" name="message" id="message">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send</button>
+                    </form>
                     <!-- end of contact form -->
                 </div> <!-- end of col -->
             </div> <!-- end of row -->
@@ -472,14 +464,6 @@
                 </div>
             </div>
         </div>
-        {% for message in messages %}
-        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-            <strong>Message: </strong> {{ message }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        {% endfor %}
     </div>
     <!-- Footer -->
     <div class="footer">
@@ -491,7 +475,6 @@
                         <p class="white">We're passionate about delivering the best business growth services for companies just starting out as startups or industry players that have established their market position a long tima ago.</p>
                     </div> <!-- end of text-container -->
                 </div> <!-- end of col -->
-               
             </div> <!-- end of row -->
         </div> <!-- end of container -->
     </div> <!-- end of footer -->
@@ -501,7 +484,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <p class="p-small">Copyright © 2020 <a href="https://inovatik.com">Template by Inovatik</a></p>
+                    <p class="p-small">Copyright © Cigo 2021 All rights reserved</p>
                 </div> <!-- end of col -->
             </div> <!-- enf of row -->
         </div> <!-- end of container -->
