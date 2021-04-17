@@ -272,7 +272,7 @@ def additem(request):
 		img = request.FILES['menuimg']
 		
 		if img == False:
-			img = Defaultimg.objects.all()[randint(0,10)].dimage
+			img = Defaultimg.objects.all()[randint(0,1)].dimage
 
 
 		venue = Venue.objects.get(venueid=venueID)

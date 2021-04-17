@@ -57,6 +57,8 @@ INSTALLED_APPS = [
 	'allauth.socialaccount.providers.google',
 
 	'storages',
+
+	'onlymenuapp.apps.OnlymenuappConfig',
 ]
 
 SITE_ID = 2

@@ -30,8 +30,8 @@ AVAIL_CHOICE=(
 	)
 
 class Menu(models.Model):
-	venue = models.ForeignKey(Venue, on_delete=models.CASCADE)
 	product_id=models.AutoField(primary_key=True)
+	venue = models.ForeignKey(Venue, on_delete=models.CASCADE)
 	product_name=models.CharField(max_length=50)
 	category=models.CharField(max_length=50, null=True)
 	description=models.CharField(max_length=300, null=True)

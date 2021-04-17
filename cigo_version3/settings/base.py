@@ -49,6 +49,8 @@ INSTALLED_APPS = [
 	'allauth.socialaccount.providers.google',
 
 	'storages',
+	
+	'import_export',
 ]
 
 SITE_ID = 2
