@@ -4,6 +4,8 @@ branch-defaults:
     group_suffix: null
   master:
     environment: Production
+  stage:
+    environment: Staging
 global:
   application_name: Cigo
   default_ec2_keyname: null
