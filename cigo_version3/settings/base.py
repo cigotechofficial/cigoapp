@@ -51,6 +51,7 @@ INSTALLED_APPS = [
 	'storages',
 	
 	'import_export',
+	'onlymenuapp.apps.OnlymenuappConfig',
 ]
 
 SITE_ID = 2
