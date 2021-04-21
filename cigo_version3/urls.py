@@ -19,6 +19,7 @@ urlpatterns = [
     path('changePassword', views.changePassword, name='changePassword'), 
 
     path('emenu/', include('onlymenuapp.urls')),
+    path('emenu2/', include('onlymenuapp2.urls')),
     
 
 ]

@@ -52,6 +52,7 @@ INSTALLED_APPS = [
 	
 	'import_export',
 	'onlymenuapp.apps.OnlymenuappConfig',
+	'onlymenuapp2.apps.Onlymenuapp2Config',
 ]
 
 SITE_ID = 2
