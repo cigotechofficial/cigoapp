@@ -1,6 +1,38 @@
+function play(){
+            var audio = new Audio(
+			'https://media.geeksforgeeks.org/wp-content/uploads/20190531135120/beep.mp3');
+            audio.play();
+        }
+
+function showNotification(){
+    const notification = new Notification("New Order",{
+        body: "Hey You Got A New Order"
+    });
+}
+
+function notification(){
+    if (Notification.permission === "granted"){
+        showNotification();
+    }
+    else if(Notification.permission !== "denied"){
+        Notification.requestPermission().then(permission => {
+            if (permission === "granted"){
+                showNotification();
+            }
+        });
+    }
+}
+
+
+
 
 var previousorderlen = 1;
 var currentorderlen;
+
+
+// function updatePrevOrderLen(newlen){
+// 	previousorderlen = newlen;
+// }
 
 
 var req = new XMLHttpRequest();
@@ -78,21 +110,25 @@ function drawTable(table_name, data) {
 		}
 	}
 	table.className = 'table text-center table-hover table-light'
-	// var currentorderlen = table.rows.length
-	// // currentorderlen = previousorderlen;
-	// // var previousorderlen = 0
-	// // newLenOrder = table.rows.length
-	// console.log(currentorderlen,previousorderlen)
-	// if (currentorderlen > previousorderlen) {
-	// 	console.log("here")
-	// 	currentorderlen = previousorderlen;
-	// 	// alert("You have new orders!");
-	// 	swal("You have a new order!")
-	// 	// oldLenOrder = newLenOrder;
-	// 	// play();
-	// }
-	
 	div.appendChild(table);
+
+	if (tableid == 'neworderdelivery'){
+		var currentorderlen = table.rows.length
+		// console.log(previousorderlen , currentorderlen)
+
+		if (currentorderlen > previousorderlen) {
+
+			// alert("You have new orders!");
+			swal("You have a new order!")
+			notification();
+			// showNotification();
+			play();
+		}
+		previousorderlen = currentorderlen;
+	}
+
+
+	// updatePrevOrderLen(currentorderlen);
 
 }
 
@@ -129,7 +165,7 @@ function viewAddressFunction(addressmodalcontentid, data, orderid, buttonid) {
 }
 
 function shiftFunction(shifturl, buttonid) {
-	console.log(buttonid)
+	// console.log(buttonid)
 	var id = buttonid;
 	var url = ''+ shifturl +'?id=' + id;
 	var req = new XMLHttpRequest();

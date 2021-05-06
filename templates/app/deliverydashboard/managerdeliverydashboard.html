@@ -4,10 +4,10 @@
 {% block title %}Cigo{% endblock title %}
 {% block homedelactive %}active{% endblock homedelactive %}
 {% block pageheading %}
-<h4 class="text-gray-800 mt-3 ">Delivery Dashboard - Owner</h4>
+<h1 class="h3 mb-0 text-gray-800 mr-4">Delivery - Manager</h1>
 {% endblock pageheading %}
 {% block body %}
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <!-- Page Heading -->
@@ -16,29 +16,6 @@
             <center>
                 <h4 class=" mb-0 text-gray-800 mr-2">{{restaurantname}}</h4>
             </center>
-        </div>
-    </div>
-    <!-- Content Row -->
-    <div class="row">
-        <div class="col-xl-12 col-lg-12 col-md-12 mb-2 bg-white ">
-            <button class="btn btn-primary mx-2 mb-3 btn-sm" type="button" data-toggle="collapse" data-target="#discount">
-                Choose Discount For Customers<i class="fas fa-caret-down"></i>
-            </button>
-            <div class="collapse" id="discount">
-                <div class="card mb-2 float-center">
-                    <div class="card-header py-3">
-                        <form class="form-inline" method="post" action="./deliverydiscount/">
-                            {% csrf_token %}
-                            <div class="form-group mx-sm-3 mb-2 mr-2">
-                                <input type="text" class="form-control" id="discount" name='discount' placeholder="Discount">
-                                <h5 class="mt-2 text-gray-800">%</h5>
-                            </div>
-                            <button type="submit" class="btn btn-primary mb-2">Confirm </button>
-                            <h6 class="text-gray-800 ml-5">Current Discount: {{discount}}%</h6>
-                        </form>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
     <!-- Mid Row Start-->
@@ -176,5 +153,7 @@
 </div>
 {% endblock body %}
 {% block js %}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="{% static 'deliverydashboard/js/deliverydash.js' %}"></script>
+
 {% endblock js %}

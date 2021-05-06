@@ -13,8 +13,8 @@ if ($.isEmptyObject(cart)) {
 } else {
 
     mystr = `<table class="table-responsive  ">
-                    <thead class="thead-dark table-light">
-                        <tr>
+                    <thead class="thead-dark table-light  ">
+                        <tr >
                             <th scope="col">Item</th>
                             <th scope="col">Price</th>
                             <th scope="col">Qty</th>
