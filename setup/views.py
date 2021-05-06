@@ -268,10 +268,11 @@ def additem(request):
 		category = request.POST['category'] 
 		price = request.POST['price']
 		description = request.POST['description']
-		# img= request.POST['menuimg']
-		img = request.FILES['menuimg']
-		
-		if img == False:
+		# img = request.FILES['addimg']
+		try:
+			img = request.FILES['addimg']
+
+		except:
 			img = Defaultimg.objects.all()[randint(0,1)].dimage
 
 
@@ -316,6 +317,22 @@ def updatemenu(request):
 			item.description=description
 			item.availability=availability
 			item.save()
+
+		messages.success(request, "Item Successfully Updated: "  )
+		return redirect('../menupage')
+
+	else:
+		return HttpResponse('404 - Not Found')
+
+def updateimg(request):
+	if request.method == 'POST':
+		productid = request.POST['productid2']
+		img = request.FILES['menuimg']
+		
+		item = Menu.objects.get(product_id=productid)
+		
+		item.image=img
+		item.save()
 
 		messages.success(request, "Item Successfully Updated: "  )
 		return redirect('../menupage')

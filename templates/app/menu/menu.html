@@ -35,7 +35,7 @@
 					<div class="text-center">
 						<button type="button" class="btn btn-info" data-toggle="modal" data-target="#additemModal">
 							Add Item
-						</button>
+						</button>						
 					</div>
 				</div>
 			</div>
@@ -210,7 +210,7 @@
 					</div>
 					<div class="form-group">
 						<label>Image</label>
-						<input type="file" class="form-control-file" id="menuimg" name="menuimg" >
+						<input type="file" class="form-control-file" id="addimg" name="addimg"  >
 					</div>
 					<button type="submit" class="btn btn-primary">Submit</button>
 				</form>
@@ -219,6 +219,33 @@
 	</div>
 </div>
 <!-- End Add Item Modal -->
+<!-- Start Update Image Modal -->
+<div class="modal fade" id="updateimg" tabindex="-1" role="dialog" aria-labelledby="additemModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="additemModalLabel">Update Image</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form action="../updateimg/" method="post" enctype="multipart/form-data">
+					{% csrf_token %}
+					<div class="form-group ">
+						<input type="hidden" class="form-control" id="productid2" name="productid2">
+					</div>
+					<div class="form-group">
+						<label>Image</label>
+						<input type="file" class="form-control-file" id="menuimg" name="menuimg" >
+					</div>
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End Update Image Modal -->
 
 <!-- Update Item Modal -->
 <div class="modal fade" id="updateMenuModal" >
@@ -271,6 +298,11 @@
 							<option value="ava">Available</option>
 							<option value="not">Not Available</option>
 						</select>
+					</div>					
+					<div class="input-group mb-3">
+						<button type="button" class="btn btn-info" data-dismiss="modal" data-toggle="modal" data-target="#updateimg">
+							Update Image
+						</button>
 					</div>
 					<button type="button" id="deletemenuid" class="deletemenu btn btn-danger mr-5 ml-2">Delete</button>
 					<button type="submit" class="btn btn-primary col-6 ml-5">Update</button>
@@ -343,6 +375,7 @@ $(".updatemenu").click(function() {
 	document.getElementById("descriptionupdate").value = description.textContent;	
 
 	document.getElementById("productid").value = this.id;
+	document.getElementById("productid2").value = this.id;
 	document.getElementById("deletemenuid").value = this.id;
 
 });

@@ -13,6 +13,7 @@ urlpatterns = [
     path('menupage/', views.menupage, name='menupage'),
     path('additem/', views.additem, name='additem'),
     path('updatemenu/', views.updatemenu, name='updatemenu'),
+    path('updateimg/', views.updateimg, name='updateimg'),
     path('menupage/deletemenu/', views.deletemenu, name='deletemenu'),
     path('menupage/venueselect/', views.venueselect, name='venueselect'),
 

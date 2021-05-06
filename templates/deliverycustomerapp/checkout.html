@@ -1,0 +1,33 @@
+{% extends "deliverycustomerapp/customerbase.html" %}
+{% load static %}
+{% block title %}Checkout{% endblock title %}
+{% block body %}
+<div class="container">
+	<div class="col my-4">
+		<h2 class="whitetext">Your Order: </h2>
+		{# <button class=" btn btn-info" onclick="deleteall()">Clear</button> #}
+		<div class="my-4">
+			<ul class="list-group" id="items">
+			</ul>
+		</div>
+	</div>
+	<div class="col my-4">
+			<a href="/deliverycustomerapp/{{restaurantid}}/address" class="btn btn-info mr-2" role="button">Next </button>
+			<a href="/deliverycustomerapp/{{restaurantid}}/" class="btn btn-info" role="button">Change Order</a>
+		</form>
+		<p class="whitetext mt-4">NOTE: All Orders Would Be Pay On Delivery (UPI, Paytm, Cash)</p>
+	</div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+
+{% endblock body %} 
+{% block js %}
+<script type="text/javascript">
+	var discountval = '{{discount}}';
+	var sgstval = '{{sgstval}}';
+	var cgstval = '{{cgstval}}';
+</script>
+<script src="{% static 'deliverycustomerapp/js/checkout.js' %}"></script>
+{% endblock js %}

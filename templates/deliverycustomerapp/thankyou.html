@@ -1,0 +1,21 @@
+{% extends "deliverycustomerapp/customerbase.html" %}
+{% load static %}
+{% block title %}Cigo{% endblock title %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static "customerapp/css/custstatus.css" %}"> {% endblock css %}
+{% block body %}
+<div class="container ">
+    <div class="card">
+        <center>
+            <header class="card-header ">Thank You</header>
+        </center>
+        <div class="card-body">
+            <div>
+                <p>Thanks For Ordering From Us, Your Food Is On The Way! </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock body %}

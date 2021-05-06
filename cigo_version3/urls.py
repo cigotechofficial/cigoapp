@@ -10,6 +10,7 @@ urlpatterns = [
     path('', include('home.urls')),
     path('home/', include('home.urls')),
     path('dashboard/', include('dashboard.urls')),
+    path('deliverydashboard/', include('deliverydashboard.urls')),
     path('setup/', include('setup.urls')),
     path('help/', include('help.urls')),
     path('customerapp/', include('customerapp.urls')),
@@ -20,6 +21,8 @@ urlpatterns = [
 
     path('emenu/', include('onlymenuapp.urls')),
     path('emenu2/', include('onlymenuapp2.urls')),
+    path('deliverydashboard/', include('deliverydashboard.urls')),
+    path('deliverycustomerapp/', include('deliverycustomerapp.urls')),
     
 
 ]
