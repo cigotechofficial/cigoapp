@@ -4,24 +4,24 @@ function play(){
             audio.play();
         }
 
-function showNotification(){
-    const notification = new Notification("New Order",{
-        body: "Hey You Got A New Order"
-    });
-}
-
-function notification(){
-    if (Notification.permission === "granted"){
-        showNotification();
-    }
-    else if(Notification.permission !== "denied"){
-        Notification.requestPermission().then(permission => {
-            if (permission === "granted"){
-                showNotification();
-            }
-        });
-    }
-}
+// function showNotification(){
+//     const notification = new Notification("New Order",{
+//         body: "Hey You Got A New Order"
+//     });
+// }
+// 
+// function notification(){
+//     if (Notification.permission === "granted"){
+//         showNotification();
+//     }
+//     else if(Notification.permission !== "denied"){
+//         Notification.requestPermission().then(permission => {
+//             if (permission === "granted"){
+//                 showNotification();
+//             }
+//         });
+//     }
+// }
 
 
 
@@ -120,7 +120,7 @@ function drawTable(table_name, data) {
 
 			// alert("You have new orders!");
 			swal("You have a new order!")
-			notification();
+			// notification();
 			// showNotification();
 			play();
 		}
