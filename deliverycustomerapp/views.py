@@ -9,7 +9,7 @@ from .models import DeliveryOrder,ArchiveDeliveryOrder
 from deliverydashboard.models import Discount
 import json
 from home.models import Gst
-
+from twilio.rest import Client
 
 def deliverycustomerapp(request,restaurantidslug):
 	
@@ -93,6 +93,16 @@ def address(request,restaurantidslug):
 		thank = True
 		orderdone = True
 		# id = order.order_id
+		account_sid = 'ACd9091a3d9a2318e52141f22b2f55221c'
+		auth_token = 'de41b86cc18874cc03643a15edf9c1af'
+		client = Client(account_sid, auth_token)
+
+		call = client.calls.create(
+	                        url='http://demo.twilio.com/docs/voice.xml',
+	                        to='+918851623643',
+	                        from_='+13347218681'
+	                    )
+		
 		return render(request, 'deliverycustomerapp/address.html', {'thank':thank, 'restaurantid':restaurantidslug})
 	return render(request,'deliverycustomerapp/address.html', params)
 
