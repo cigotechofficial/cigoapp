@@ -277,8 +277,9 @@ def additem(request):
 
 
 		venue = Venue.objects.get(venueid=venueID)
+		venuename = venue.venuename
 
-		item = Menu(venue=venue, product_name=product_name, category=category, price=price, description=description, image=img )
+		item = Menu(venue=venue, venuename=venuename, product_name=product_name, category=category, price=price, description=description, image=img )
 		item.save(venue)
 		# print(venueID)
 		messages.success(request, "Item Successfully Saved: "  )
@@ -298,6 +299,7 @@ def updatemenu(request):
 		availability = request.POST['availabilityupdate']
 		
 		venue = Venue.objects.get(venueid=venueID)
+		venuename = venue.venuename
 		item = Menu.objects.get(product_id=productid)
 
 
@@ -305,12 +307,13 @@ def updatemenu(request):
 			img=item.image
 			item.showtype=0
 			item.save()
-			newitem = Menu(venue=venue, product_name=product_name, category=category, price=price, showtype=1, description=description,image =img)
+			newitem = Menu(venue=venue, venuename=venuename, product_name=product_name, category=category, price=price, showtype=1, description=description,image =img)
 			newitem.save()
 			# newitem.save(venue)
 
 		else:
 			item.venue=venue
+			item.venuename=venue.venuename
 			item.product_name=product_name
 			item.category=category
 			item.price=price
