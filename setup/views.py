@@ -50,6 +50,11 @@ def editvenue(request):
 			venuedetail.notables = notables 
 			venuedetail.save()
 
+		items = Menu.objects.filter(venue=venueid)
+
+		for item in items:
+			item.venuename=venuename
+			item.save()
 
 		messages.success(request, "Restaurant successfully updated")
 		
