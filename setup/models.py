@@ -7,7 +7,7 @@ class Venue(models.Model):
 	venuename = models.CharField(max_length=50)
 	owner = models.ForeignKey(User, on_delete=models.CASCADE)
 	notables = models.IntegerField(default=0)
-	paymentphone = models.IntegerField(default=0)
+	paymentphone = models.CharField(max_length=50, default="0")
 
 	def __str__(self):
 		return self.venuename
