@@ -8,8 +8,10 @@
 <link rel="stylesheet" href="{% static 'customerapp/css/swiper.css' %}">
 <link rel="stylesheet" href="{% static 'customerapp/css/menu.css' %}">
 
+
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Cantarell&family=RocknRoll+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
 {% endblock head %}
 
 {% block body %}
@@ -45,9 +47,14 @@
 
                     <h6 id="pricepr{{i.product_id}}">₹ {{i.price}}</h6>
                     </div>
+                    <div>
                     <span id="divpr{{i.product_id}}" class="divpr" style="background-color: rgba(0,0,0,0.5);">
                         <button id="pr{{i.product_id}}" class="btn btn-sm btn-primary cart">Add</button>
                     </span>
+                    </div>
+                    <div class="mt-2">
+                        <button id="{{i.description}}" class="btn btn-sm btn-primary" onclick="description(id)">𝒊</button>
+                    </div>
                 </div>
             <!-- </div> -->
         </div>
@@ -57,21 +64,20 @@
     <div class="swiper-pagination"></div>
 </div>
 {% endfor %}
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
+<div class="modal fade" id="descriptionModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document" >
+        <div class="modal-content" style="background-color: rgba(0,0,0,0.8); !important;">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" style="color:white;">Item Description</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                ...
+               <div id="descriptiondiv"></div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
@@ -99,5 +105,13 @@
     var restaurantId = "{{restaurantidslug}}";
     
     localStorage.setItem("restaurantId", restaurantId);
+</script>
+<script type="text/javascript">
+    function description(id){
+        document.getElementById("descriptiondiv").innerHTML = '<p style="color:white; padding:30px;">'+ id +'</p>';
+        $('#descriptionModal').modal('show');
+         
+
+    }
 </script>
 {% endblock js %}

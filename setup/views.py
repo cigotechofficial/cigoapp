@@ -26,8 +26,9 @@ def newvenue(request):
 		venuename = request.POST['venuename']
 		owner = request.user
 		notables = request.POST['notables']
+		paymentphone = request.POST['paymentphone']
 	
-		venuedetails = Venue(venuename=venuename, owner=owner, notables=notables )
+		venuedetails = Venue(venuename=venuename, owner=owner, notables=notables, paymentphone = paymentphone )
 		venuedetails.save()
 
 		messages.success(request, "Restaurant successfully saved")
@@ -40,6 +41,7 @@ def editvenue(request):
 		venuename = request.POST['editvenuename']
 		owner = request.user
 		notables = request.POST['editnotables']
+		paymentphone = request.POST['editpaymentphone']
 		# cgst = request.POST['cgst']
 		# sgst = request.POST['sgst']
 		
@@ -48,8 +50,14 @@ def editvenue(request):
 			venuedetail.venuename = venuename
 			venuedetail.owner = owner
 			venuedetail.notables = notables 
+			venuedetail.paymentphone = paymentphone 
 			venuedetail.save()
 
+		items = Menu.objects.filter(venue=venueid)
+
+		for item in items:
+			item.venuename=venuename
+			item.save()
 
 		messages.success(request, "Restaurant successfully updated")
 		

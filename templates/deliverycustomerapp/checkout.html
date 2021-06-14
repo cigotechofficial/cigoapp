@@ -5,7 +5,9 @@
 <div class="container">
     <div class="card">
         <center>
-            <header class="card-header "><h5>Your Order:</h5></header>
+            <header class="card-header ">
+                <h5>Your Order:</h5>
+            </header>
         </center>
         <div class="card-body">
             <div>
@@ -14,11 +16,32 @@
                     </ul>
                 </div>
                 <div class="col my-4">
-                    <a href="/deliverycustomerapp/{{restaurantid}}/address" class="btn btn-info mr-2" role="button">Next </button>
-                        <a href="/deliverycustomerapp/{{restaurantid}}/" class="btn btn-info" role="button">Change Order</a>
-                        </form>
-                        <p class="whitetext mt-4">NOTE: All Orders Would Be Pay On Delivery (UPI, Paytm, Cash)</p>
+                    <center>
+                    <a href="/deliverycustomerapp/{{restaurantid}}/" class="btn btn-info" role="button">Change Order</a>
+                    </center>
                 </div>
+                <div style="display : flex;">
+                    <a href="/deliverycustomerapp/{{restaurantid}}/address" class="btn btn-info mr-2" role="button">Payment On Delivery </a>
+                    <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#discount" >
+                        Online Payment
+                    </button>
+                    
+                </div>
+                    <div class="collapse" id="discount">
+                        <div class="card mb-2 float-center">
+                            <div class="card-header py-3">
+                                <p>Copy the Phone No. and Pay from (Paytm / Google Pay / Phonepay)</p>
+                                <div style="display: flex;">
+                                <p class="mt-3" id="p1">{{paymentphone}}</p>
+                                <button class="btn btn-secondary ml-2" type="button" onclick="copyToClipboard('#p1')">Copy To Clipboard</button>
+                                
+                                </div> 
+
+                            </div>
+                            <a href="/deliverycustomerapp/{{restaurantid}}/address" class="btn btn-info" type="button"> Payment Done</a>
+                        </div>
+                    </div>
+                
             </div>
         </div>
     </div>
@@ -31,5 +54,16 @@ var discountval = '{{discount}}';
 var sgstval = '{{sgstval}}';
 var cgstval = '{{cgstval}}';
 </script>
+<script>
+    function copyToClipboard(element) {
+  var $temp = $("<input>");
+  $("body").append($temp);
+  $temp.val($(element).text()).select();
+  document.execCommand("copy");
+  $temp.remove();
+}
+
+</script>
 <script src="{% static 'deliverycustomerapp/js/checkout.js' %}"></script>
+
 {% endblock js %}
