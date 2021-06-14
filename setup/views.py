@@ -26,9 +26,9 @@ def newvenue(request):
 		venuename = request.POST['venuename']
 		owner = request.user
 		notables = request.POST['notables']
-		paymentphone = request.POST['paymentphone']
+		paymentphoneno = request.POST['paymentphone']
 	
-		venuedetails = Venue(venuename=venuename, owner=owner, notables=notables, paymentphone = paymentphone )
+		venuedetails = Venue(venuename=venuename, owner=owner, notables=notables, paymentphoneno = paymentphoneno )
 		venuedetails.save()
 
 		messages.success(request, "Restaurant successfully saved")
