@@ -41,6 +41,7 @@ class Menu(models.Model):
 	price=models.IntegerField(default=0)
 	# showtype 0 means old and 1 means new
 	showtype=models.BooleanField(default=1) 
+	pictype=models.BooleanField(default=1) 
 
 	availability=models.CharField(max_length=3,choices=AVAIL_CHOICE,default="ava")
 	image = models.ImageField(upload_to='images/', null=True, blank=True)
