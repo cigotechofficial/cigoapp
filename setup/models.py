@@ -9,6 +9,7 @@ class Venue(models.Model):
 	notables = models.IntegerField(default=0)
 	# paymentphone = models.CharField(max_length=50, default="0")
 	paymentphoneno = models.CharField(max_length=50, default="0")
+	category_list_sorted = models.CharField(max_length=500, default="0") # "Snacks, Main Course"
 
 	def __str__(self):
 		return self.venuename
@@ -37,7 +38,7 @@ class Menu(models.Model):
 	venuename = models.CharField(max_length=100,default="venuename")
 	product_name=models.CharField(max_length=50)
 	category=models.CharField(max_length=50, null=True)
-	description=models.CharField(max_length=300, null=True)
+	description=models.CharField(max_length=1000, null=True)
 	price=models.IntegerField(default=0)
 	
 	customisable=models.BooleanField(default=0)
