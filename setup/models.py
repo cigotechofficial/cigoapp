@@ -59,4 +59,4 @@ class CustomItem(models.Model):
 	customitemprice=models.IntegerField(default=0)
 
 	def __str__(self):
-		return self.customitem_id
+		return str(self.customitem_id)
