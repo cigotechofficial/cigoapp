@@ -38,7 +38,10 @@ class Menu(models.Model):
 	category=models.CharField(max_length=50, null=True)
 	description=models.CharField(max_length=300, null=True)
 	price=models.IntegerField(default=0)
-	# showtype 0 means old and 1 means new
+	
+	customisable=models.BooleanField(default=0)
+
+	# showtype 0 means old and 1 means new 
 	showtype=models.BooleanField(default=1) 
 	pictype=models.BooleanField(default=1) 
 
@@ -46,5 +49,13 @@ class Menu(models.Model):
 	image = models.ImageField(upload_to='images/', null=True, blank=True)
 
 	def __str__(self):
-		return self.product_name
+		return str(self.product_id)
 
+class CustomItem(models.Model):
+	customitem_id=models.AutoField(primary_key=True)
+	product_id = models.ForeignKey(Menu, on_delete=models.CASCADE)
+	customitemname = models.CharField(default="customitemname", max_length=50)
+	customitemprice=models.IntegerField(default=0)
+
+	def __str__(self):
+		return self.customitem_id

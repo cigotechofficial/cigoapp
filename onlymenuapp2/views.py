@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from setup.models import Menu
+from setup.models import Menu, CustomItem
 from home.models import Gst
 from django.contrib.auth import logout
 from django.shortcuts import render,HttpResponse,HttpResponseRedirect
@@ -22,7 +22,7 @@ def customerapp(request,restaurantidslug):
 
 	restaurantname = Venue.objects.get(venueid=restaurantidslug).venuename
 
-	allProds = []
+	allProds = [] 
 
 	catprods = Menu.objects.filter(venue=restaurantidslug).filter(showtype=1).filter(availability="ava").values('category')
 	cats = {item['category'] for item in catprods}
@@ -32,8 +32,17 @@ def customerapp(request,restaurantidslug):
 		# prod = Menu.objects.filter(category=cat, availability='ava')
 		allProds.append(prod)
 
-	# print(allProds[1])
+	allcustomisablefields = {}
+
+	allcustomisableitems = Menu.objects.filter(venue=restaurantidslug).filter(showtype=1).filter(availability="ava").filter(customisable=1)
+	
+	for customisableitem in allcustomisableitems:
+		customisablefield = CustomItem.objects.filter(product_id=customisableitem.product_id)
+		allcustomisablefields[customisableitem.product_id] = customisablefield
+
+	# print(allcustomisablefields)
 	params={
+	'allcustomisablefields':allcustomisablefields,
 	'restaurantname':restaurantname,
 	'allProds': allProds,
 	'restaurantidslug':restaurantidslug,
