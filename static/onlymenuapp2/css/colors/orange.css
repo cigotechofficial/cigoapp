@@ -37,6 +37,7 @@
 }
 .tab-menu .is-active{
 	background: #e75b1e;
+	border-radius: 15px;
 }
 .tab-menu .slick-arrow.slick-prev{
 	background: #e75b1e url(../../images/back.png) no-repeat center;

@@ -284,6 +284,7 @@ html, body{ height: 100%; }
     background: #f5f5f5;
     padding: 2px 0px;
     box-shadow: 0 0 8px 5px rgba(0, 0, 0, 0.05);
+    border-radius: 15px;
 }
 
 .offer-item {
@@ -358,8 +359,10 @@ html, body{ height: 100%; }
 .tab-menu .is-active h2{
     color:#fff;
     border-bottom: 1px solid #fff;
+
 }
 .tab-menu .is-active p{
     color:#fff;
+    
 }
 
