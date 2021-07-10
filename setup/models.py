@@ -28,7 +28,7 @@ class Employee(models.Model):
 
 
 AVAIL_CHOICE=(
-	('ava','Available'),
+	('ava','Available'), 
 	('not','Not Available'),
 	)
 
@@ -40,6 +40,7 @@ class Menu(models.Model):
 	category=models.CharField(max_length=50, null=True)
 	description=models.CharField(max_length=1000, null=True)
 	price=models.IntegerField(default=0)
+	serialno=models.IntegerField(default=0)
 	
 	customisable=models.BooleanField(default=0)
 
