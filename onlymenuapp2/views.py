@@ -31,8 +31,8 @@ def customerapp(request,restaurantidslug):
 	catorder_list = [c.strip() for c in catorder_str.split(',')]
 
 	for cat in catorder_list:
-		# prod = Menu.objects.filter(venue=restaurantidslug).filter(showtype=1).filter(availability="ava").filter(category=cat ).order_by('serialno')
-		prod = Menu.objects.filter(venue=restaurantidslug).filter(showtype=1).filter(availability="ava").filter(category=cat )
+		prod = Menu.objects.filter(venue=restaurantidslug).filter(showtype=1).filter(availability="ava").filter(category=cat ).order_by('serialno')
+		# prod = Menu.objects.filter(venue=restaurantidslug).filter(showtype=1).filter(availability="ava").filter(category=cat )
 		# prod = Menu.objects.filter(category=cat, availability='ava')
 		allProds.append(prod)
 

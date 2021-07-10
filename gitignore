@@ -1,4 +1,8 @@
 db.sqlite3
+<<<<<<< HEAD
 _migrations/*
 !_migrations/__init__.py
 
+=======
+**/migrations/*
+>>>>>>> dev
