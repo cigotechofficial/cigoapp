@@ -5,7 +5,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-<link rel="stylesheet" href="{% static 'customerapp/css/onlymenu2.css' %}">
+<link rel="stylesheet" href="{% static 'customerapp/css/menu.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Cantarell&family=RocknRoll+One&display=swap" rel="stylesheet">
@@ -54,14 +55,23 @@
         <div id="status"></div>
     </div>
 
-<center><h2 class="whitetext mt-2" style="font-family: 'RocknRoll One', sans-serif;"><span class="restaurantname">{{restaurantname}}</h2></span></center>
+<nav class=" navbar fixed-bottom bg-info py-1" id="checkoutnav">
+    <button type="button" class="btn btn-primary mx-2" id="popcart" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="">
+        <i class="fa fa-shopping-cart" aria-hidden="true"></i> View Cart(<span id="cart">0</span>)
+    </button>
+    <a href="../checkout"><button class="btn btn-primary mr-3">
+            Order Food <i class="fa fa-arrow-right"></i>
+        </button>
+    </a>
+</nav>
+<center><h2 class="whitetext mt-2" style="font-family: 'RocknRoll One', sans-serif;">{{restaurantname}}</h2></center>
 <!-- end site-header -->
     <div id="menu" class="menu-main mt-4">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-                    <div class="catagorycard tab-menu">
+                    <div class="tab-menu">
                         <div class="slider slider-nav">
                             {% for prodlist in allProds %}
                             <div class="tab-title-menu">
@@ -70,9 +80,8 @@
                             {% endfor %}
                         </div>
                     </div>
-
                     <br>
-                    <!-- <div class="tab-menu"> -->
+                    <div class="tab-menu">
                         <div class="slider slider-single">
                             <!-- ------------------------------------------------------1---------------------------------------------- -->
                             {% for prodlist in allProds %}
@@ -81,8 +90,8 @@
                                     <div class="container px-2 py-2 mx-auto">
                                         <div class="flex flex-wrap -m-2">
                                             {% for i in prodlist %}
-                                            <div class="menucard p-2 lg:w-1/3 md:w-1/2 w-full">
-                                                <div class="h-full flex items-center rounded-lg">
+                                            <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
+                                                <div class="h-full flex items-center border-gray-200 border p-1 rounded-lg">
                                                     <div class="box flex-grow ml-3 ">
                                                         <h4 class="text-gray-900 title-font font-medium mt-2">{{i.product_name}} </h4>
                                                         {% if i.customisable %}
@@ -99,14 +108,16 @@
                                                         {% else %}
                                                         <p class="text-gray-700">₹ {{i.price}}</p>
                                                         {% endif %}
-
+                                                        <span id="divpr{{i.product_id}}" class="divpr" style="background-color: rgba(0,0,0,0.5); float: right;">
+                                                            <button id="pr{{i.product_id}}" class=" mx-1 btn btn-sm btn-primary cart">Add</button>
+                                                        </span>
                                                         <p class="text-gray-500">{{i.description}}</p>
-                                                        <a class="readmore-btn text-gray-700"><button type="button" class=" btn btn-info btn-sm mt-2">𝒊</button></a>
+                                                        <a class="readmore-btn text-gray-700">More</a>
                                                         
                                                         
                                                     </div>
                                                     {% if i.pictype %}
-                                                    <img alt="team" class="w-28 h-15 bg-gray-100 object-cover object-center flex-shrink-0 mr-3" src="{{i.image.url}}">
+                                                    <img alt="team" class="w-28 h-15 bg-gray-100 object-cover object-center flex-shrink-0 mr-3"  src="{{i.image.url}}">
                                                     {% else %}
                                                     {% endif %}
                                                 </div>
@@ -119,7 +130,7 @@
                             </div>
                             {% endfor %}
                         </div>
-                    <!-- </div> -->
+                    </div>
                     <!-- end tab-menu -->
                 </div>
                 <!-- end col -->
@@ -135,7 +146,7 @@
 
 {% endblock body %}
 {% block js %}
-
+    <script src="{% static 'customerapp/js/menu.js' %}"></script>
     <script src="{% static 'onlymenuapp2/js/all.js' %}"></script>
     <script src="{% static 'onlymenuapp2/js/bootstrap.min.js' %}"></script>
     <!-- ALL PLUGINS -->

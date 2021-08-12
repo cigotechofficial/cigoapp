@@ -1,0 +1,72 @@
+{% extends "customerapp/customerbase.html" %}
+{% load static %}
+{% block title %}Payment{% endblock title %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static "customerapp/css/custstatus.css" %}"> {% endblock css %}
+{% block body %}
+<div class="container ">
+    <div class="card">
+        <center>
+            <header class="card-header ">Payment</header>
+        </center>
+        <div class="card-body">
+            <div>
+                <table class="table-responsive">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Item</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Qty</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i,j,k,l in zipped%}
+                        <tr>
+                            <td>{{i}}</td>
+                            <td>₹{{j}}</td>
+                            <td>{{k}}</td>
+                            <td>₹{{l}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot class="table-secondary">
+                        <tr>
+                            <td scope="row"></td>
+                            <th>Subtotal: </th>
+                            <td></td>
+                            <td>₹{{subtotal}}</td>
+                        </tr>                        
+                        <tr>
+                            <td scope="row"></td>
+                            <th>CGST: </th>
+                            <td>@{{cgstval}}%</td>
+                            <td>₹{{cgst}}</td>
+                        </tr>
+                        <tr>
+                            <td scope="row"></td>
+                            <th>SGST: </th>
+                            <td>@{{sgstval}}%</td>
+                            <td>₹{{sgst}}</td>
+                        </tr>
+                        <tr>
+                            <td scope="row"></td>
+                            <th>Total Amount: </th>
+                            <td></td>
+                            <td>₹{{total}}</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div>
+                <button class="btn btn-new mt-4" data-abc="true" onclick="Waiterfun()"> Call Waiter For Payment <i class="fa fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script type="text/javascript">
+var x = "{{orders}}";
+</script>
+<script src="{% static 'customerapp/js/status.js' %}"></script>
+{% endblock body %}
