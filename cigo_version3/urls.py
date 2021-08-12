@@ -14,6 +14,7 @@ urlpatterns = [
     path('setup/', include('setup.urls')),
     path('help/', include('help.urls')),
     path('customerapp/', include('customerapp.urls')),
+    path('customerapp2/', include('customerapp2.urls')),
     path('signup', views.handleSignup, name='handleSignup'),
     path('login', views.handleLogin, name='handleLogin'),
     path('logout', views.handleLogout, name='handleLogout'),

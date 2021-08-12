@@ -1,4 +1,4 @@
-{% extends "onlymenuapp/emenubase.html" %}
+{% extends "customerapp2/customerbase.html" %}
 {% block css %}
 <style type="text/css">
 	@import url('https://fonts.googleapis.com/css?family=Montserrat:700');
@@ -7,7 +7,7 @@
 
 body {
   background-color: #111;
-  background-image: radial-gradient(#ffffff, #b3abab);
+  background-image: radial-gradient(#333, #111);
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -24,8 +24,6 @@ body {
   margin: 20vh auto;
   height: 10vh; 
   text-transform: uppercase;
-  /*color: #fd7b5d;*/
-  color: black;
 }
 
 #fly-in span {
@@ -70,6 +68,17 @@ Welcome To Cigo
 <div id="fly-in">  
 <div><span>Welcome to </span>{{restaurantname}}</div>
 <div><span>Powered By</span>CIGO</div></div> 
-<a type="button" class="mt-5 btn" href="../menu" style="background-color:#e75b1e; color:white">View Menu</a>
+<a type="button" class="mt-5 btn btn-primary" href="../menu">Start Ordering</a>
 {% endblock body %}
 
+{% block js %}
+  <script>
+	var restaurantId = "{{restaurantidslug}}";
+	var tableno = "{{tableno}}";
+	var hashcode = "{{hashcode}}";
+	
+	localStorage.setItem("restaurantId", restaurantId);
+	localStorage.setItem("tableno", tableno);
+	localStorage.setItem("hashcode", hashcode);
+  </script>
+{% endblock js %} 
