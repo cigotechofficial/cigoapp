@@ -49,12 +49,12 @@
 {% endblock head %}
 
 {% block body %}
-
+<div style="height:148px;border-radius: 0 0 60% 60%;background-color: #ff9847;">
     <div id="loader">
         <div id="status"></div>
     </div>
 
-<center><h2 class="whitetext mt-2" style="font-family: 'RocknRoll One', sans-serif;"><span class="restaurantname">{{restaurantname}}</h2></span></center>
+<center><h2 class="whitetext " style="font-family: 'RocknRoll One', sans-serif;"><span class="restaurantname">{{restaurantname}}</h2></span></center>
 <!-- end site-header -->
     <div id="menu" class="menu-main mt-4">
         <div class="container">
@@ -76,8 +76,8 @@
                         <div class="slider slider-single">
                             <!-- ------------------------------------------------------1---------------------------------------------- -->
                             {% for prodlist in allProds %}
-                            <div>
-                                <section class="text-gray-600 body-font">
+                            <!-- <div> -->
+                                <!-- <section class="text-gray-600 body-font"> -->
                                     <div class="container px-2 py-2 mx-auto">
                                         <div class="flex flex-wrap -m-2">
                                             {% for i in prodlist %}
@@ -112,11 +112,11 @@
                                                 </div>
                                             </div>
                                             {% endfor %}
-                                        </div>
+                                        <!-- </div> -->
                                     </div>
-                                </section>
+                                <!-- </section> -->
                                 <!-- end col -->
-                            </div>
+                            <!-- </div> -->
                             {% endfor %}
                         </div>
                     <!-- </div> -->
@@ -131,7 +131,7 @@
     <!-- end menu -->
     <a href="#" class="scrollup" style="display: none;">Scroll</a>
 
-
+</div>
 
 {% endblock body %}
 {% block js %}

@@ -8,7 +8,7 @@
     cursor: pointer;
     padding-top: 20px;
     border-radius: 25px;
-    box-shadow: rgb(100 100 111 / 50%) 0px 7px 29px 0px;
+    box-shadow: rgb(0 0 0 / 20%) 0px 25px 20px -20px;
     align-items: stretch;
 }
 .catagorycard{
