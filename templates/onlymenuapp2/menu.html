@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-<link rel="stylesheet" href="{% static 'customerapp/css/onlymenu2.css' %}">
+<link rel="stylesheet" href="{% static 'onlymenuapp2/css/onlymenu2.css' %}">
 
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Cantarell&family=RocknRoll+One&display=swap" rel="stylesheet">
@@ -41,7 +41,7 @@
             height: auto;
         }
         .box p{
-            height:20px; 
+            height:1px; 
             overflow: hidden;
         }
 
@@ -77,7 +77,7 @@
                             <!-- ------------------------------------------------------1---------------------------------------------- -->
                             {% for prodlist in allProds %}
                             <!-- <div> -->
-                                <!-- <section class="text-gray-600 body-font"> -->
+                                <section class="text-gray-600 body-font">
                                     <div class="container px-2 py-2 mx-auto">
                                         <div class="flex flex-wrap -m-2">
                                             {% for i in prodlist %}
@@ -97,11 +97,11 @@
                                                         </div>
                                                         <!-- <button type="button" id="{{i.product_id}}" class="btn btn-primary btn-sm" onclick="customise(id)">Customisable</button> -->
                                                         {% else %}
-                                                        <p class="text-gray-700">₹ {{i.price}}</p>
-                                                        {% endif %}
+                                                        <h3 class="text-gray-700">₹ {{i.price}}</h3>
+                                                        {% endif %}<a class="readmore-btn text-gray-700"><button type="button" class=" btn btn-info btn-sm ">𝒊</button></a>
 
                                                         <p class="text-gray-500">{{i.description}}</p>
-                                                        <a class="readmore-btn text-gray-700"><button type="button" class=" btn btn-info btn-sm mt-2">𝒊</button></a>
+                                                        
                                                         
                                                         
                                                     </div>
@@ -112,9 +112,9 @@
                                                 </div>
                                             </div>
                                             {% endfor %}
-                                        <!-- </div> -->
+                                        </div>
                                     </div>
-                                <!-- </section> -->
+                                </section>
                                 <!-- end col -->
                             <!-- </div> -->
                             {% endfor %}
