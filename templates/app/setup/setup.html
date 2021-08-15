@@ -39,7 +39,7 @@
 							<th scope="row">{{ forloop.counter }}</th>
 							<td id="venuename{{i.venueid}}">{{i.venuename}}</td>
 							<td id="notables{{i.venueid}}">{{i.notables}}</td>
-							<td id="paymentphone{{i.venueid}}">{{i.paymentphone}}</td>
+							<td id="paymentphoneno{{i.venueid}}">{{i.paymentphoneno}}</td>
 							<td><button id="{{i.venueid}}" type="button" class="btn btn-success updatevenue" data-toggle="modal" data-target="#updateVenueModal">Update</button></td>
 							<td><button type="button" id="{{i.venueid}}" class="btn btn-danger deletevenue">Delete</button></td>
 						</tr>
@@ -146,8 +146,8 @@
 						<input type="number" class="form-control" name="notables" id="notables">
 					</div>	
 					<div class="form-group">
-						<label for="paymentphone">Payment Phone No:</label>
-						<input type="phone" class="form-control" name="paymentphone" id="paymentphone" placeholder="Phone No. Linked To Bank Account">
+						<label for="paymentphoneno">Payment Phone No:</label>
+						<input type="phone" class="form-control" name="paymentphoneno" id="paymentphoneno" placeholder="Phone No. Linked To Bank Account">
 					</div>
 					<!-- img start -->
 					<!--                     <div class="form-group">
@@ -187,8 +187,8 @@
 						<input type="number" class="form-control" name="editnotables" id="editnotables">
 					</div>
 					<div class="form-group">
-						<label for="paymentphone">Payment Phone No:</label>
-						<input type="phone" class="form-control" name="editpaymentphone" id="editpaymentphone" placeholder="Phone No. Linked To Bank Account">
+						<label for="paymentphoneno">Payment Phone No:</label>
+						<input type="phone" class="form-control" name="editpaymentphoneno" id="editpaymentphoneno" placeholder="Phone No. Linked To Bank Account">
 					</div>
 					<!-- img start -->
 					<!--                     <div class="form-group">
@@ -331,8 +331,8 @@ $(".updatevenue").click(function() {
 	var notables = document.getElementById("notables" + this.id);
 	document.getElementById("editnotables").value = notables.textContent;	
 
-	var paymentphone = document.getElementById("paymentphone" + this.id);
-	document.getElementById("editpaymentphone").value = paymentphone.textContent;
+	var paymentphoneno = document.getElementById("paymentphoneno" + this.id);
+	document.getElementById("editpaymentphoneno").value = paymentphoneno.textContent;
 
 	document.getElementById("venueid").value = this.id;
 

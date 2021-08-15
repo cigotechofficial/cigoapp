@@ -38,7 +38,7 @@ def checkout(request,restaurantidslug,):
 	tax = Gst.objects.all()[0]
 	cgstval = tax.cgst
 	sgstval = tax.sgst
-	paymentphone = Venue.objects.get(venueid=restaurantidslug).paymentphone
+	paymentphoneno = Venue.objects.get(venueid=restaurantidslug).paymentphoneno
 	try:
 		discountmodel = Discount.objects.get(restaurant=restaurantidslug)
 		discount = discountmodel.discount
@@ -49,7 +49,7 @@ def checkout(request,restaurantidslug,):
 	'discount':discount,
 	'cgstval':cgstval,
 	'sgstval':sgstval,
-	'paymentphone':paymentphone,
+	'paymentphoneno':paymentphoneno,
 	}
 	if request.method=="POST":
 		items_json = request.POST.get('itemsJson', '')
