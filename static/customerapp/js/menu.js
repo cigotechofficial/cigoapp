@@ -92,7 +92,7 @@ function clearCart() {
 
     cart = JSON.parse(localStorage.getItem('cart'));
     for (var item in cart) {
-        document.getElementById('div' + item).innerHTML = '<button id="' + item + '" class="btn btn-sm btn-primary cart">Add</button>'
+        document.getElementById('div' + item).innerHTML = '<button id="' + item + '" class="btn-sm btn-primary cart">Add</button>'
     }
     localStorage.clear();
     cart = {};
@@ -103,7 +103,7 @@ function updateCart(cart) {
     var sum = 0;
     for (var item in cart) {
         sum = sum + cart[item][0];
-        document.getElementById('div' + item).innerHTML = "<button id='minus" + item + "' class='btn btn-sm btn-primary minus'>-</button> <span id='val" + item + "''>" + cart[item][0] + "</span> <button id='plus" + item + "' class='btn btn-sm btn-primary plus'> + </button>";
+        document.getElementById('div' + item).innerHTML = "<button id='minus" + item + "' class='btn-sm btn-primary minus'>-</button> <span id='val" + item + "''>" + cart[item][0] + "</span> <button id='plus" + item + "' class='btn-sm btn-primary plus'> + </button>";
     }
     localStorage.setItem('cart', JSON.stringify(cart));
     document.getElementById('cart').innerHTML = sum;
@@ -121,7 +121,7 @@ $('.divpr').on("click", "button.minus", function() {
 		cart = JSON.parse(localStorage.getItem('cart'));
 		delete cart['pr' + a]
 		localStorage.setItem('cart',JSON.stringify(cart));
-		document.getElementById('divpr' + a).innerHTML = '<button id="' + 'pr'+ a + '" class="btn  btn-sm btn-primary cart">Add</button>'
+		document.getElementById('divpr' + a).innerHTML = '<button id="' + 'pr'+ a + '" class="btn-sm btn-primary cart">Add</button>'
 		updatePopover(cart);
 		
     }

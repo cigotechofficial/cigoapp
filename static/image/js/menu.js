@@ -178,8 +178,8 @@ const getFontSize = (textLength) => {
 }
 
 const boxes = document.querySelectorAll(".abc")
-console.log("Boxes length")
-console.log(boxes.length)
+// console.log("Boxes length")
+// console.log(boxes.length)
 boxes.forEach(box => {
     console.log(getFontSize(box.textContent.length))
     box.style.fontSize = getFontSize(box.textContent.length)

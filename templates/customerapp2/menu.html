@@ -5,8 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-<link rel="stylesheet" href="{% static 'customerapp/css/menu.css' %}">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{% static 'onlymenuapp2/css/onlymenu2.css' %}">
 
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Cantarell&family=RocknRoll+One&display=swap" rel="stylesheet">
@@ -27,7 +26,7 @@
     <!-- <link rel="apple-touch-icon" href="images/apple-touch-icon.png"> -->
     <!-- Bootstrap CSS -->
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    {# <link rel="stylesheet" href="{% static 'onlymenuapp2/css/bootstrap.min.css' %}"> #}
+    <!-- {# <link rel="stylesheet" href="{% static 'onlymenuapp2/css/bootstrap.min.css' %}"> #} -->
     <!-- Site CSS -->
     <link rel="stylesheet" href="{% static 'onlymenuapp2/css/style.css' %}">
     <!-- Responsive CSS -->
@@ -42,7 +41,7 @@
             height: auto;
         }
         .box p{
-            height:20px; 
+            height:1px; 
             overflow: hidden;
         }
 
@@ -50,10 +49,11 @@
 {% endblock head %}
 
 {% block body %}
-
-    <div id="loader">
-        <div id="status"></div>
-    </div>
+{% if orderdone %}
+<div class="alert alert-success py-2 mt-1" role="alert">
+    <a href="../status"><button type="button" class="btn alert-success btn-sm btn-block py-0">View Order Status</button></a>
+</div>
+{% endif %}
 
 <nav class=" navbar fixed-bottom bg-info py-1" id="checkoutnav">
     <button type="button" class="btn btn-primary mx-2" id="popcart" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="">
@@ -64,14 +64,19 @@
         </button>
     </a>
 </nav>
-<center><h2 class="whitetext mt-2" style="font-family: 'RocknRoll One', sans-serif;">{{restaurantname}}</h2></center>
+<div style="height:148px;border-radius: 0 0 60% 60%;background-color: #ff9847;">
+    <div id="loader">
+        <div id="status"></div>
+    </div>
+
+<center><h2 class="whitetext " style="font-family: 'RocknRoll One', sans-serif;"><span class="restaurantname">{{restaurantname}}</h2></span></center>
 <!-- end site-header -->
     <div id="menu" class="menu-main mt-4">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-                    <div class="tab-menu">
+                    <div class="catagorycard tab-menu">
                         <div class="slider slider-nav">
                             {% for prodlist in allProds %}
                             <div class="tab-title-menu">
@@ -80,44 +85,36 @@
                             {% endfor %}
                         </div>
                     </div>
+
                     <br>
-                    <div class="tab-menu">
+                    <!-- <div class="tab-menu"> -->
                         <div class="slider slider-single">
                             <!-- ------------------------------------------------------1---------------------------------------------- -->
                             {% for prodlist in allProds %}
-                            <div>
+                            <!-- <div> -->
                                 <section class="text-gray-600 body-font">
                                     <div class="container px-2 py-2 mx-auto">
                                         <div class="flex flex-wrap -m-2">
                                             {% for i in prodlist %}
-                                            <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
-                                                <div class="h-full flex items-center border-gray-200 border p-1 rounded-lg">
-                                                    <div class="box flex-grow ml-3 ">
-                                                        <h4 class="text-gray-900 title-font font-medium mt-2">{{i.product_name}} </h4>
-                                                        {% if i.customisable %}
-                                                        <div class="text-gray-700">
-                                                        {% for k,v in allcustomisablefields.items %}
-                                                            {% if k == i.product_id %}
-                                                                {% for c in v %}
-                                                                    {{ c.customitemname }} - ₹{{ c.customitemprice }} /
-                                                                {% endfor %}
-                                                            {% endif %}
-                                                        {% endfor %}
-                                                        </div>
-                                                        <!-- <button type="button" id="{{i.product_id}}" class="btn btn-primary btn-sm" onclick="customise(id)">Customisable</button> -->
-                                                        {% else %}
-                                                        <p class="text-gray-700">₹ {{i.price}}</p>
-                                                        {% endif %}
-                                                        <span id="divpr{{i.product_id}}" class="divpr" style="background-color: rgba(0,0,0,0.5); float: right;">
-                                                            <button id="pr{{i.product_id}}" class=" mx-1 btn btn-sm btn-primary cart">Add</button>
+                                            <div class="menucard p-2 lg:w-1/3 md:w-1/2 w-full">
+                                                <div class="h-full flex items-center rounded-lg">
+                                                    <div class="box flex-grow ml-3 mt-4 ">
+                                                        <h4 class="ab mt-2 text-gray-1400" id="namepr{{i.product_id}}" style="font-family: 'Cantarell', sans-serif;">{{i.product_name}}</h4>
+                                                        <div class="text-gray-700 mb-2">₹ {{i.price}}</div>
+                                                        <a class="readmore-btn text-gray-700 " ><button type="button" class=" btn-primary btn-sm">Read</button></a>
+
+                                                        <span id="divpr{{i.product_id}}" class="divpr" >
+                                                            <button id="pr{{i.product_id}}" class=" btn-sm btn-primary cart ">Add</button>
                                                         </span>
-                                                        <p class="text-gray-500">{{i.description}}</p>
-                                                        <a class="readmore-btn text-gray-700">More</a>
                                                         
+                                                        
+                                                        <p class="text-gray-500">{{i.description}}</p>
                                                         
                                                     </div>
                                                     {% if i.pictype %}
-                                                    <img alt="team" class="w-28 h-15 bg-gray-100 object-cover object-center flex-shrink-0 mr-3"  src="{{i.image.url}}">
+                                                    <div class="box flex-grow">
+                                                    <img alt="team" class="w-28 h-15 bg-gray-100 object-coverobject-none object-right flex-shrink-0 " src="{{i.image.url}}">
+                                                    </div>
                                                     {% else %}
                                                     {% endif %}
                                                 </div>
@@ -127,10 +124,10 @@
                                     </div>
                                 </section>
                                 <!-- end col -->
-                            </div>
+                            <!-- </div> -->
                             {% endfor %}
                         </div>
-                    </div>
+                    <!-- </div> -->
                     <!-- end tab-menu -->
                 </div>
                 <!-- end col -->
@@ -142,7 +139,7 @@
     <!-- end menu -->
     <a href="#" class="scrollup" style="display: none;">Scroll</a>
 
-
+</div>
 
 {% endblock body %}
 {% block js %}
