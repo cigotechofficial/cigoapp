@@ -1,0 +1,169 @@
+{% extends "app/appbase.html" %}
+{% load qr_code %}
+{% load static %}
+{% block title %}Cigo{% endblock title %}
+{% block dashboardactive %}active{% endblock dashboardactive %}
+{% block pageheading %}
+<h1 class="h3 mb-0 text-gray-800 mr-4">Dashboard - Manager</h1>
+{% endblock pageheading %}
+{% block body %}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="{% static 'app/js/dashboardmanager.js' %}"></script>
+<!-- Begin Page Content -->
+<div class="container-fluid">
+	<!-- Page Heading -->
+	<div class="row">
+        <div class="col-xl-12 col-md-12 mb-2 bg-white ">
+            <center><h4 class=" mb-0 text-gray-800 mr-2">{{restaurantname}}</h4></center>
+        </div>
+    </div>
+	<!-- Content Row -->
+	<!-- Top Row Start -->
+	<div class="row">
+		<div class="col-xl-4 col-lg-5">
+			<div class="card shadow mb-4">
+				<!-- Card Header - Dropdown -->
+				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+					<h6 class="m-0 font-weight-bold text-primary">Waiter Request</h6>
+				</div>
+				<!-- Card Body -->
+				<div class="card-body">
+					<div>
+						<p id="waiterid"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-xl-8 col-lg-12">
+			<div class="card shadow mb-4">
+				<!-- Card Header - Dropdown -->
+				<a name="revenue">
+					<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+						<h6 class="m-0 font-weight-bold text-primary">Verify Payment</h6>
+					</div>
+				</a>
+				<!-- Card Body -->
+				<div class="card-body">
+					<div>
+						<p id="verifypaymenttable"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Top Row End -->
+	<center><div ><button class="btn btn-info" onclick="btnorderstatus()"> See Order Status <i class="fas fa-caret-down"></i> </button></div></center>
+	<!-- Second Top Row Start -->
+	<div class="row mt-4" id="orderstatusdiv">
+		<div class="col-xl-6 col-lg-6 ">
+			<div class="card shadow mb-4">
+				<!-- Card Header - Dropdown -->
+				<a name="revenue">
+					<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+						<h6 class="m-0 font-weight-bold text-primary">New Order</h6>
+					</div>
+				</a>
+				<!-- Card Body -->
+				<div class="card-body">
+					<div>
+						<p id="neworder"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-xl-6 col-lg-6 ">
+			<div class="card shadow mb-4">
+				<!-- Card Header - Dropdown -->
+				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+					<h6 class="m-0 font-weight-bold text-primary">Cooking</h6>
+				</div>
+				<!-- Card Body -->
+				<div class="card-body">
+					<p id="cookingtable"></p>
+				</div>
+			</div>
+		</div>
+		<div class="col-xl-3 col-lg-3">
+			<div class="card shadow mb-4">
+				<!-- Card Header - Dropdown -->
+				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+					<h6 class="m-0 font-weight-bold text-primary">Start Session</h6>
+				</div>
+				<!-- Card Body -->
+				<div class="card-body">
+					<form class="form-inline" action="" method="post">
+						{% csrf_token %}
+						<div class="form-row">
+							<div class="form-group col-xs-8 ">
+								<select class="form-control" id="tablenoselect" name="tablenoselect" required>
+									<option value="" disabled selected hidden>Choose Table</option>
+									{% for i in tablenos %}
+									<option value="{{i}}">{{i}}</option>
+									{% endfor %}
+								</select>
+							</div>
+							<div class="form-group col-xs-4 ">
+								<button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Start</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="col-xl-9 col-lg-9">
+			<div class="card shadow mb-4">
+				<!-- Card Header - Dropdown -->
+				<a name="revenue">
+					<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+						<h6 class="m-0 font-weight-bold text-primary">End Session</h6>
+					</div>
+				</a>
+				<!-- Card Body -->
+				<div class="card-body">
+					<div>
+						<p id="tabletextid"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Second Top Row End -->
+	<!-- Third Top Row Start -->
+	<div class="row mt-4">
+
+	</div>
+	<!-- Third Top Row End -->
+</div>
+<!-- End of Page Content -->
+<!-- Modal Qr Code -->
+<div class="modal fade" id="myModalz" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Scan this:</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="my-2">
+					<center>
+						<!-- <h5 style="font-size:4vw;">{{table_qr}}</h5> -->
+					</center>
+					<center>{% qr_from_text table_qr size=8 border=1 image_format="png" error_correction="L" %}</center>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock body %}
+{% block js %}
+<script type="text/javascript">
+$(window).on('load', function() {
+
+	if ({{table_selected}} != 0) {
+		$('#myModalz').modal({ backdrop: 'static', keyboard: false });
+	}
+});
+</script>
+{% endblock js %}

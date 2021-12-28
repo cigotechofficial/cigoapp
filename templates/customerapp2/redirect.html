@@ -1,0 +1,10 @@
+{% extends "customerapp/customerbase.html" %}
+{% block js %}
+<script>
+	var restaurantId = localStorage.getItem('restaurantId');
+	var tableno = localStorage.getItem('tableno');
+	var hashcode = localStorage.getItem('hashcode');
+	window.location.replace("http://192.168.1.9:8000/customerapp/" + restaurantId +"/"+ tableno +"/" + hashcode +"/menu/");
+	
+</script>	
+{% endblock js %}

@@ -1,0 +1,361 @@
+{% extends "app/appbase.html" %}
+{% load static %}
+{% block title %}Cigo{% endblock title %}
+{% block menuactive %}active{% endblock menuactive %}
+{% block menuactivemanager %}active{% endblock menuactivemanager %}
+{% block pageheading %}
+<div class="mr-5">
+	<h1 class="h3 mb-0 text-gray-800 mr-5">Menu</h1>
+</div>
+<!-- Venue Select ajax -->
+<!-- <div class="p-1 mb-1 bg-info text-white ml-5">
+	<select class="custom-select" id="restaurant" name="restaurant" onchange="venue()">
+		<option value="" disabled selected hidden>Choose Venue</option>
+		{% for i in allrestaurants %}
+		<option value="{{i.venueid}}">{{i.venuename}}</option>
+		{% endfor %}
+	</select>
+</div> -->
+<!-- Venue Select ajax -->
+{% endblock pageheading %}
+{% block body %}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+	<div class="row">
+		<!-- Left Side Components Start-->
+		<div class="col-xl-7 col-lg-7">
+			<!-- Add Menu Item Start-->
+			<div class="card shadow mb-4">
+				<!-- Card Header - Dropdown -->
+				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+					<h6 class="m-0 font-weight-bold text-primary">Add Menu Item</h6>
+				</div>
+				<!-- Card Body -->
+				<div class="card-body">
+					<div class="text-center">
+						<button type="button" class="btn btn-info" data-toggle="modal" data-target="#additemModal">
+							Add Item
+						</button>
+					</div>
+				</div>
+			</div>
+			<!-- Add Menu Item End -->
+			<!-- Edit Menu Item Start -->
+			<div class="card shadow mb-4">
+				<!-- Card Header - Dropdown -->
+				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+					<div>
+						<h6 class="m-0 font-weight-bold text-primary">Edit Menu Items</h6>
+					</div>
+					<!--                    <div>
+						<form method="get">
+							{{myFilter.form}}
+							<button class="btn btn-info" type="submit">Search</button>
+						</form>
+					</div>   -->
+					<div class="input-group">
+						<form method="post" action="./" class="form-inline">
+							{% csrf_token %}
+							<div class="mr-1">
+								<select class="custom-select" id="venueselect" name="venueselect" onchange="filtervenue()">
+									<option selected>Venue</option>
+									<option value="{{restaurant.venueid}}">{{restaurant.venuename}}</option>
+								</select>
+							</div>
+							<div class="mr-1">
+								<select class="custom-select" id="categoryselect" name="categoryselect" onchange="filtercategory()">
+									<option selected>Category</option>
+								</select>
+							</div>
+							<div class="mr-1">
+								<select class="custom-select" id="availability" name="availability">
+									<option value="Availability" selected>Availability</option> 
+									<option value="not">Not Available</option>
+									<option value="ava">Available</option>
+								</select>
+							</div>
+							<div class="ml-2">
+								<button class="btn btn-info" type="submit">Filter Result</button>
+							</div>
+						</form>
+					</div>
+				</div>
+				<!-- Card Body -->
+				<div class="card-body ">
+					<!--                         <img class="img-fluid px-3 px-sm-4 mt-3 mb-4 mx-5" style="width: 12rem;" src="{% static 'app/img/undraw_cooking_lyxy.svg' %}" alt=""> -->
+					<div class="table-responsive">
+						<table class="table mt-2">
+							<thead class="table-warning">
+								<tr>
+									<!-- {# <th scope="col">Sno.</th> #} -->
+									<th scope="col">Venue</th>
+									<th hidden scope="col">Venueid</th>
+									<th scope="col">Name</th>
+									<th scope="col">Category</th>
+									<th scope="col">Price</th>
+									<th scope="col">Available</th>
+									<th scope="col">Update</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for i in allmenu %}
+								<tr>
+									<!-- {# <th scope="row">{{ forloop.counter }}</th> #} -->
+									<td id="venue{{i.product_id}}">{{i.venue}}</td>
+									<td hidden id="venueid{{i.product_id}}">{{i.venue.venueid}}</td>
+									<td id="product{{i.product_id}}">{{i.product_name}}</td>
+									<td id="category{{i.product_id}}">{{i.category}}</td>
+									<td id="price{{i.product_id}}">{{i.price}}</td>
+									<td hidden id="description{{i.product_id}}">{{i.description}}</td>
+									<td id="availability{{i.product_id}}">{{i.availability}}</td>
+									<td><button id="{{i.product_id}}" type="button" class="btn btn-success updatemenu" data-toggle="modal" data-target="#updateMenuModal">Update</button></td>
+								</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<!-- Edit Menu Item End -->
+		</div>
+		<!-- Left Side Components Ends -->
+		<!-- Right Side Components Starts -->
+		<div class="col-xl-5 col-lg-5">
+			<!-- Sample Menu Start -->
+			<div class="card shadow mb-4">
+				<!-- Card Header - Dropdown -->
+				<a name="revenue">
+					<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+						<h6 class="m-0 font-weight-bold text-primary">Sample Menu</h6>
+					</div>
+				</a>
+				<!-- Card Body -->
+				<div class="card-body">
+					<!-- Category Select Ajax -->
+					<!--                     <form class="form-inline">
+						<div class="mx-auto mb-2">
+							<select class="custom-select" id="restaurant" name="restaurant">
+								<option value="" disabled selected hidden>Choose Category</option>
+								{% for i in allrestaurants %}
+								<option value="{{i.venueid}}">{{i.venuename}}</option>
+								{% endfor %}
+							</select>
+							<select class="custom-select" id="restaurant" name="restaurant">
+								<option value="" disabled selected hidden>Choose Dish</option>
+								{% for i in allmenu %}
+								<option value="{{i.product_id}}">{{i.product_name}}</option>
+								{% endfor %}
+							</select>
+							<button type="submit" class="btn btn-info">Get</button>
+						</div>
+					</form> -->
+					<!-- Category Select Ajax -->
+					<div class="card mx-auto" style="width: 15rem;">
+						<img src="https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=400" class="card-img-top" alt="...">
+						<div class="card-body">
+							<h5 class="card-title">Shahi Paneer</h5>
+							<p class="card-text">Preparation with cream, tomatoes and Indian spices.</p>
+							<a href="#" class="btn btn-primary">Add</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Sample Menu Ends -->
+		</div>
+		<!-- Right Side Components Ends -->
+	</div>
+</div>
+<!-- Add Item Modal -->
+<div class="modal fade" id="additemModal" tabindex="-1" role="dialog" aria-labelledby="additemModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="additemModalLabel">Item Details</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<!-- Add Item Modal -->
+			<div class="modal-body">
+				<form action="../additem/" method="post" enctype="multipart/form-data">
+					{% csrf_token %}
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<label class="input-group-text" for="inputGroupSelect01">Choose Venue:</label>
+						</div>
+						<select class="custom-select" id="restaurant" name="restaurant">
+							<option value="{{restaurant.venueid}}">{{restaurant.venuename}}</option>
+						</select>
+					</div>
+					<div class="form-group ">
+						<label for="name">Name</label>
+						<input type="text" class="form-control" id="name" name="name" aria-describedby="nameHelp" placeholder=" Example: Shahi Paneer" required>
+					</div>
+					<div class="form-group">
+						<label for="category">Category</label>
+						<input type="text" class="form-control" id="category" name="category" aria-describedby="category" placeholder="Example: Main Course" required>
+					</div>
+					<div class="form-group">
+						<label for="price">Price</label>
+						<input type="number" class="form-control" name="price" id="price" required>
+					</div>
+					<div class="form-group ">
+						<label for="description">Description</label>
+						<input type="text" class="form-control" name="description" id="description" required>
+					</div>
+					<div class="form-group">
+						<label>Image</label>
+						<input type="file" class="form-control-file" id="menuimg" name="menuimg" >
+					</div>
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End Add Item Modal -->
+
+<!-- Update Item Modal -->
+<div class="modal fade" id="updateMenuModal" >
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title"> Update Item Details</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<!-- Add Item Modal -->
+			<div class="modal-body">
+				<form action="../updatemenu/" method="post">
+					{% csrf_token %}
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<label class="input-group-text" for="inputGroupSelect01">Choose Venue:</label>
+						</div>
+						<select class="custom-select" id="restaurantupdate" name="restaurantupdate">
+							<option value="{{restaurant.venueid}}">{{restaurant.venuename}}</option>
+						</select>
+					</div>
+					<div class="form-group ">
+						<input type="hidden" class="form-control" id="productid" name="productid">
+					</div>
+					<div class="form-group ">
+						<label for="name">Name</label>
+						<input type="text" class="form-control" id="nameupdate" name="nameupdate" aria-describedby="nameHelp" placeholder=" Example: Shahi Paneer" required>
+					</div>
+					<div class="form-group">
+						<label for="category">Category</label>
+						<input type="text" class="form-control" id="categoryupdate" name="categoryupdate" aria-describedby="category" placeholder="Example: Main Course" required>
+					</div>
+					<div class="form-group">
+						<label for="price">Price</label>
+						<input type="number" class="form-control" name="priceupdate" id="priceupdate" required>
+					</div>
+					<div class="form-group ">
+						<label for="description">Description</label>
+						<input type="text" class="form-control" name="descriptionupdate" id="descriptionupdate" required>
+					</div>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<label class="input-group-text" for="inputGroupSelect01">Availability:</label>
+						</div>
+						<select class="custom-select" id="availabilityupdate" name="availabilityupdate">
+							<option value="ava">Available</option>
+							<option value="not">Not Available</option>
+						</select>
+					</div>
+					<button type="button" id="deletemenuid" class="deletemenu btn btn-danger mr-5 ml-2">Delete</button>
+					<button type="submit" class="btn btn-primary col-6 ml-5">Update</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End Add Item Modal -->
+<!-- End of Page Content -->
+{% endblock body %}
+{% block js %}
+<script>
+function filtervenue() {
+
+	var x = document.getElementById("venueselect").value;
+
+	var url = 'venueselect?id=' + x;
+	var req = new XMLHttpRequest();
+	req.onreadystatechange = function() {
+		if (this.readyState === 4 && this.status === 200) {
+			var data = JSON.parse(req.responseText);
+			// var select = document.getElementById("categoryselect");
+			var modelList = document.getElementById("categoryselect")
+			while (modelList.options.length) {
+				modelList.remove(0);
+			}
+			var categoryname = new Option("Category","0");
+			modelList.options.add(categoryname);
+
+			for (var i = 0; i < data.length; i++) {
+				var catlist = new Option(data[i], data[i]);
+				modelList.options.add(catlist);
+			}
+
+		}
+	};
+
+	req.open("GET", url, true);
+	req.send();
+
+
+
+
+}
+
+function filtercategory() {
+	var y = document.getElementById("categoryselect").value;
+	// alert(y)
+
+}
+// ------------------------------------------------Update Menu Start----------------------------------------------------------------------------
+$(".updatemenu").click(function() {
+	var venue = document.getElementById("venueid" + this.id);
+	document.getElementById("restaurantupdate").value = venue.textContent;	
+
+	var product = document.getElementById("product" + this.id);
+	document.getElementById("nameupdate").value = product.textContent;
+
+	var category = document.getElementById("category" + this.id);
+	document.getElementById("categoryupdate").value = category.textContent;	
+
+	var price = document.getElementById("price" + this.id);
+	document.getElementById("priceupdate").value = price.textContent;	
+
+	var availability = document.getElementById("availability" + this.id);
+	document.getElementById("availabilityupdate").value = availability.textContent;	
+
+	var description = document.getElementById("description" + this.id);
+	document.getElementById("descriptionupdate").value = description.textContent;
+
+	document.getElementById("productid").value = this.id;
+	document.getElementById("deletemenuid").value = this.id;
+
+});
+$(".deletemenu").click(function() {
+
+	var itemid = this.value;
+	// console.log(itemid)
+	var url = 'deletemenu?itemid=' + itemid;
+	var req = new XMLHttpRequest();
+	req.onreadystatechange = function() {
+		if (this.readyState === 4 && this.status === 200) {
+		
+			location.reload();
+		}
+	};
+
+	req.open("GET", url, true);
+	req.send();
+
+});
+// ------------------------------------------------Update Menu End-------------------------------------------------------------------------
+</script>
+{% endblock js %}

@@ -1,0 +1,257 @@
+{% extends "app/appbase.html" %}
+{% load static %}
+{% block title %}Cigo{% endblock title %}
+{% block dashboardactive %}active{% endblock dashboardactive %}
+{% block pageheading %}
+<h1 class="h3 mb-0 text-gray-800 mr-2">Dashboard Owner</h1>
+{# Graph Form Start #}
+{# Graph Form End #}
+{% endblock pageheading %}
+{% block infosearchbutton %}
+<button class="btn btn-primary mx-2 btn-sm" type="button" data-toggle="collapse" data-target="#collapseExample">
+    Set Data Filter <i class="fas fa-caret-down"></i>
+</button>
+{% endblock infosearchbutton %}
+{% block infosearch %}
+<div class="collapse" id="collapseExample">
+    <div class="card mb-2 float-center">
+        <div class="card-header py-3">
+            <form class="form-inline" action="" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <select class="custom-select mx-2" id="restaurant" name="restaurant" required>
+                        <option value="" disabled selected hidden>Choose Venue</option>
+                        {% for i in allrestaurants %}
+                        <option value="{{i.venueid}}">{{i.venuename}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group mx-2">
+                    <small class="form-text text-muted">From:</small>
+                    <input class="custom-select" type="date" id="fromdate" name="fromdate" required>
+                </div>
+                <div class="form-group  mx-2">
+                    <small class="form-text text-muted">To:</small>
+                    <input class="custom-select" type="date" id="todate" name="todate" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm ">Get Info</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock infosearch %}
+{% block body %}
+<!-- Begin Page Content  -->
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-xl-12 col-md-12 mb-2 bg-white ">
+            <center><h4 class=" mb-0 text-gray-800 mr-2">{{restaurantname}}</h4></center>
+        </div>
+    </div>
+    <!-- Content Row -->
+    <div class="row">
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4 ">
+            <a href="#revenue">
+                <div class="card border-left-primary shadow h-100 py-2 bg-gradient-danger">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center ">
+                            <div class="col mr-2  ">
+                                <div class="text-xs font-weight-bold text-white text-uppercase mb-1">Revenue (Daily Avg)</div>
+                                <div class="h5 mb-0 font-weight-bold text-white">₹{{avg_dailyrevenue}}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-rupee-sign fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <a href="#allorder">
+                <div class="card border-left-success shadow h-100 py-2 bg-gradient-warning">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-white text-uppercase mb-1">All Orders</div>
+                                <div class="h5 mb-0 font-weight-bold text-white">{{allorderlen}}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-list-alt fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <a href="#revenue">
+                <div class="card border-left-success shadow h-100 py-2 bg-gradient-info">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-white text-uppercase mb-1">Happiness Index</div>
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col-auto">
+                                        <div class="h5 mb-0 mr-3 font-weight-bold text-white">{{hapinessindex}}%</div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="progress progress-sm mr-2">
+                                            <div class="progress-bar bg-warning" role="progressbar" style="width: {{hapinessindex}}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-smile fa-2x text-white"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <!-- Pending Requests Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <a href="#feedback">
+                <div class="card border-left-warning shadow h-100 py-2 bg-gradient-dark">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-white text-uppercase mb-1">Feedback</div>
+                                <div class="h5 mb-0 font-weight-bold text-white">{{feedbackno}}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-comments fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+<!-- Content Row -->
+<!-- -----start of Revenue Overview,Happiness Index Distribution , All Orders Till Date, Feedback------ -->
+    
+<!--     <div class="row">
+        <div class="col-xl-8 col-lg-7">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Revenue Overview</h6>
+                </div>
+                <div class="card-body">
+                    <div class="chart-area">
+                        <canvas id="myAreaChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-lg-5">
+            <div class="card shadow mb-4">
+                <a name="revenue">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Happiness Index Distribution</h6>
+                    </div>
+                </a>
+                <div class="card-body">
+                    <div class="chart-pie pt-4 pb-2">
+                        <canvas id="myPieChart"></canvas>
+                    </div>
+                    <div class="mt-4 text-center small">
+                        <span class="mr-2">
+                            <i class="fas fa-circle text-primary"></i> Awesome
+                        </span>
+                        <span class="mr-2">
+                            <i class="fas fa-circle text-success"></i> Satisfied
+                        </span>
+                        <span class="mr-2">
+                            <i class="fas fa-circle text-info"></i> Not Satisfied
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <a name="allorder"></a>
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">All Orders Till Date</h6>
+                </div>
+                <div class="card-body">
+                    <center><a href="orderhistory/" class="btn btn-primary ">See Order History</a></center>
+                </div>
+            </div>
+        </div>
+        <a name="feedback"></a>
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Feedback</h6>
+                </div>
+                <div class="card-body">
+                    <div class="text-center">
+                        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="{% static 'app/img/undraw_feedback_h2ft.svg' %}" alt="">
+                    </div>
+                    <p>
+                        <ul>
+                            {% for i in feedbacklist %}
+                            {% if forloop.counter <= 3 %} <li>{{i}}</li>
+                                {% endif %}
+                                {% empty %}
+                                <p>Change the dates to see feedback!</p>
+                                {% endfor %}
+                        </ul>
+                    </p>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#morefeedback">
+                        See More Feedbacks
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<!-- -----End of Revenue Overview,Happiness Index Distribution , All Orders Till Date, Feedback------ -->
+<!-- End of Page Content -->
+<!-- Feedback Modal -->
+<div class="modal fade" id="morefeedback" tabindex="-1" role="dialog" aria-labelledby="morefeedback" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">More Feedbacks</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    <ul>
+                        {% for i in feedbacklist %}
+                        <li>{{i}}</li>
+                        {% empty %}
+                        <p>Change the dates to see feedback!</p>
+                        {% endfor %}
+                    </ul>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}
+{% block js %}
+        <script type="text/javascript">
+        var revenuegraph_data = JSON.parse('{{daily_prices}}');
+
+        var z = "{{dates}}".replaceAll("&#x27;", "\"");
+        var revenuelabeldata = JSON.parse(z);
+
+
+        var feedbackdata = JSON.parse('{{graphdata}}');
+        </script>
+        <script src="{% static 'app/js/revenuegraph.js' %}"></script>
+        <script src="{% static 'app/js/happinessgraph.js' %}"></script>
+{% endblock js %}

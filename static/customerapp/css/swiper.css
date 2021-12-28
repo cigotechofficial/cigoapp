@@ -1,0 +1,73 @@
+<style>
+.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+    border-top-left-radius: 22px;
+    border-top-right-radius: 18px;
+}
+
+.card {
+
+    height: 100%;
+    width: 100%;
+    border-radius: 25px;
+    background: transparent;
+    box-shadow: 0 8px 20px -6px black;
+    /*margin: 10px;*/
+    overflow: auto;
+    /*height:auto;*/
+
+}
+
+.img {
+    float: right;
+    height: auto;
+}
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    color: white;
+    background: #fff;
+    height: 230px;
+    width: 200px;
+    /*from cigo*/
+    position: relative;
+    background: transparent;
+    border-radius: 25px;
+    margin: 0 auto;
+    box-shadow: 0 8px 20px -6px black;
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+
+}
+
+.swiper-pagination {
+    position: relative;
+    top: -320px;
+}
+
+.sliderText {
+    position: relative;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    width: 100%;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: black;
+}
+
+</style>

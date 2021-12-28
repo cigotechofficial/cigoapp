@@ -1,0 +1,338 @@
+{% load static %}
+{% load auth_extras %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<title>{% block title %}{% endblock title %}</title>
+	<!-- Custom fonts for this template-->
+	<link href="{% static 'app/css/all.min.css' %}" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+	<!-- Custom styles for this template-->
+	<link href="{% static 'app/css/sb-admin-2.min.css' %}" rel="stylesheet">
+	<link href="{% static 'app/css/dashboard.css' %}" rel="stylesheet">
+	{% block head %}{% endblock head %}
+	<link rel="icon" href="{% static 'home/img/icon.png'%}">
+</head>
+
+<body id="page-top">
+	<!-- Topbar -->
+	<nav class="navbar navbar-expand navbar-dark bg-black topbar shadow" style="background-color: #343a40;">
+		<a class="navbar-brand" href="/home"><img class="img-profile " src="{% static 'home/img/logohome.png' %}" style="width:90px;height:40px;"></a>
+		<!-- Topbar Navbar -->
+		<ul class="navbar-nav ml-auto">
+			<div class="topbar-divider d-none d-sm-block"></div>
+			{% if user.is_authenticated %}
+			<!-- Nav Item - User Information -->
+			<li class="nav-item dropdown no-arrow">
+				<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<span class="mr-2 d-none d-lg-inline small">{{request.user.first_name}}</span>
+					<span><i class="fas fa-caret-down mr-1"></i></span>
+					<img class="img-profile rounded-circle" src="{% static 'app/img/undraw_profile.svg' %}">
+				</a>
+				<!-- Dropdown - User Information -->
+				<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+					<div class="dropdown-item border ">
+						<center><i class="fa fa-user-circle  " aria-hidden="true"></i> <span>{{request.user.first_name}} </span></center>
+					</div>
+					<button class="dropdown-item" data-toggle="modal" data-target="#changePassModal">
+						Change Password
+					</button>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="/logout">Logout</a>
+				</div>
+			</li>
+			{% else %}
+			<!-- Button trigger loginModal -->
+			<button type="button" class="btn btn-info mr-2" data-toggle="modal" data-target="#loginModal">
+				Login
+			</button>
+			<!-- Button trigger signupModal -->
+			<button type="button" class="btn btn-info " data-toggle="modal" data-target="#signupModal">
+				Sign Up
+			</button>
+			{% endif %}
+		</ul>
+	</nav>
+	<div class="bg">
+		<!-- Page Wrapper -->
+		<div id="wrapper">
+			<!-- Sidebar -->
+			<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
+				<!-- Divider -->
+				<hr class="sidebar-divider my-0">
+				<!-- Nav Item - Dashboard -->
+				<li class="nav-item {% block dashboardactive %}{% endblock dashboardactive %}">
+					<a class="nav-link" href="/dashboard/">
+						<i class="fas fa-fw fa-tachometer-alt"></i>
+						<span>Dashboard</span></a>
+				</li>
+				<li class="nav-item {% block homedelactive %}{% endblock homedelactive %}">
+					<a class="nav-link" href="/deliverydashboard/">
+						<i class="fas fa-motorcycle"></i>
+						<span>Home Delivery</span></a>
+				</li>
+				<!-- Divider -->
+				<hr class="sidebar-divider">
+				{% if request.user|has_group:"Owner" %}
+
+				<!-- Heading -->
+				<div class="sidebar-heading">
+					Basic Setup
+				</div>
+				<!-- Nav Item - Pages Collapse Menu -->
+				<li class="nav-item {% block setupactive %}{% endblock setupactive %}">
+					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+						<i class="fas fa-fw fa-cog"></i>
+						<span>Setup Your Venue</span>
+					</a>
+					<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded">
+							<h6 class="collapse-header"> Components:</h6>
+							<a class="collapse-item" href="/setup">Add / Edit Restaurant</a>
+						</div>
+					</div>
+				</li>
+				<!-- Nav Item - Utilities Collapse Menu -->
+				<li class="nav-item {% block menuactive %}{% endblock menuactive %}">
+					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+						<i class="fas fa-fw fa-utensils"></i>
+						<span>Food Menu</span>
+					</a>
+					<div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded">
+							<h6 class="collapse-header"> Utilities:</h6>
+							<a class="collapse-item" href="/setup/menupage">Change Menu</a>
+						</div>
+					</div>
+				</li>
+				<!-- Divider -->
+				<hr class="sidebar-divider">
+				<!-- Heading -->
+				<div class="sidebar-heading">
+					Interface
+				</div>
+				<li class="nav-item {% block helpactive %}{% endblock helpactive %}">
+					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseHelp" aria-expanded="true" aria-controls="collapseHelp">
+						<i class="fas fa-chalkboard-teacher"></i>
+						<span>Help</span>
+					</a>
+					<div id="collapseHelp" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded">
+							<h6 class="collapse-header"> Help: </h6>
+							<a class="collapse-item" href="/help/tutorials">Tutorials</a>
+							<a class="collapse-item" href="/help/productspecialist">Contact Product Specialist</a>
+						</div>
+					</div>
+				</li>
+				<!-- Divider -->
+				<hr class="sidebar-divider d-none d-md-block">
+				{% elif request.user|has_group:"Manager" %}
+								<!-- Heading -->
+				<div class="sidebar-heading">
+					Basic Setup
+				</div>
+				<!-- Nav Item - Pages Collapse Menu -->
+				<li class="nav-item ">
+					<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded">
+							<h6 class="collapse-header"> Components:</h6>
+							<a class="collapse-item" href="/setup">Add / Edit Restaurant</a>
+							<a class="collapse-item" type="button" data-toggle="modal" data-target="#signupModal">Edit Existing Venue</a>
+						</div>
+					</div>
+				</li>
+				<!-- Nav Item - Utilities Collapse Menu -->
+				<li class="nav-item {% block menuactivemanager %}{% endblock menuactivemanager %}">
+					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+						<i class="fas fa-fw fa-utensils"></i>
+						<span>Food Menu</span>
+					</a>
+					<div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded">
+							<h6 class="collapse-header"> Utilities:</h6>
+							<a class="collapse-item" href="/setup/menupage">Change Menu</a>
+						</div>
+					</div>
+				</li>
+				<!-- Divider -->
+				<hr class="sidebar-divider">
+				<!-- Heading -->
+				<div class="sidebar-heading">
+					Interface
+				</div>
+				<li class="nav-item {% block helpactivemanager %}{% endblock helpactivemanager %} ">
+					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseHelp" aria-expanded="true" aria-controls="collapseHelp">
+						<i class="fas fa-chalkboard-teacher"></i>
+						<span>Help</span>
+					</a>
+					<div id="collapseHelp" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded">
+							<h6 class="collapse-header"> Help: </h6>
+							<a class="collapse-item" href="/help/tutorials">Tutorials</a>
+						</div>
+					</div>
+				</li>
+				<!-- Divider -->
+				<hr class="sidebar-divider d-none d-md-block">
+				{% endif %}
+
+				
+				<!-- Sidebar Toggler (Sidebar) -->
+				<div class="text-center d-none d-md-inline">
+					<button class="rounded-circle border-0" id="sidebarToggle"></button>
+				</div>
+			</ul>
+			<!-- End of Sidebar -->
+			<!-- Content Wrapper -->
+			<div id="content-wrapper" class="d-flex flex-column">
+				<!-- Main Content -->
+				<!-- Topbar -->
+				<nav class="navbar navbar-expand-xl navbar-light bg-white topbar mb-1 shadow">
+					<!-- Sidebar Toggle (Topbar) -->
+					<button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+						<i class="fa fa-bars"></i>
+					</button>
+					<!-- Topbar Navbar -->
+					{% block pageheading %}
+					{% endblock pageheading %}
+					{% block infosearchbutton %}
+					{% endblock infosearchbutton %}
+				</nav>
+				{% block infosearch %}
+				{% endblock infosearch %}
+				<!-- End of Topbar -->
+				<!-- Begin Page Content -->
+				{% for message in messages %}
+				<div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+					<strong>Message: </strong> {{ message }}
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				{% endfor %}
+				{% block body %}
+				{% endblock body %}
+				<!-- End of Main Content -->
+				<!-- Change Password Modal -->
+				<div class="modal fade" id="changePassModal" tabindex="-1" role="dialog" aria-labelledby="changePassModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="loginModalLabel">Change Password</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<form action="/changePassword" method="post">
+									{% csrf_token %}
+									<div class="form-group">
+										<label for="loginemail">Email Id</label>
+										<input type="email" class="form-control" id="changepassemail" name="changepassemail" aria-describedby="emailHelp">
+									</div>
+									<div class="form-group">
+										<label for="loginpassword">Old Password</label>
+										<input type="password" class="form-control" name="oldpassword" id="oldpassword">
+									</div>
+									<div class="form-group">
+										<label for="loginpassword">New Password</label>
+										<input type="password" class="form-control" name="newpass1" id="newpass1">
+									</div>
+									<div class="form-group">
+										<label for="loginpassword">Confirm New Password</label>
+										<input type="password" class="form-control" name="newpass2" id="newpass2">
+									</div>
+									<button type="submit" class="btn btn-primary">Login</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Signup Employee Modal -->
+				<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="signupModalLabel">Add Member Here</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<form action="/addemployee" method="post">
+									{% csrf_token %}
+									<div class="form-group">
+										<label for="fname">Name</label>
+										<input type="text" class="form-control" id="fname" name="fname" aria-describedby="fnameHelp" required>
+									</div>
+									<div class="form-group">
+										<label for="exampleInputEmail1">Email</label>
+										<input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" required>
+									</div>
+									<div class="form-group">
+										<label for="pass1">Password</label>
+										<input type="password" class="form-control" name="pass1" id="pass1" required>
+									</div>
+									<div class="form-group">
+										<label for="pass2">Confirm Password</label>
+										<input type="password" class="form-control" name="pass2" id="pass2" required>
+									</div>
+									<div class="input-group mb-3">
+										<div class="input-group-prepend">
+											<label class="input-group-text" for="inputGroupSelect01">Role</label>
+										</div>
+										<select class="custom-select" id="role" name="role">
+											<option selected>Choose...</option>
+											<option value="Owner">Co-Owner</option>
+											<option value="Manager">Manager</option>
+											<option value="Receptionist">Receptionist</option>
+											<option value="Chef">Chef</option>
+										</select>
+									</div>
+									<button type="submit" class="btn btn-primary">Submit</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- End Signup Employee Modal -->
+				<!-- Footer -->
+				<footer class="sticky-footer bg-white">
+					<div class="container my-auto">
+						<div class="copyright text-center my-auto">
+							<span>Copyright &copy; Cigo 2021</span>
+						</div>
+					</div>
+				</footer>
+				<!-- End of Footer -->
+			</div>
+			<!-- End of Content Wrapper -->
+		</div>
+		<!-- End of Page Wrapper -->
+		<!-- Scroll to Top Button-->
+		<a class="scroll-to-top rounded" href="#page-top">
+			<i class="fas fa-angle-up"></i>
+		</a>
+		<!-- downloaded template extensions-->
+		<script src="{% static 'app/js/jquery.min.js' %}"></script>
+		<script src="{% static 'app/js/bootstrap.bundle.min.js' %}"></script>
+		<!-- Core plugin JavaScript-->
+		<script src="{% static 'app/js/jquery.easing.min.js' %}"></script>
+		<!-- Custom scripts for all pages-->
+		<script src="{% static 'app/js/sb-admin-2.min.js' %}"></script>
+		<!-- Page level plugins -->
+		<script src="{% static 'app/js/Chart.min.js' %}"></script>
+		<!-- Page level custom scripts -->
+		<script src="{% static 'app/js/sidebar.js' %}"></script>
+
+		{% block js %}{% endblock js %}
+	</div>
+</body>
+
+</html>

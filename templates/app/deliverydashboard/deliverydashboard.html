@@ -1,0 +1,180 @@
+{% extends "app/appbase.html" %}
+{% load qr_code %}
+{% load static %}
+{% block title %}Cigo{% endblock title %}
+{% block homedelactive %}active{% endblock homedelactive %}
+{% block pageheading %}
+<h4 class="text-gray-800 mt-3 ">Delivery Dashboard - Owner</h4>
+{% endblock pageheading %}
+{% block body %}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-xl-12 col-md-12 mb-2 bg-white ">
+            <center>
+                <h4 class=" mb-0 text-gray-800 mr-2">{{restaurantname}}</h4>
+            </center>
+        </div>
+    </div>
+    <!-- Content Row -->
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 mb-2 bg-white ">
+            <button class="btn btn-primary mx-2 mb-3 btn-sm" type="button" data-toggle="collapse" data-target="#discount">
+                Choose Discount For Customers<i class="fas fa-caret-down"></i>
+            </button>
+            <div class="collapse" id="discount">
+                <div class="card mb-2 float-center">
+                    <div class="card-header py-3">
+                        <form class="form-inline" method="post" action="./deliverydiscount/">
+                            {% csrf_token %}
+                            <div class="form-group mx-sm-3 mb-2 mr-2">
+                                <input type="text" class="form-control" id="discount" name='discount' placeholder="Discount">
+                                <h5 class="mt-2 text-gray-800">%</h5>
+                            </div>
+                            <button type="submit" class="btn btn-primary mb-2">Confirm </button>
+                            <h6 class="text-gray-800 ml-5">Current Discount: {{discount}}%</h6>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Mid Row Start-->
+    <a id="neworder"></a>
+    <div class="row">
+        <!-- Area Chart -->
+        <div class="col-xl-12 col-lg-12 col-md-12">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">New Orders</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <div id="neworderdelivery"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Pie Chart -->
+        <div class="col-xl-12 col-lg-12 col-md-12">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <a name="revenue">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Delivering</h6>
+                    </div>
+                </a>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <div id="delivering"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-12 col-lg-12 col-md-12">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <!-- Card Body -->
+                <div class="card-body">
+                    <button class="btn btn-primary mx-2 btn-sm" type="button" data-toggle="collapse" data-target="#url">
+                        View Online Order URL <i class="fas fa-caret-down"></i>
+                    </button>
+                    <div class="collapse" id="url">
+                        <div class="card mb-2 float-center">
+                            <div class="card-header py-3">
+                                <h6 class="text-gray-800 ml-5">www.cigo.co.in/deliverycustomerapp/{{venueid}}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Mid Row End -->
+</div>
+<!-- End of Page Content -->
+<!-- Modal See Order-->
+<div class="modal fade" id="seeordermodal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-gradient-danger text-white">
+                <h5 class="modal-title"> New Orders </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="modalcontent"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal View Address 1-->
+<div class="modal fade" id="viewaddmodel1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-gradient-danger text-white">
+                <h5 class="modal-title"> Address </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="addressmodalcontent1"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal See delivering Order-->
+<div class="modal fade" id="seeordermodaldelivering">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-gradient-primary text-white">
+                <h5 class="modal-title"> Delivering Orders </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="modalcontentdelivering"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal View Address 2-->
+<div class="modal fade" id="viewaddmodel2">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-gradient-danger text-white">
+                <h5 class="modal-title"> Address </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="addressmodalcontent2"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}
+{% block js %}
+<script src="{% static 'deliverydashboard/js/deliverydash.js' %}"></script>
+{% endblock js %}

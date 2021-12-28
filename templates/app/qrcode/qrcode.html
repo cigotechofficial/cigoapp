@@ -1,0 +1,43 @@
+{% load qr_code %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+<style type="text/css" media="print">
+@media print {
+    body {
+        -webkit-print-color-adjust: exact;
+    }
+
+}
+
+@page {
+    size: A4 portrait;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin: 0;
+    -webkit-print-color-adjust: exact;
+}
+</style>
+
+<style type="text/css">
+
+.bg{ background-image: url("https://images.unsplash.com/photo-1521729839347-131a32f9abcb?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=900&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=1600"); }
+
+</style>
+
+<body onload="window.print();">
+	
+    {% for i in tablenos %}
+    <div class="bg">
+    	<center><h1>{{i.venue}}</h1>{% qr_from_text i.tableno size=10 border=1 image_format="png" error_correction="L" %}</center>
+    </div>
+    {% endfor %}
+    
+</body>
+
+</html>

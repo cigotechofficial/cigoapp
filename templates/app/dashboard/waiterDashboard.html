@@ -1,0 +1,383 @@
+{% extends "app/appbase.html" %}
+{% load qr_code %}
+{% load static %}
+{% block title %}Cigo{% endblock title %}
+{% block dashboardactive %}active{% endblock dashboardactive %}
+{% block pageheading %}
+<h4 class="text-gray-800 mt-3 ">Dashboard - Waiter</h4>
+{% endblock pageheading %}
+{% block body %}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!-- Begin Page Content -->
+<div class="container-fluid">
+	<!-- Page Heading -->
+    <div class="row">
+        <div class="col-xl-12 col-md-12 mb-2 bg-white ">
+            <center><h4 class=" mb-0 text-gray-800 mr-2">{{restaurantname}}</h4></center>
+        </div>
+    </div>
+	<!-- Content Row -->
+	<!-- Top Row Start -->
+	<div class="row">
+		<div class="col-xl-8 col-lg-7"> 
+			<div class="card shadow mb-4">
+				<!-- Card Header - Dropdown -->
+				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+					<h6 class="m-0 font-weight-bold text-primary">Start Session</h6>
+				</div>
+				<!-- Card Body -->
+				<div class="card-body">
+					<form class="form-inline" action="" method="post">
+						{% csrf_token %}
+						<div class="form-row">
+							<div class="form-group col-xs-8 ">
+								<select class="form-control" id="tablenoselect" name="tablenoselect" required>
+									<option value="" disabled selected hidden>Choose Table</option>
+									{% for i in tablenos %}
+									<option value="{{i}}">{{i}}</option>
+									{% endfor %}
+								</select>
+							</div>
+							<div class="form-group col-xs-4 ">
+								<button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Start</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="col-xl-4 col-lg-5">
+			<div class="card shadow mb-4">
+				<!-- Card Header - Dropdown -->
+				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+					<h6 class="m-0 font-weight-bold text-primary">Waiter Request</h6>
+				</div>
+				<!-- Card Body -->
+				<div class="card-body">
+					<div class="table-responsive">
+						<div>
+							<p id="waiterid"></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Top Row End -->
+	<!-- Mid Row Start-->
+	<a id="neworder"></a>
+	<div class="row">
+		<!-- Area Chart -->
+		<div class="col-xl-6 col-lg-6 col-md-6">
+			<div class="card shadow mb-4">
+				<!-- Card Header - Dropdown -->
+				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+					<h6 class="m-0 font-weight-bold text-primary">New Orders</h6>
+				</div>
+				<!-- Card Body -->
+				<div class="card-body">
+					<div class="table-responsive">
+						<div id="neworderwaiter"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Pie Chart -->
+		<div class="col-xl-6 col-lg-6 col-md-6">
+			<div class="card shadow mb-4">
+				<!-- Card Header - Dropdown -->
+				<a name="revenue">
+					<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+						<h6 class="m-0 font-weight-bold text-primary">Cooking</h6>
+					</div>
+				</a>
+				<!-- Card Body -->
+				<div class="card-body">
+					<div class="table-responsive">
+						<div id="cooking"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Mid Row End -->
+	<!-- Bottom Row Start -->
+	<div class="row">
+		<div class="col-xl-12 col-lg-7">
+			<div class="card shadow mb-4">
+				<!-- Card Header - Dropdown -->
+				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+					<h6 class="m-0 font-weight-bold text-primary">End Session</h6>
+				</div>
+				<!-- Card Body -->
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table" id="endsessionid">
+							<thead class="bg-gradient-success text-white">
+								<tr>
+									<th scope="col">Sno.</th>
+									<th scope="col">Table</th>
+									<th scope="col">End Session</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for i in t_list %}
+								<tr>
+									<td>{{forloop.counter}}</td>
+									<td>{% for a in i%}
+										{{a.table_no}}
+										{% endfor%}</td>
+									<td><button type="button" class="btn btn-outline-secondary btn-sm" id="{% for a in i%}{{a.table_no}}{% endfor%}" onclick="trial(this.id)" data-toggle="modal" data-target=".endsession">End Session</button></td>
+								</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Bottom Row End -->
+</div>
+<!-- End of Page Content -->
+<!-- Modal Qr Code -->
+<div class="modal fade" id="myModalz" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Scan this:</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="my-2">
+					<center>
+						<!-- <h5 style="font-size:4vw;">{{table_qr}}</h5> -->
+					</center>
+					<center>{% qr_from_text table_qr size=8 border=1 image_format="png" error_correction="L" %}</center>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Modal See Order-->
+<div class="modal fade" id="seeordermodal">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header bg-gradient-danger text-white">
+				<h5 class="modal-title"> New Orders </h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div id="modalcontent"></div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+				<form action="./shiftcooking/" method="post">
+					{% csrf_token %}
+					<div id="orderidhidden1"></div>
+					<button type="submit" class=" btn btn-outline-secondary">Shift to Cooking</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Modal See Cooking Order-->
+<div class="modal fade" id="seeordermodalcooking">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header bg-gradient-primary text-white">
+				<h5 class="modal-title"> Cooking </h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div id="modalcontentcooking"></div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+				<form action="./served/" method="post">
+					{% csrf_token %}
+					<div id="orderidhidden2"></div>
+					<button type="submit" class=" btn btn-outline-secondary">Served</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Modal -->
+<div class="endsession modal fade">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">End Session</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div id="endsessioncontent"></div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class=" btn btn-outline-secondary ml-4" data-dismiss="modal">Close</button>
+				<p id="paymentinfo"></p>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock body %}
+{% block js %}
+<script type="text/javascript">
+$(window).on('load', function() {
+
+	if ({{table_selected}} != 0) {
+		$('#myModalz').modal({ backdrop: 'static', keyboard: false });
+	}
+});
+</script>
+<script src="{% static 'app/js/waiterdashajax.js' %}"></script>
+<script>
+function trial(btnid) {
+	var endsessioncontent = document.getElementById('endsessioncontent');
+	var data = JSON.parse('{{ dumplist | escapejs }}');
+	// var ordersendsession= "{% for i in t_list %}{% for a in i%} {{a.items_json}} {% endfor %}{% endfor %}";
+	// endsessioncontent.textContent = data[0][0].;
+	var div = document.getElementById('endsessioncontent');
+	div.innerHTML = "";
+	var table = document.createElement('TABLE');
+
+	var row = table.insertRow(0);
+	row.className = 'bg-gradient-success text-white'
+	var items_json = row.insertCell(0);
+	var price_item = row.insertCell(1);
+	var price_subtotal = row.insertCell(2);
+	// var price_total = row.insertCell(3);
+	// var table_no = row.insertCell(4);
+
+	items_json.innerHTML = "Items";
+	// table_no.innerHTML = "Table No.";
+	price_item.innerHTML = "Item Price";
+	price_subtotal.innerHTML = "Subtotal";
+	// price_total.innerHTML = "Total";
+	// status.innerHTML = "Status";
+	
+	var venueid
+	table_order = [];
+	for (var i = 0; i < data.length; i++) {
+		if ((data[i][data[i].length - 1].table_no) == btnid) {
+			
+			venueid = data[i][0].venue
+			// console.log(data[i][0].venue)
+
+			var table_order_string = '';
+			var table_prices_string = '';
+			var table_subtotals_string = '';
+			var table_total = 0;
+
+			for (var entry = 0; entry < data[i].length - 1; entry++) {
+
+				var table_no = data[i][data[i].length - 1].table_no;
+				order = data[i][entry].items_json;
+				order_prices = data[i][entry].prices;
+
+				
+
+				var item_price_str
+				var item_total_str
+				var orderString
+
+				orderJsonObj = JSON.parse(order);
+
+				for (x in orderJsonObj) {
+					var row_entry = table.insertRow(table.rows.length);
+					row_entry.id = x.toString();
+					var items_json_entry = row_entry.insertCell(0);
+					var price_item_entry = row_entry.insertCell(1);
+					var price_subtotal_entry = row_entry.insertCell(2);
+
+					orderString = orderJsonObj[x].toString();
+					orderString = orderString.replace(",", " - ");
+					// console.log(x,orderString)
+					// orderString += '<br>';
+
+					item_price_str = order_prices[x][0].toString();
+					item_total_str = order_prices[x][1].toString();
+					// item_price_str += '<br>';
+					// item_total_str += '<br>';
+					table_total += order_prices[x][1];
+
+					items_json_entry.innerHTML = orderString;
+					price_item_entry.innerHTML = item_price_str;
+					price_subtotal_entry.innerHTML = item_total_str;
+				}
+
+
+
+			}
+			var row_entry = table.insertRow(table.rows.length);
+			var items_json_entry = row_entry.insertCell(0);
+			var price_item_entry = row_entry.insertCell(1);
+			var price_subtotal_entry = row_entry.insertCell(2);
+
+			items_json_entry.innerHTML = "CGST";
+			price_item_entry.innerHTML = "@2.5%";
+			price_subtotal_entry.innerHTML = table_total * 0.025;
+
+			var row_entry = table.insertRow(table.rows.length);
+			var items_json_entry = row_entry.insertCell(0);
+			var price_item_entry = row_entry.insertCell(1);
+			var price_subtotal_entry = row_entry.insertCell(2);
+
+			items_json_entry.innerHTML = "SGST";
+			price_item_entry.innerHTML = "@2.5%";
+			price_subtotal_entry.innerHTML = table_total * 0.025;
+
+			var row_entry = table.insertRow(table.rows.length);
+			var items_json_entry = row_entry.insertCell(0);
+			var price_item_entry = row_entry.insertCell(1);
+			var price_subtotal_entry = row_entry.insertCell(2);
+
+			items_json_entry.innerHTML = "TOTAL";
+			price_item_entry.innerHTML = "";
+			price_subtotal_entry.innerHTML = table_total * 1.05;
+			// items_json_entry.innerHTML = table_order_string;
+			// table_no_entry.innerHTML = table_no;
+			// price_item_entry.innerHTML = table_prices_string;
+			// price_subtotal_entry.innerHTML = table_subtotals_string;
+			// price_total_entry.innerHTML = table_total.toString();
+
+		}
+	}
+
+	var paymentbtn = document.getElementById("paymentinfo")
+
+	paymentbtn.innerHTML = '<button class=" btn btn-outline-secondary">Paid</button>';
+	
+	paymentbtn.onclick = function() {
+		
+		var url = 'deleteorder?id=' + btnid ;
+		var req = new XMLHttpRequest();
+		req.onreadystatechange = function() {
+			if (this.readyState === 4 && this.status === 200) {
+				window.location.reload();
+
+			}
+		};
+
+		req.open("GET", url, true);
+		req.send();
+
+
+	}
+
+
+	table.className = 'table text-center table-hover table-responsive'
+	div.appendChild(table);
+
+}
+</script>
+{% endblock js %}

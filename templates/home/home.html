@@ -1,0 +1,624 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Cigo is an Initiative to Save Restaurants, and help them prosper by giving them softwares and helping them in online presence. ">
+    <meta name="author" content="Inovatik">
+    <!-- OG Meta Tags to improve the way the post looks when you share the page on LinkedIn, Facebook, Google+ -->
+    <meta property="og:site_name" content="" /> <!-- website name -->
+    <meta property="og:site" content="" /> <!-- website link -->
+    <meta property="og:title" content="" /> <!-- title shown in the actual shared post -->
+    <meta property="og:description" content="" /> <!-- description shown in the actual shared post -->
+    <meta property="og:image" content="" /> <!-- image link, make sure it's jpg -->
+    <meta property="og:url" content="" /> <!-- where do you want your post to link to -->
+    <meta property="og:type" content="article" />
+    <!-- Website Title -->
+    <title>Cigo - Restaurant Companion </title>
+    <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:500,700&display=swap&subset=latin-ext" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600&display=swap&subset=latin-ext" rel="stylesheet">
+    <!-- <link href="css/bootstrap.css" rel="stylesheet"> -->
+    <!--     <link href="css/fontawesome-all.css" rel="stylesheet">
+    <link href="css/swiper.css" rel="stylesheet">
+    <link href="css/magnific-popup.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="{% static 'home/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/fontawesome-all.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/swiper.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/styles.css' %}">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Favicon  -->
+    <link rel="icon" href="{% static 'home/img/icon.png'%}">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GEHH8XNWTR"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-GEHH8XNWTR');
+    </script>
+</head>
+
+<body data-spy="scroll" data-target=".fixed-top">
+    <!-- Preloader -->
+    <div class="spinner-wrapper">
+        <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+    </div>
+    <!-- end of preloader -->
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <!-- Text Logo - Use this if you don't have a graphic logo -->
+        <!-- <a class="navbar-brand logo-text page-scroll" href="index.html">Aria</a> -->
+        <!-- Image Logo -->
+        <a class="navbar-brand logo-image" href="./"><img src="{% static 'home/img/logohome.png' %}" alt="alternative"></a>
+        <!-- Mobile Menu Toggle Button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-awesome fas fa-bars"></span>
+            <span class="navbar-toggler-awesome fas fa-times"></span>
+        </button>
+        <!-- end of mobile menu toggle button -->
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="#header">HOME <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="#products">PRODUCTS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="#scantoorder">INTRO</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="#hiw">HOW IT WORKS</a>
+                </li>
+                <!-- Dropdown Menu -->
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="#about">ABOUT</a>
+                </li>
+                <!-- end of dropdown menu -->
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="#contact">CONTACT</a>
+                </li>
+            </ul>
+            <div class="ml-auto">
+                {% if user.is_authenticated %}
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Welcome {{request.user.first_name}}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/dashboard">Go to Dashboard</a>
+                            <div class="dropdown-items-divide-hr"></div>
+                            <a class="dropdown-item" href="/logout">Logout</a>
+                        </div>
+                    </li>
+                </ul>
+                {% else %}
+                <!-- Button trigger loginModal -->
+                <button type="button" class="btn btn-info mr-2 " data-toggle="modal" data-target="#loginModal">
+                    Login
+                </button>
+                <!-- Button trigger signupModal -->
+                <button type="button" class="btn btn-info " data-toggle="modal" data-target="#signupModal">
+                    Sign Up
+                </button>
+                {% endif %}
+            </div>
+        </div>
+    </nav> <!-- end of navbar -->
+    <!-- end of navbar -->
+    <a id="top"></a>
+    <!-- Header -->
+    <header id="header" class="header">
+        <div class="header-content">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                <strong>Message: </strong> {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endfor %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="text-container">
+                            <h2 style="color: white; font-size: x-large;">HOSPITALITY NEEDS A REVAMP</h2>
+                            <h1>MAKE YOUR RESTAURANT <span id="js-rotating">SMART, TRENDY, INTELLIGENT, NEWAGE</span></h1>
+                            <p class="p-heading p-large">Cigo is a platform helping you manage your restaurant efficiently. And the best part? Its absolutely FREE!</p>
+                            <a class="btn btn-info page-scroll" href="#products">Know More</a>
+                            {% if user.is_authenticated %}
+                            <a class="btn btn-info" href="/dashboard">Go To Dashboard</a>
+                            {% else %}
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#signupModal">
+                                Get Started For Free
+                            </button>
+                            {% endif %}
+                        </div>
+                    </div> <!-- end of col -->
+                </div> <!-- end of row -->
+            </div> <!-- end of container -->
+        </div> <!-- end of header-content -->
+    </header> <!-- end of header -->
+    <!-- end of header -->
+    <div id="products" class="basic-1">
+        <section class="text-gray-600 body-font">
+            <div class="container px-5 py-24 mx-auto">
+                <div class="flex flex-col text-center w-full mb-20">
+                    <h2 class="text-xs text-indigo-500 tracking-widest font-medium title-font mb-1">Restaurant's Companion</h2>
+                    <h1 class="sm:text-3xl text-2xl font-medium title-font text-gray-900">Products Of Cigo</h1>
+                </div>
+                <div class="flex flex-wrap -m-4">
+                    <div class="p-4 md:w-1/3">
+                        <div class="flex rounded-lg h-full bg-gray-100 p-8 flex-col">
+                            <div class="flex items-center mb-3">
+                                <div class="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
+                                    <i class="fas fa-qrcode"></i>
+                                </div>
+                                <h2 class="text-gray-900 text-lg title-font font-medium">Scan To Order </h2>
+                            </div>
+                            <div class="flex-grow">
+                                <p class="leading-relaxed text-base">Customers sitting in restaurant have to scan QR code to start ordering.</p>
+                                <br>
+                                <br>
+                                <hr>
+                                <ul class="list-disc ">
+                                    <li>
+                                        <p class="leading-relaxed text-base">Owner, Manager, Waiter Dashboard</p>
+                                    </li>
+                                    <li>
+                                        <p class="leading-relaxed text-base">Order Directly To Dashboard</p>
+                                    </li>
+                                    <li>
+                                        <p class="leading-relaxed text-base">Call Waiter</p>
+                                    </li>
+                                </ul>
+                                <br>
+                                <a class="mt-3 text-indigo-500 inline-flex items-center" href="#scantoorder">Learn More
+                                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+                                        <path d="M5 12h14M12 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-4 md:w-1/3">
+                        <div class="flex rounded-lg h-full bg-gray-100 p-8 flex-col">
+                            <div class="flex items-center mb-3">
+                                <div class="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
+                                    <i class="fas fa-motorcycle"></i>
+                                </div>
+                                <h2 class="text-gray-900 text-lg title-font font-medium">Direct Home Delivery</h2>
+                            </div>
+                            <div class="flex-grow">
+                                <p class="leading-relaxed text-base">Customers can directly order from your page, no middle app, no commission.</p>
+                                <br>
+                                <hr>
+                                <ul class="list-disc leading-relaxed text-base">
+                                    <li>
+                                        <p class="leading-relaxed text-base">Direct Order Page</p>
+                                    </li>
+                                    <li>
+                                        <p class="leading-relaxed text-base">Contactless Ordering</p>
+                                    </li>
+                                    <li>
+                                        <p class="leading-relaxed text-base">Digital Marketing - Instagram & Facebook Ads</p>
+                                    </li>
+                                </ul>
+                                <a class="mt-3 text-indigo-500 inline-flex items-center" href="#homedelivery">Learn More
+                                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+                                        <path d="M5 12h14M12 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="p-4 md:w-1/3">
+                        <div class="flex rounded-lg h-full bg-gray-100 p-8 flex-col">
+                            <div class="flex items-center mb-3">
+                                <div class="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
+                                    <i class="fas fa-mobile"></i>
+                                </div>
+                                <h2 class="text-gray-900 text-lg title-font font-medium">Emenu</h2>
+                            </div>
+                            <div class="flex-grow">
+                                <p class="leading-relaxed text-base">It only has Emenu without direct order feature.</p>
+                                <br>
+                                <br>
+                                <hr>
+                                <ul class="list-disc leading-relaxed text-base">
+                                    <li>
+                                        <p class="leading-relaxed text-base">Scan To View Emenu</p>
+                                    </li>
+                                </ul>
+                                <br>
+                                <br>
+                                <br>
+                                <a class="mt-3 text-indigo-500 inline-flex items-center">Learn More
+                                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+                                        <path d="M5 12h14M12 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Intro -->
+        <div id="scantoorder" class="basic-1">
+            <div class="container">
+                <div class="flex flex-col text-center w-full mb-20 bg-indigo-100">
+                    <h1 class="sm:text-3xl text-2xl font-medium title-font text-gray-900">Scan To Order</h1>
+                </div>
+                <div class="row">
+                    <div class="col-lg-5">
+                        <div class="text-container">
+                            <div class="section-title">INTRO</div>
+                            <h2>Managing a restaurant can be quite an overwhelming processs at times.</h2>
+                            <p class="testimonial-text">"Our mission here at Cigo is to get you through those tough moments relying on our platform's expertise managing restaurants."</p>
+                            <div class="testimonial-author">Ryan Chowdhury - Director Of Sales</div>
+                            <br>
+                            <hr>
+                            <br>
+                            <ul class="list-disc ">
+                                <li>
+                                    <div class="media-body"> Contactless Dining</div>
+                                </li>
+                                <li>
+                                    <div class="media-body"> No App Req.</div>
+                                </li>
+                                <li>
+                                    <div class="media-body"> Call Waiter Directly</div>
+                                </li>
+                                <li>
+                                    <div class="media-body"> Customer Happiness Index and Feedback</div>
+                                </li>
+                                <li>
+                                    <div class="media-body"> Reduce Staff Costs</div>
+                                </li>
+                                <li>
+                                    <div class="media-body"> Live Order Status</div>
+                                </li>
+                            </ul>
+                        </div> <!-- end of text-container -->
+                    </div> <!-- end of col -->
+                    <div class="col-lg-7">
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/nOI3K_0UOhU" allowfullscreen></iframe>
+                        </div>
+                    </div> <!-- end of col -->
+                </div> <!-- end of row -->
+            </div> <!-- end of container -->
+        </div> <!-- end of basic-1 -->
+        <!-- end of intro -->
+        <div id="hiw" class="basic-1">
+            <!-- Description -->
+            <div class="cards-1">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!-- Card -->
+                            <div class="card">
+                                <span class="fa-stack">
+                                    <span class="hexagon"></span>
+                                    <i class="fas fa-qrcode  fa-stack-1x"></i>
+                                </span>
+                                <div class="card-body">
+                                    <h4 class="card-title">Scan Qr Code</h4>
+                                    <p>Customers have to scan Qr code with their phones to see catalogue of items </p>
+                                </div>
+                            </div>
+                            <!-- end of card -->
+                            <!-- Card -->
+                            <div class="card">
+                                <span class="fa-stack">
+                                    <span class="hexagon"></span>
+                                    <i class="fas fa-list-alt fa-stack-1x"></i>
+                                </span>
+                                <div class="card-body">
+                                    <h4 class="card-title">Select and Order</h4>
+                                    <p>Customers have to select item and quantity and order will be digitally placed</p>
+                                </div>
+                            </div>
+                            <!-- end of card -->
+                            <!-- Card -->
+                            <div class="card">
+                                <span class="fa-stack">
+                                    <span class="hexagon"></span>
+                                    <i class="fas fa-utensils fa-stack-1x"></i>
+                                </span>
+                                <div class="card-body">
+                                    <h4 class="card-title">Food on Table</h4>
+                                    <p>After the food is prepared, customers will get their food</p>
+                                </div>
+                            </div>
+                            <!-- end of card -->
+                        </div> <!-- end of col -->
+                    </div> <!-- end of row -->
+                </div> <!-- end of container -->
+            </div> <!-- end of cards-1 -->
+            <!-- end of description -->
+            <section class="text-gray-600 body-font">
+                <div class="container px-5 py-24 mx-auto flex flex-wrap">
+                    <div class="lg:w-1/2 w-full mb-10 lg:mb-0 rounded-lg overflow-hidden">
+<!--                         <img alt="feature" class="object-cover object-center h-full w-full" src="https://cigo-bucket.s3.ap-south-1.amazonaws.com/images/cigo+ss.jpg">  -->
+                        <img alt="feature" class="object-cover object-center h-full w-full" src="{% static 'home/img/feature.jpg' %}">
+                    </div>
+                    <div class="flex flex-col flex-wrap lg:py-6 -mb-10 lg:w-1/2 lg:pl-12 lg:text-left text-center">
+                        <div class="flex flex-col mb-10 lg:items-start items-center">
+                            <div class="w-20 h-20 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mr-auto ml-auto mb-2">
+                                <i class="fas fa-chart-line fa-2x"></i>
+                            </div>
+                            <div class="flex-grow">
+                                <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Increases Sales</h2>
+                                <p class="leading-relaxed text-base">Seamless ordering, coupled with pictures encourages repeat orders.</p>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="flex flex-col mb-10 lg:items-start items-center">
+                            <div class="w-20 h-20 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mr-auto ml-auto mb-2">
+                                <i class="fas fa-comments fa-2x"></i>
+                            </div>
+                            <div class="flex-grow">
+                                <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Happiness Index & Feedback</h2>
+                                <p class="leading-relaxed text-base">Growth is very important and for that one needs feedback. Owner can get happiness index and feedback directly from customers.</p>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="flex flex-col mb-10 lg:items-start items-center">
+                            <div class="w-20 h-20 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mr-auto ml-auto mb-2">
+                                <i class="fas fa-exclamation-triangle fa-2x"></i>
+                            </div>
+                            <div class="flex-grow">
+                                <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Eliminates Human Error</h2>
+                                <p class="leading-relaxed text-base">As ordering is digital, there is no chance of confusion. Plus it enhances customer experience.</p>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="flex flex-col mb-10 lg:items-start items-center">
+                            <div class="w-20 h-20 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mr-auto ml-auto mb-2">
+                                <i class="fas fa-edit fa-2x"></i>
+                            </div>
+                            <div class="flex-grow">
+                                <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Update Menu Instantly</h2>
+                                <p class="leading-relaxed text-base">Its very embarrassing situation when order choosen by customer is out of stock. Now Manager can update menu and it will not be shown to customer.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <!-- Call Me -->
+        <div id="homedelivery" class="form-1">
+            <section class="text-gray-600 body-font">
+                <div class="container">
+                <div class="flex flex-col text-center w-full mb-20 bg-indigo-100">
+                    <h1 class="sm:text-3xl text-2xl font-medium title-font text-gray-900">Direct Home Delivery</h1>
+                </div>
+            </div>
+                <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
+
+                    <div class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+                        <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-400">Grow your Brand
+                        </h1>
+                        <p class="mb-8 leading-relaxed text-white">Grow your restaurant brand, by instagram ads and get orders directly  to Cigo Dashboard, no commission changes, no app required - directly from url.  </p>
+                    </div>
+                    <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
+                        <img class="object-cover object-center rounded" alt="hero" src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=667&q=80">
+                    </div>
+                </div>
+            </section>
+        </div> <!-- end of form-1 -->
+        <!-- end of call me -->
+        <!-- About -->
+        <div id="about" class="counter">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5 col-xl-6">
+                        <div class="image-container">
+                            <img class="img-fluid" src="https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=751&q=80" alt="alternative">
+                        </div> <!-- end of image-container -->
+                    </div> <!-- end of col -->
+                    <div class="col-lg-7 col-xl-6">
+                        <div class="text-container">
+                            <div class="section-title">ABOUT</div>
+                            <h2>We're Passionate About Helping Restaurants To Growth </h2>
+                            <p>Our goal is to provide tech products to restaurants at the appropriate time so thy can benefit from the created momentum and thrive for a long period of time</p>
+                            <br>
+                            <ul class="list-unstyled li-space-lg">
+                                <li class="media">
+                                    <i class="fas fa-square"></i>
+                                    <div class="media-body">Every tech. products we provide have direct positive impact</div>
+                                </li>
+                                <li class="media">
+                                    <i class="fas fa-square"></i>
+                                    <div class="media-body">Your restaurant will grow at exponential rate with Cigo </div>
+                                </li>
+                            </ul>
+                            <!-- Counter -->
+                            <!--                         <div id="counter">
+                            <div class="cell">
+                                <div class="counter-value number-count" data-count="1">1</div>
+                                <div class="counter-info">Happy<br>Users</div>
+                            </div>
+                            <div class="cell">
+                                <div class="counter-value number-count" data-count="3">1</div>
+                                <div class="counter-info">Issues<br>Solved</div>
+                            </div>
+                            <div class="cell">
+                                <div class="counter-value number-count" data-count="9">1</div>
+                                <div class="counter-info">Good<br>Reviews</div>
+                            </div>
+                        </div> -->
+                            <!-- end of counter -->
+                        </div> <!-- end of text-container -->
+                    </div> <!-- end of col -->
+                </div> <!-- end of row -->
+            </div> <!-- end of container -->
+        </div> <!-- end of counter -->
+        <!-- end of about -->
+        <!-- Contact -->
+        <div id="contact" class="form-2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="text-container">
+                            <div class="section-title">CONTACT</div>
+                            <h2>Get In Touch Using The Form</h2>
+                            <p>You can stop by our office for a cup of coffee and just use the contact form below for any questions and inquiries</p>
+                            <ul class="list-unstyled li-space-lg">
+                                <li><i class="fas fa-phone"></i><a href="tel:+91 9958661391">+91 9958661391</a></li>
+                                <li><i class="fas fa-phone"></i><a href="tel:+91 8851623643">+91 8851623643</a></li>
+                                <li><i class="fas fa-envelope"></i><a href="mailto:cigotechofficial@gmail.com">cigotechofficial@gmail.com</a></li>
+                            </ul>
+                        </div> <!-- end of text-container -->
+                    </div> <!-- end of col -->
+                    <div class="col-lg-6">
+                        <!-- Contact Form -->
+                        <form action="./contactus" method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="name">Name:</label>
+                                <input type="name" class="form-control" id="name" name="name" aria-describedby="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="notables">Phone No:</label>
+                                <input type="phone" class="form-control" name="ph" id="ph">
+                            </div>
+                            <div class="form-group">
+                                <label for="notables">Email:</label>
+                                <input type="email" class="form-control" name="email" id="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="notables">Message:</label>
+                                <input type="text" class="form-control" name="message" id="message">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send</button>
+                        </form>
+                        <!-- end of contact form -->
+                    </div> <!-- end of col -->
+                </div> <!-- end of row -->
+            </div> <!-- end of container -->
+        </div> <!-- end of form-2 -->
+        <!-- end of contact -->
+        <div>
+            <!-- Signup Modal -->
+            <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="signupModalLabel">Sign Up Here</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/signup" method="post">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="fname">Name</label>
+                                    <input type="text" class="form-control" id="fname" name="fname" aria-describedby="fnameHelp" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Email Id (User Id)</label>
+                                    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Phone Number</label>
+                                    <input type="phone" class="form-control" id="phone" name="phone" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="pass1">Password</label>
+                                    <input type="password" class="form-control" name="pass1" id="pass1" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="pass2">Confirm Password</label>
+                                    <input type="password" class="form-control" name="pass2" id="pass2" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Login Modal -->
+            <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="loginModalLabel">Login Here</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/login" method="post">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="text">User Id:</label>
+                                    <input type="text" class="form-control" id="loginemail" name="loginemail" aria-describedby="emailHelp" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="loginpassword">Password</label>
+                                    <input type="password" class="form-control" name="loginpassword" id="loginpassword" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Login</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="text-container about">
+                            <h4>Few Words About Cigo</h4>
+                            <p class="white">We're passionate to help restaurants get grow from the ashes and to be best in town.</p>
+                        </div> <!-- end of text-container -->
+                    </div> <!-- end of col -->
+                </div> <!-- end of row -->
+            </div> <!-- end of container -->
+        </div> <!-- end of footer -->
+        <!-- end of footer -->
+        <!-- Copyright -->
+        <div class="copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p class="p-small">Copyright © Cigo 2021 All rights reserved</p>
+                    </div> <!-- end of col -->
+                </div> <!-- enf of row -->
+            </div> <!-- end of container -->
+        </div> <!-- end of copyright -->
+        <!-- end of copyright -->
+        <!-- Scripts -->
+        <script src="{% static 'home/js/jquery.min.js' %}"></script> <!--  jQuery for Bootstrap's JavaScript plugins -->
+        <script src="{% static 'home/js/popper.min.js' %}"></script> <!-- Popper tooltip library for Bootstrap -->
+        <script src="{% static 'home/js/bootstrap.min.js' %}"></script> <!-- Bootstrap framework -->
+        <script src="{% static 'home/js/jquery.easingchanged.min.js' %}"></script> <!-- jQuery Easing for smooth scrolling between anchors -->
+        <script src="{% static 'home/js/swiper.min.js' %}"></script> <!-- Swiper for image and text sliders -->
+        <script src="{% static 'home/js/jquery.magnific-popup.js' %}"></script>
+        <script src="{% static 'home/js/morphext.min.js' %}"></script> <!-- Morphtext rotating text in the header -->
+        <script src="{% static 'home/js/isotope.pkgd.min.js' %}"></script> <!-- Isotope for filter -->
+        <script src="{% static 'home/js/validator.min.js' %}"></script> <!-- Bootstrap plugin that validates forms -->
+        <script src="{% static 'home/js/scripts.js' %}"></script> <!--  Custom scripts -->
+</body>
+
+</html>

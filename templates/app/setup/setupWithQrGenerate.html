@@ -1,0 +1,249 @@
+{% extends "app/appbase.html" %}
+{% block title %}home{% endblock title %}
+{% block setupactive %}active{% endblock setupactive %}
+{% block pageheading %}
+    <h1 class="h3 mb-0 text-gray-800 mr-4">Setup</h1>
+{% endblock pageheading %}
+{% block body %}
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h4 class="m-0 font-weight-bold text-primary">Step 1:</h4>
+        </div>
+        <div class="card-body">
+            <div class="text-center">
+            </div>
+            <div>
+                <h5 class="text-center "> Details Of Your Restaurant</h5>
+            </div>
+            <div class="text-center">
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#newVenueModal">
+                    Add Venue
+                </button>
+            </div>
+            <div class="table-responsive">
+                <table class="table mt-2">
+                    <thead class="table-success">
+                        <tr>
+                            <th scope="col">Sno.</th>
+                            <th scope="col">Venue</th>
+                            <th scope="col">Number Of Tables</th>
+                            <th scope="col">Update</th>
+                            <th scope="col">Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in allrestaurants %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{i.venuename}}</td>
+                            <td>{{i.notables}}</td>
+                            <td><button type="button" class="btn btn-success">Warning</button></td>
+                            <td><button type="button" class="btn btn-danger">Danger</button></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <!--                 {% for i in allrestaurants %}
+                <p>{{ forloop.counter }}. {{i.venuename}}</p>
+                {% endfor %} -->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h4 class="m-0 font-weight-bold text-primary">Step 2:</h4>
+        </div>
+        <div class="card-body">
+            <div class="text-center">
+            </div>
+            <div>
+                <h5 class="text-center "> Add Your Employees </h5>
+            </div>
+            <div class="text-center">
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#signupModal">
+                    Add Member
+                </button>
+            </div>
+            <div class="table-responsive">
+                <table class="table mt-2">
+                    <thead class="table-warning">
+                        <tr>
+                            <th scope="col">Sno.</th>
+                            <th scope="col">Employees</th>
+                            <th scope="col">Venue</th>
+                            <th scope="col">Roles</th>
+                            <th scope="col">Phone No.</th>
+                            <th scope="col">Update</th>
+                            <th scope="col">Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in allemployee %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{i.name}}</td>
+                            <td>{{i.venue}}</td>
+                            <td>{{i.role}}</td>
+                            <td>{{i.ph}}</td>
+                            <td><button type="button" class="btn btn-success">Warning</button></td>
+                            <td><button type="button" class="btn btn-danger">Danger</button></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <!--                 {% for i in allemployee %}
+                <p>{{i.name}}</p>
+                {% endfor %} -->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h4 class="m-0 font-weight-bold text-primary">Step 3:</h4>
+        </div>
+        <div class="card-body">
+            <div class="text-center">
+            </div>
+            <div>
+                <h5 class="text-center "> Print Your QR Codes </h5>
+            </div>
+            <div class="container">
+                <form action="./qrcode" method="post" class="form-inline ">
+                    {% csrf_token %}
+                    <div class="input-group mx-5">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupSelect01">Venue:</label>
+                        </div>
+                        <select class="custom-select" id="restaurant" name="restaurant" required>
+                            <option value="" disabled selected hidden>Choose Venue</option>
+                            {% for i in allrestaurants %}
+                            <option value="{{i.venueid}}">{{i.venuename}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary ">Download QR Codes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- New Venue Details Starts-->
+<div class="modal fade" id="newVenueModal" tabindex="-1" role="dialog" aria-labelledby="newVenueModallLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newVenueModalLabel">Put Venue Details Here</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="./newvenue" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="name">Name Of Your Restaurant:</label>
+                        <input type="name" class="form-control" id="venuename" name="venuename" aria-describedby="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="notables">Number Of Tables:</label>
+                        <input type="number" class="form-control" name="notables" id="notables">
+                    </div>                    
+                    <div class="form-group">
+                        <label for="notables">CGST (Percentage):</label>
+                        <input type="number" class="form-control" name="cgst" id="cgst">
+                    </div>
+                    <div class="form-group">
+                        <label for="notables">SGST (Percentage):</label>
+                        <input type="number" class="form-control" name="sgst" id="sgst">
+                    </div>
+                    <!-- img start -->
+                    <!--                     <div class="form-group">
+                        <label for="rlogo">Logo Of Your Restaurant:</label>
+                        <input type="file" class="form-control-file" id="rlogo">
+                    </div> -->
+                    <!-- img end -->
+                    <button type="submit" class="btn btn-primary">Add The Venue</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- New Venue Details Ends-->
+<!-- Signup Employee Modal -->
+<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="signupModalLabel">Type Your Employee's Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="./addemployee" method="post">
+                    {% csrf_token %}
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupSelect01">Venue</label>
+                        </div>
+                        <select class="custom-select" id="restaurant" name="restaurant">
+                            <option value="" disabled selected hidden>Choose Venue</option>
+                            {% for i in allrestaurants %}
+                            <option value="{{i.venueid}}">{{i.venuename}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group ">
+                        <label for="fname">Name</label>
+                        <input type="text" class="form-control" id="fname" name="fname" aria-describedby="fnameHelp" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number (User Id)</label>
+                        <input type="phone" class="form-control" id="phone" name="phone" aria-describedby="phone" required>
+                    </div>
+                    <div class="form-group ">
+                        <label for="pass1">Password</label>
+                        <input type="password" class="form-control" name="pass1" id="pass1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pass2">Confirm Password</label>
+                        <input type="password" class="form-control" name="pass2" id="pass2" required>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupSelect01">Role</label>
+                        </div>
+                        <select class="custom-select" id="role" name="role">
+                            <option selected>Choose...</option>
+                            <option value="Owner">Co-Owner</option>
+                            <option value="Manager">Manager</option>
+                            <option value="Waiter">Waiter</option>
+                            <option value="Chef">Chef</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Signup Employee Modal -->
+{% endblock body %}
+
+
+<!-- --------------------------------------put this in setup views.py-------------------------------------------------------- -->
+def qrcode(request):
+
+    
+    venueID = request.POST['restaurant']
+
+    tablenos = VenueTable.objects.filter(venue=venueID)
+    context = {
+        'tablenos':tablenos
+        }
+    return render(request,'app/qrcode/qrcode.html',context)

@@ -1,0 +1,79 @@
+{% extends "onlymenuapp/emenubase.html" %}
+{% load static %}
+{% block title %}Menu{% endblock title %}
+{% block head %}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+<link rel="stylesheet" href="{% static 'customerapp/css/swiper.css' %}">
+<link rel="stylesheet" href="{% static 'customerapp/css/menu.css' %}">
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Cantarell&family=RocknRoll+One&display=swap" rel="stylesheet">
+{% endblock head %}
+
+{% block body %}
+{% if orderdone %}
+<div class="alert alert-success py-2 mt-1" role="alert">
+    <a href="../status"><button type="button" class="btn alert-success btn-sm btn-block py-0">View Order Status</button></a>
+</div>
+{% endif %}
+
+<nav class=" navbar fixed-bottom bg-info py-1" id="checkoutnav">
+    <button type="button" class="btn btn-primary mx-auto" id="popcart" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="">
+        <i class="fa fa-shopping-cart" aria-hidden="true"></i> Summary(<span id="cart">0</span>)
+    </button>
+</nav>
+<center><h2 class="whitetext" style="font-family: 'RocknRoll One', sans-serif;">{{restaurantname}}</h2></center>
+{% for prodlist in allProds %}
+<div class="swiper-container mt-2 mb-5">
+    <h5 class="mt-1 ml-3 whitetext" id="{{prodlist.0.category}}" style="font-family: 'Cantarell', sans-serif;">{{prodlist.0.category}}</h4>
+    <div class="swiper-wrapper ">
+        {% for i in prodlist %}
+        <div class="swiper-slide " style=" background-image: url('{{i.image.url}}'); background-size: cover; ">
+            <!-- <div class="card" style="width: 15rem;"> -->
+                <!-- <img src='{{i.image.url}}' class="card-img-top" alt="..."> -->
+                <!-- <div class="img"><img src='https://images.unsplash.com/photo-1559847844-5315695dadae?ixlib=rb-1.2.1&auto=format&fit=crop&w=740&q=80' class="card-img" alt="Card image cap"></div>  -->
+                <div class="card-body">
+                    <div  style="background-color: rgba(0,0,0,0.5); font-size: 14px; border-radius: 8px;">
+                    <div class="ab" id="namepr{{i.product_id}}" style="font-family: 'Cantarell', sans-serif;">{{i.product_name}}</div>
+                    <!-- NOTE: use abc class above to get changeable font size based on length -->
+
+                    <h6 >₹ {{i.price}}</h6>
+                    </div>
+                    <span id="divpr{{i.product_id}}" class="divpr" style="background-color: rgba(0,0,0,0.5);">
+                        <button id="pr{{i.product_id}}" class="btn btn-sm btn-primary cart">Add</button>
+                    </span>
+                </div>
+            <!-- </div> -->
+        </div>
+        {% endfor %}
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination"></div>
+</div>
+{% endfor %}
+
+<div class="action" onclick="actionToggle();">
+    <span><i class="fa fa-bars" aria-hidden="true"></i></span>
+    <ul>
+        {% for prodlist in allProds %}
+        <li><a href="#{{prodlist.0.category}}">{{prodlist.0.category}}</a></li>
+        {% endfor %}
+    </ul>
+    
+</div>
+{% endblock body %}
+{% block js %}
+<!-- Swiper JS -->
+<script src="{% static "customerapp/js/menu.js" %}"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script src="{% static 'customerapp/js/swiper.js' %}"></script>
+<script type="text/javascript">
+    function actionToggle() {
+        var action = document.querySelector('.action');
+        action.classList.toggle('active')
+    }
+    var restaurantId = "{{restaurantidslug}}";
+</script>
+{% endblock js %}
