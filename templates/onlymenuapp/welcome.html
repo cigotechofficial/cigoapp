@@ -7,7 +7,7 @@
 
 body {
   background-color: #111;
-  background-image: radial-gradient(#333, #111);
+  background-image: radial-gradient(#ffffff, #b3abab);
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -24,6 +24,8 @@ body {
   margin: 20vh auto;
   height: 10vh; 
   text-transform: uppercase;
+  /*color: #fd7b5d;*/
+  color: black;
 }
 
 #fly-in span {
@@ -68,6 +70,6 @@ Welcome To Cigo
 <div id="fly-in">  
 <div><span>Welcome to </span>{{restaurantname}}</div>
 <div><span>Powered By</span>CIGO</div></div> 
-<a type="button" class="mt-5 btn btn-primary" href="../menu">View Menu</a>
+<a type="button" class="mt-5 btn" href="../menu" style="background-color:#e75b1e; color:white">View Menu</a>
 {% endblock body %}
 

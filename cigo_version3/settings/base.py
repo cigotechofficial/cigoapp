@@ -52,7 +52,6 @@ INSTALLED_APPS = [
 	
 	'import_export',
 	'onlymenuapp.apps.OnlymenuappConfig',
-	'onlymenuapp2.apps.Onlymenuapp2Config',
 	
 	'deliverydashboard.apps.DeliverydashboardConfig',
 	'deliverycustomerapp.apps.DeliverycustomerappConfig',
