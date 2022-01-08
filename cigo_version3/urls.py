@@ -20,8 +20,7 @@ urlpatterns = [
     path('logout', views.handleLogout, name='handleLogout'),
     path('changePassword', views.changePassword, name='changePassword'), 
 
-    path('emenu/', include('onlymenuapp.urls')),
-    path('emenu2/', include('onlymenuapp2.urls')),
+    path('emenu/', include('app_emenu.urls')),
     path('deliverydashboard/', include('deliverydashboard.urls')),
     path('deliverycustomerapp/', include('deliverycustomerapp.urls')),
     
