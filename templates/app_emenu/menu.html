@@ -1,12 +1,12 @@
-{% extends "onlymenuapp/emenubase.html" %}
+{% extends "app_emenu/emenubase.html" %}
 {% load static %}
 {% block title %}Menu{% endblock title %}
 {% block head %}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-<link rel="stylesheet" href="{% static 'customerapp/css/swiper.css' %}">
-<link rel="stylesheet" href="{% static 'customerapp/css/menu.css' %}">
+<link rel="stylesheet" href="{% static 'app_emenu/css/swiper.css' %}">
+<link rel="stylesheet" href="{% static 'app_emenu/css/menu.css' %}">
 
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Cantarell&family=RocknRoll+One&display=swap" rel="stylesheet">
@@ -66,9 +66,9 @@
 {% endblock body %}
 {% block js %}
 <!-- Swiper JS -->
-<script src="{% static "customerapp/js/menu.js" %}"></script>
+<script src="{% static "app_emenu/js/menu.js" %}"></script>
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-<script src="{% static 'customerapp/js/swiper.js' %}"></script>
+<script src="{% static 'app_emenu/js/swiper.js' %}"></script>
 <script type="text/javascript">
     function actionToggle() {
         var action = document.querySelector('.action');

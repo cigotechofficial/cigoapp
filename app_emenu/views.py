@@ -1,11 +1,6 @@
-from django.contrib.auth.models import User
 from setup.models import Menu
-from home.models import Gst
-from django.contrib.auth import logout
-from django.shortcuts import render,HttpResponse,HttpResponseRedirect
-from django.contrib.auth.models import Group
+from django.shortcuts import render
 from setup.models import Venue
-import json
 
 def welcome(request,restaurantidslug):
 	venue = Venue.objects.get(venueid=restaurantidslug)
@@ -14,7 +9,7 @@ def welcome(request,restaurantidslug):
 	'restaurantidslug':restaurantidslug,
 
 	}
-	return render(request,'onlymenuapp/welcome.html',dicts) 
+	return render(request,'app_emenu/welcome.html',dicts) 
 
 
 
@@ -31,20 +26,18 @@ def emenu(request,restaurantidslug):
 
 	for cat in cats:
 		prod = Menu.objects.filter(venue=restaurantidslug).filter(showtype=1).filter(availability="ava").filter(category=cat )
-		# prod = Menu.objects.filter(category=cat, availability='ava')
 		allProds.append(prod)
 
-	# print(allProds[1])
 	params={
 	'restaurantname':restaurantname,
 	'allProds': allProds,
 	'restaurantidslug':restaurantidslug,
 	}
 	if emenutheme == 1:
-		return render(request,'onlymenuapp/menu.html', params)
+		return render(request,'app_emenu/menu.html', params)
 
 	else:
-		return render(request,'onlymenuapp2/menu.html', params)
+		return render(request,'app_emenu2/menu.html', params)
 
 
 
