@@ -10,6 +10,7 @@ class Venue(models.Model):
 	# paymentphone = models.CharField(max_length=50, default="0")
 	paymentphoneno = models.CharField(max_length=50, default="0")
 	category_list_sorted = models.CharField(max_length=500, default="0") # "Snacks, Main Course"
+	emenu_theme = models.IntegerField(default=3)
 
 	def __str__(self):
 		return self.venuename

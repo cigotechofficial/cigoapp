@@ -51,8 +51,7 @@ INSTALLED_APPS = [
 	'storages',
 	
 	'import_export',
-	'onlymenuapp.apps.OnlymenuappConfig',
-	'onlymenuapp2.apps.Onlymenuapp2Config',
+	'app_emenu.apps.App_emenuConfig',
 	
 	'deliverydashboard.apps.DeliverydashboardConfig',
 	'deliverycustomerapp.apps.DeliverycustomerappConfig',
