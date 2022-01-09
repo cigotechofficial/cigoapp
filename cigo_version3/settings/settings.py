@@ -41,7 +41,7 @@ INSTALLED_APPS = [
 	'home.apps.HomeConfig',
 	'dashboard.apps.DashboardConfig',
 	'help.apps.HelpConfig',
-	'customerapp.apps.CustomerappConfig',
+	'app_eordering.apps.App_eorderingConfig',
 	'django.contrib.admin',
 	'django.contrib.auth',
 	'django.contrib.contenttypes',

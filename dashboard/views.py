@@ -1,8 +1,8 @@
 from django.shortcuts import render,HttpResponse,HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from accounts.decorators import allowed_users
-from customerapp.models import Order,Waiter,ArchiveOrder,Feedback,CustomerAuthentication,VerifyOrder
-from customerapp.serializer import OrderSerializer,TableSerializer,WaiterSerializer,VerifyOrderSerializer
+from app_eordering.models import Order,Waiter,ArchiveOrder,Feedback,CustomerAuthentication,VerifyOrder
+from app_eordering.serializer import OrderSerializer,TableSerializer,WaiterSerializer,VerifyOrderSerializer
 from setup.models import Menu, Venue, Employee
 from home.models import Gst
 import json
