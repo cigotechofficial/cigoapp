@@ -13,7 +13,7 @@ urlpatterns = [
     path('deliverydashboard/', include('deliverydashboard.urls')),
     path('setup/', include('setup.urls')),
     path('help/', include('help.urls')),
-    path('customerapp/', include('app_eordering.urls')),
+    path('eordering/', include('app_eordering.urls')),
     path('signup', views.handleSignup, name='handleSignup'),
     path('login', views.handleLogin, name='handleLogin'),
     path('logout', views.handleLogout, name='handleLogout'),

@@ -1,9 +1,6 @@
-from django.contrib.auth.models import User
 from setup.models import Menu
 from home.models import Gst
-from django.contrib.auth import logout
 from django.shortcuts import render,HttpResponse,HttpResponseRedirect
-from django.contrib.auth.models import Group
 from .models import Order,ArchiveOrder,Waiter,Feedback,CustomerAuthentication
 from setup.models import Venue
 import json
@@ -19,7 +16,7 @@ def welcome(request,restaurantidslug,tableno,hashcode):
 		'hashcode':hashcode
 
 		}
-		return render(request,'customerapp/welcome.html',dicts)
+		return render(request,'app_eordering/welcome.html',dicts)
 	else:
 		return HttpResponse("Invalid") 
 
@@ -27,7 +24,7 @@ def logingmail(request, restaurantidslug):
 	params={
 	'restaurantid':restaurantidslug
 	}
-	return render(request,'customerapp/logingmail.html',params) 
+	return render(request,'app_eordering/logingmail.html',params) 
 	
 def customerapp(request,restaurantidslug,tableno,hashcode):
 
@@ -62,13 +59,13 @@ def customerapp(request,restaurantidslug,tableno,hashcode):
 		'hashcode':hashcode
 		}
 	 
-		return render(request,'customerapp/menu.html', params)
+		return render(request,'app_eordering/menu.html', params)
 
 	else:
 		return HttpResponse("Invalid")
 
 def redirect(request,restaurantidslug,tableno,hashcode):
-	return render(request,"customerapp/redirect.html")
+	return render(request,"app_eordering/redirect.html")
 	
 def checkout(request,restaurantidslug,tableno,hashcode):
 	custauth= CustomerAuthentication.objects.filter(hashcode=hashcode).filter(table_no=tableno).filter(restaurant=restaurantidslug)
@@ -95,8 +92,8 @@ def checkout(request,restaurantidslug,tableno,hashcode):
 			thank = True
 			orderdone = True
 			# id = order.order_id
-			return render(request, 'customerapp/orderpage.html', {'thank':thank, 'restaurantid':restaurantidslug, 'tableno':tableno, 'hashcode':hashcode})
-		return render(request,'customerapp/orderpage.html', params)
+			return render(request, 'app_eordering/orderpage.html', {'thank':thank, 'restaurantid':restaurantidslug, 'tableno':tableno, 'hashcode':hashcode})
+		return render(request,'app_eordering/orderpage.html', params)
 	else:
 		return HttpResponse("Invalid")
 
@@ -153,7 +150,7 @@ def status(request,restaurantidslug,tableno,hashcode):
 		'stepthree':stepthree,
 		'zipped':zipped,
 		}
-		return render(request,'customerapp/status.html',params)
+		return render(request,'app_eordering/status.html',params)
 	else:
 		return HttpResponse("Invalid")
 
@@ -172,7 +169,7 @@ def feedback(request,restaurantidslug,tableno,hashcode):
 
 				return HttpResponseRedirect('../payment')
 
-		return render(request,'customerapp/feedback.html')
+		return render(request,'app_eordering/feedback.html')
 	else:
 		return HttpResponse("Invalid")
 
@@ -220,7 +217,7 @@ def payment(request,restaurantidslug,tableno,hashcode):
 		'sgst':sgst,
 		'total':total
 		}
-		return render(request,'customerapp/payment.html',params)
+		return render(request,'app_eordering/payment.html',params)
 	else:
 		return HttpResponse("Invalid")
 
