@@ -36,9 +36,11 @@ def emenu(request,restaurantidslug):
 	if emenutheme == 1:
 		return render(request,'app_emenu/menu.html', params)
 
-	else:
+	elif emenutheme == 2:
 		return render(request,'app_emenu2/menu.html', params)
 
+	elif emenutheme == 3:
+		return render(request,'app_emenu3/menu.html', params)
 
 
 
