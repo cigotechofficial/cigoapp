@@ -2,6 +2,7 @@ from django.http.response import JsonResponse
 from setup.models import Menu, CustomItem
 from django.shortcuts import render
 from setup.models import Venue
+from setup.serializer import CustomItemSerializer
 
 def welcome(request,restaurantidslug):
 	venue = Venue.objects.get(venueid=restaurantidslug)
@@ -36,14 +37,23 @@ def emenu(request,restaurantidslug):
 		customisablefield = CustomItem.objects.filter(product_id=customisableitem.product_id)
 		allcustomisablefields[customisableitem.product_id] = customisablefield
 
+	customitems = CustomItem.objects.all()
+	l = list()
 	# print(allcustomisablefields)
+	for item in customitems:
+		ser = CustomItemSerializer(item)
+		l.append(ser.data)
+
+		import json
 
 	params={
 	'restaurantname':restaurantname,
 	'allProds': allProds,
 	'restaurantidslug':restaurantidslug,
-	'allcustomisablefields':allcustomisablefields
+	'customisablefields':json.dumps(l),
+	
 	}
+
 	if emenutheme == 1:
 		return render(request,'app_emenu/menu.html', params)
 
