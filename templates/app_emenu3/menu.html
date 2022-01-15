@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -70,18 +71,84 @@
                 <img src="{{i.image.url}}" class="img-fluid rounded-start" alt="...">
                 {% else %}
                 {% endif %}
+
+                {% if i.customisable %}
+                  {% for k,v in allcustomisablefields.items %}
+                      {% if k == i.product_id %}
+                          {% for c in v %}
+                              {{ c.customitemname }} - ₹{{ c.customitemprice }} /
+                          {% endfor %}
+                      {% endif %}
+                  {% endfor %}
                 <div class="d-grid gap-2">
-                <button class="btn btn-sm btn-success">Add</button>
+                <button onclick="customiseFunc(this.id)" id="{{i.product_id}}" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#customiseModal">Customise</button>
                 </div>
+                {% endif %}
               </div>
             </div>
           </div>
         </div>     
         {% endfor %}   
 </div>
+<!-- Modal For Customisable -->
+<div class="modal fade" id="customiseModal" tabindex="-1"  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" >Customise</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="table-responsive">
+          <div id="customItemData"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
 <!-- ------------------------------------------------------card-------------------------------------------------- -->
 {% endfor %}
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="{% static 'app_emenu3/js/customise.js' %}"></script>
+<script>
+  function customiseFunc(btnid){
+    var div = document.getElementById('customItemData');
+    div.innerHTML = "";
+    var table = document.createElement('TABLE');
+    var row = table.insertRow(0);
+
+    row.className = 'bg-gradient-' + 'primary' + ' text-white'
+    
+    var sno = row.insertCell(0);
+    var table_no = row.insertCell(1);
+    var seebutton_header = row.insertCell(2);
+    
+    sno.innerHTML = "Customise";
+    table_no.innerHTML = "Price";
+    seebutton_header.innerHTML = "Add";
+
+  	for (var i = 0; i < data.length; i++) {
+  
+        var row_entry = table.insertRow(table.rows.length);
+        row_entry.id = data[i].order_id.toString();
+  
+        var sno_entry = row_entry.insertCell(0);
+        var table_no_entry = row_entry.insertCell(1);
+        var seebutton_entry = row_entry.insertCell(2);
+  
+        sno_entry.innerHTML = "1";
+        table_no_entry.innerHTML = data[i].table_no;
+        seebutton_entry.innerHTML = '<button type="button" btn btn-outline-secondary btn-sm ">See</button>';
+
+    }
+
+    
+    table.className = 'table text-center table-hover table-dark'
+    div.appendChild(table);
+  } 
+</script>
 </body>
 </html>

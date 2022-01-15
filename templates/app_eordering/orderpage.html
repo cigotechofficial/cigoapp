@@ -13,12 +13,12 @@
 	</div>
 	<div class="col my-4">
 		<!-- <p>Table no: {{table_no}}</p> -->
-		<form method="post" action="/customerapp/{{restaurantid}}/{{tableno}}/{{hashcode}}/checkout/">
+		<form method="post" action="/eordering/{{restaurantid}}/{{tableno}}/{{hashcode}}/checkout/">
 			{% csrf_token %}
 			<input type="hidden" name="itemsJson" id="itemsJson">
 			<!-- <input type="hidden" id="status" name="status" value="0"> -->
 			<button type="submit" class="btn btn-info mr-2">Send Order </button>
-			<a href="/customerapp/{{restaurantid}}/{{tableno}}/{{hashcode}}/menu" class="btn btn-info" role="button">Change Order</a>
+			<a href="/eordering/{{restaurantid}}/{{tableno}}/{{hashcode}}/menu" class="btn btn-info" role="button">Change Order</a>
 		</form>
 	</div>
 	<p class="whitetext"> Once You Send The Order, It Cant Be Changed</p>
@@ -31,7 +31,7 @@ swal("Thanks For Ordering With Us!", {
 	})
 	.then((value) => {
 		localStorage.clear();
-		document.location.href = "/customerapp/{{restaurantid}}/{{tableno}}/{{hashcode}}/menu";
+		document.location.href = "/eordering/{{restaurantid}}/{{tableno}}/{{hashcode}}/menu";
 	});
 </script>
 {% endif %}

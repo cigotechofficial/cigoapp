@@ -1,4 +1,5 @@
-from setup.models import Menu
+from django.http.response import JsonResponse
+from setup.models import Menu, CustomItem
 from django.shortcuts import render
 from setup.models import Venue
 
@@ -28,10 +29,20 @@ def emenu(request,restaurantidslug):
 		prod = Menu.objects.filter(venue=restaurantidslug).filter(showtype=1).filter(availability="ava").filter(category=cat )
 		allProds.append(prod)
 
+	allcustomisablefields = {}
+	allcustomisableitems = Menu.objects.filter(venue=restaurantidslug).filter(showtype=1).filter(availability="ava").filter(customisable=1)
+	
+	for customisableitem in allcustomisableitems:
+		customisablefield = CustomItem.objects.filter(product_id=customisableitem.product_id)
+		allcustomisablefields[customisableitem.product_id] = customisablefield
+
+	# print(allcustomisablefields)
+
 	params={
 	'restaurantname':restaurantname,
 	'allProds': allProds,
 	'restaurantidslug':restaurantidslug,
+	'allcustomisablefields':allcustomisablefields
 	}
 	if emenutheme == 1:
 		return render(request,'app_emenu/menu.html', params)
