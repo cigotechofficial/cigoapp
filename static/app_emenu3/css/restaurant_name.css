@@ -1,0 +1,13 @@
+.restaurantname{
+    background-color:#ff9847;
+    padding: 10px;
+    padding-right: 20px;
+    padding-left: 20px;
+    border-bottom: 1px solid lightgray;
+    cursor: pointer;
+    border-radius: 25px;
+    box-shadow: rgb(100 100 111 / 50%) 0px 7px 29px 0px;
+    align-items: stretch;
+    z-index: 2;
+    color:white
+}

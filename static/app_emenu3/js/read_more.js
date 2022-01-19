@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    var maxLength = 60;
+    var maxLength = 50;
     $(".show-read-more").each(function(){
       var myStr = $(this).text();
       if($.trim(myStr).length > maxLength){

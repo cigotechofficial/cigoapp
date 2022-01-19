@@ -1,0 +1,13 @@
+.menucard{
+    background-color:white;
+    display: flex;
+    /*position: relative;*/
+    margin: 8px;
+    padding: 10px;
+    border-bottom: 1px solid lightgray;
+    cursor: pointer;
+    padding-top: 20px;
+    border-radius: 25px;
+    box-shadow: rgb(0 0 0 / 20%) 0px 25px 20px -20px;
+    align-items: stretch;
+}
