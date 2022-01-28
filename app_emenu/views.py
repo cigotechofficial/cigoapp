@@ -3,6 +3,7 @@ from setup.models import Menu, CustomItem
 from django.shortcuts import render
 from setup.models import Venue
 from setup.serializer import CustomItemSerializer
+import json
 
 def welcome(request,restaurantidslug):
 	venue = Venue.objects.get(venueid=restaurantidslug)
@@ -44,7 +45,7 @@ def emenu(request,restaurantidslug):
 		ser = CustomItemSerializer(item)
 		l.append(ser.data)
 
-		import json
+		
 
 	params={
 	'restaurantname':restaurantname,

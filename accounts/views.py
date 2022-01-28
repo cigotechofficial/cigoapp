@@ -36,15 +36,15 @@ def handleSignup(request):
 		user = authenticate(username=username, password=pass1)
 		login(request,user)
 
-		account_sid = 'AC6ec32e400820c7666099da69bd36d898'
-		auth_token = '8be1c4c2ac2bcee7af392f5aeff17d24'
-		client = Client(account_sid, auth_token)
+		# account_sid = 'AC6ec32e400820c7666099da69bd36d898'
+		# auth_token = '8be1c4c2ac2bcee7af392f5aeff17d24'
+		# client = Client(account_sid, auth_token)
 
-		call = client.calls.create(
-	                        url='http://demo.twilio.com/docs/voice.xml',
-	                        to='+918851623643',
-	                        from_='+18562889732'
-	                    )
+		# call = client.calls.create(
+	    #                     url='http://demo.twilio.com/docs/voice.xml',
+	    #                     to='+918851623643',
+	    #                     from_='+18562889732'
+	    #                 )
 		newuserinfo = Newuserinfo(name = fname, email = username, phone = phone)
 		newuserinfo.save()
 		

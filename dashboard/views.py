@@ -26,7 +26,7 @@ def dashboard(request):
 		group = request.user.groups.all()[0].name 
 
 		if group == 'Manager':
-
+ 
 			manager = Employee.objects.get(ph=request.user.username)
 			manager_venueid=manager.venue.venueid
 			venue=Venue.objects.get(venueid=manager_venueid)

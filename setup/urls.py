@@ -12,6 +12,11 @@ urlpatterns = [
     path('deleteemployee', views.deleteemployee, name='deleteemployee'),
     path('menupage/', views.menupage, name='menupage'),
     path('additem/', views.additem, name='additem'),
+
+    path('menupage/exportcsv/', views.export_menu_csv, name='menu_csv'),
+    path('menupage/import_csv/', views.import_csv, name='import_csv'),
+
+
     path('updatemenu/', views.updatemenu, name='updatemenu'),
     path('updateimg/', views.updateimg, name='updateimg'),
     path('menupage/deletemenu/', views.deletemenu, name='deletemenu'),

@@ -1,3 +1,4 @@
+from django.http import response
 from django.shortcuts import render,HttpResponse,redirect
 from django.contrib.auth.decorators import login_required
 from accounts.decorators import allowed_users
@@ -7,6 +8,10 @@ from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
 from django.contrib.auth import authenticate, login, logout
 from home.models import Defaultimg
+
+from django.http import HttpResponse
+import csv
+from tablib import Dataset
 
 from random import randint
 
@@ -386,3 +391,75 @@ def venueselect(request):
 # json.dumps(l)
 	return HttpResponse(json.dumps(allcat))
 
+def export_menu_csv(request):
+	if request.user.groups.exists():
+		group = request.user.groups.all()[0].name 
+
+		if group == 'Manager':
+			manager = Employee.objects.get(ph=request.user.username)
+			venueid=manager.venue.venueid
+
+		elif group == 'Owner':
+			venueid = Venue.objects.filter(owner=request.user)[0].venueid
+
+		response = HttpResponse(content_type='text/csv')
+		response['Content-Disposition'] = 'attachment; filename=menus.csv'
+		
+		writer = csv.writer(response)
+
+		menus = Menu.objects.filter(venue=venueid)
+		# print(menus)
+
+		writer.writerow(['product_id', 'product_name', 'category', 'description', 'price', 'serialno', 'customisable', 'showtype', 'pictype', 'availability', 'image'])
+
+		for item in menus:
+			writer.writerow([item.product_id, item.product_name, item.category, item.description, item.price, item.serialno, item.customisable, item.showtype, item.pictype, item.availability, item.image])
+
+		return response
+
+def import_csv(request):
+	if request.user.groups.exists():
+		group = request.user.groups.all()[0].name 
+
+		if group == 'Manager':
+			manager = Employee.objects.get(ph=request.user.username)
+			venueid=manager.venue.venueid
+
+		elif group == 'Owner':
+			venueid = Venue.objects.filter(owner=request.user)[0].venueid
+
+		if request.method == 'POST':
+			# person_resource = PersonResource()
+			dataset = Dataset()
+			new_menu = request.FILES['myfile']
+
+			imported_data = dataset.load(new_menu.read(), format='xlsx')
+
+
+			venue_name=Venue.objects.filter(venueid=venueid)[0].venuename
+
+			restaurant_menu = Menu.objects.filter(venue=venueid)
+			# print(restaurant_menu)
+
+			new_pids = [data[0] for data in imported_data]
+			
+			for itm in restaurant_menu:
+				if itm.product_id not in new_pids:
+					itm.delete()
+
+			for row in imported_data:
+				# new_pids.append(data[0])
+				entry = (row[0],) + (venueid, venue_name) + row[1:]
+				# print(row)
+				menu_obj = Menu(*entry)
+				menu_obj.save()  
+
+		
+
+		
+		#result = person_resource.import_data(dataset, dry_run=True)  # Test the data import
+
+		#if not result.has_errors():
+		#    person_resource.import_data(dataset, dry_run=False)  # Actually import now
+
+	return redirect('../')
