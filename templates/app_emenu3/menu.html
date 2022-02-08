@@ -63,7 +63,7 @@
 </nav>
 <!-- ------------------------------------------------------------nav------------------------------------------ -->
 
-
+<div style="height:300px;border-radius: 0 0 60% 0;background-color: #ff9847;">
 <!-- Swiper -->
     <div class="swiper mySwiper ">
       <div class="swiper-wrapper">
@@ -74,7 +74,10 @@
       </div>
       <div class="swiper-pagination"></div>
     </div>
-<center><h1 class="whitetext mt-5 "><span class="restaurantname">{{restaurantname}}</span></h1></center>
+<!-- Swiper -->
+
+<center><h1 class="mt-5 "><span class="restaurantname">{{restaurantname}}</span></h1></center>
+</div>
 {% for prodlist in allProds %}
 <!-- ------------------------------------------------------card-------------------------------------------------- -->
 <p class="px-3 mt-5" style="font-size: 20px; font-weight:500;" id="{{prodlist.0.category}}">{{prodlist.0.category}}</p>

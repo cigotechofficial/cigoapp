@@ -1,5 +1,6 @@
 .restaurantname{
-    background-color:#ff9847;
+    /* background-color:#ff9847; */
+    background-color:#eeeceb;
     padding: 10px;
     padding-right: 20px;
     padding-left: 20px;
@@ -9,5 +10,5 @@
     box-shadow: rgb(100 100 111 / 50%) 0px 7px 29px 0px;
     align-items: stretch;
     z-index: 2;
-    color:white
+    color:rgb(58, 55, 55)
 }
