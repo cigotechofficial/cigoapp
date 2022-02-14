@@ -4,10 +4,14 @@ branch-defaults:
     group_suffix: null
   master:
     environment: Production
+  prod:
+    environment: Production
+    group_suffix: null
   stage:
     environment: Staging
 global:
   application_name: Cigo
+  branch: null
   default_ec2_keyname: null
   default_platform: Python 3.7 running on 64bit Amazon Linux 2
   default_region: ap-south-1
@@ -16,5 +20,6 @@ global:
   platform_name: null
   platform_version: null
   profile: eb-cli
+  repository: null
   sc: git
   workspace_type: Application
