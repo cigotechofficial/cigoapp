@@ -27,7 +27,7 @@ SECRET_KEY = '97quixm#*05p9d5f(w%11f96nutg82dw*+lgdn)bfp$3xi@@oh'
 # DEBUG = True
 
 
-ALLOWED_HOSTS = ['cigostaging.ap-south-1.elasticbeanstalk.com','cigoproduction.ap-south-1.elasticbeanstalk.com', 'www.cigo.co.in', 'cigo.co.in']
+ALLOWED_HOSTS = ['cigostaging.ap-south-1.elasticbeanstalk.com','cigoprod.ap-south-1.elasticbeanstalk.com', 'www.cigo.co.in', 'cigo.co.in']
 
 # ALLOWED_HOSTS = ['*']
 
@@ -175,11 +175,11 @@ AUTHENTICATION_BACKENDS = (
  'allauth.account.auth_backends.AuthenticationBackend',
  )
 
-# ---------------------------for https ----------------------------------------
-# if os.getcwd() == '/app':
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_SSL_REDIRECT = True
-DEBUG = False
+# # ---------------------------for https ----------------------------------------
+# # if os.getcwd() == '/app':
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# SECURE_SSL_REDIRECT = True
+# DEBUG = False
 
 
 AWS_ACCESS_KEY_ID = 'AKIAX3RRDD2KH74DTQ3M'
