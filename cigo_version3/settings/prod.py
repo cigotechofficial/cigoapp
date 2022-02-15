@@ -28,9 +28,23 @@ SECURE_SSL_REDIRECT = False
 
 #     }
 # }
+
+# DATABASES = {
+# 	'default': {
+# 		'ENGINE': 'django.db.backends.sqlite3',
+# 		'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+# 	}
+# }
+
 DATABASES = {
-	'default': {
-		'ENGINE': 'django.db.backends.sqlite3',
-		'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-	}
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        # 'NAME':'CigoProdDatabase',
+        'NAME':'cigoproduction_database',
+        'USER':'cigo_ryan',
+        'PASSWORD':'cigo_2022',
+        'HOST':'database-cigo.cckg5toxqpnf.ap-south-1.rds.amazonaws.com',
+        'PORT':'3306'
+
+    }
 }
