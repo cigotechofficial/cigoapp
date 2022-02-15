@@ -41,10 +41,10 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         # 'NAME':'CigoProdDatabase',
         'NAME':'cigoproduction_database',
+        'HOST':'database-cigo.cckg5toxqpnf.ap-south-1.rds.amazonaws.com',
         'USER':'cigo_ryan',
         'PASSWORD':'cigo_2022',
-        'HOST':'database-cigo.cckg5toxqpnf.ap-south-1.rds.amazonaws.com',
-        'PORT':'3306'
+        'PORT':'3306',
 
     }
 }
