@@ -48,3 +48,19 @@ DATABASES = {
 
     }
 }
+
+AWS_ACCESS_KEY_ID = 'AKIAX3RRDD2KGR5JQSJE' 
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'cigo-bucket'
+
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+
+
+AWS_S3_FILE_OVERWRITE = False
+
+AWS_DEFAULT_ACL = None
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
+
+
