@@ -9,6 +9,10 @@ branch-defaults:
     group_suffix: null
   stage:
     environment: Staging
+environment-defaults:
+  Production:
+    branch: null
+    repository: null
 global:
   application_name: Cigo
   branch: null

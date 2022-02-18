@@ -27,11 +27,7 @@
 # # DEBUG = True
 
 
-<<<<<<< HEAD
-ALLOWED_HOSTS = ['cigostaging.ap-south-1.elasticbeanstalk.com','cigoprod.ap-south-1.elasticbeanstalk.com', 'www.cigo.co.in', 'cigo.co.in']
-=======
 # ALLOWED_HOSTS = ['cigostaging.ap-south-1.elasticbeanstalk.com','cigoproduction.ap-south-1.elasticbeanstalk.com', 'www.cigo.co.in', 'cigo.co.in']
->>>>>>> dev
 
 # # ALLOWED_HOSTS = ['*']
 
