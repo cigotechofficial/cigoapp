@@ -5,7 +5,7 @@ branch-defaults:
   master:
     environment: Production
   prod:
-    environment: Production
+    environment: stageing
     group_suffix: null
   stage:
     environment: Staging
