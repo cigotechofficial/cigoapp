@@ -5,11 +5,14 @@ branch-defaults:
   master:
     environment: Production
   prod:
-    environment: stageing
+    environment: Cigo-env
     group_suffix: null
   stage:
     environment: Staging
 environment-defaults:
+  Cigo-env:
+    branch: null
+    repository: null
   Production:
     branch: null
     repository: null
