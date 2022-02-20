@@ -2,7 +2,7 @@ from cigo_version3.settings.base import *
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['cigo-env.eba-steer7fa.ap-south-1.elasticbeanstalk.com','cigoprod.ap-south-1.elasticbeanstalk.com', 'www.cigo.co.in', 'cigo.co.in']
+ALLOWED_HOSTS = ['172.31.13.229','cigo-env.eba-steer7fa.ap-south-1.elasticbeanstalk.com','cigoprod.ap-south-1.elasticbeanstalk.com', 'www.cigo.co.in', 'cigo.co.in']
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
