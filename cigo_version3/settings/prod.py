@@ -29,25 +29,25 @@ SECURE_SSL_REDIRECT = False
 #     }
 # }
 
-# DATABASES = {
-# 	'default': {
-# 		'ENGINE': 'django.db.backends.sqlite3',
-# 		'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-# 	}
-# }
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        # 'NAME':'CigoProdDatabase',
-        'NAME':'cigoproduction_database',
-        'HOST':'database-cigo.cckg5toxqpnf.ap-south-1.rds.amazonaws.com',
-        'USER':'cigo_ryan',
-        'PASSWORD':'cigo_2022',
-        'PORT':'3306',
-
-    }
+	'default': {
+		'ENGINE': 'django.db.backends.sqlite3',
+		'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+	}
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         # 'NAME':'CigoProdDatabase',
+#         'NAME':'cigoproduction_database',
+#         'HOST':'database-cigo.cckg5toxqpnf.ap-south-1.rds.amazonaws.com',
+#         'USER':'cigo_ryan',
+#         'PASSWORD':'cigo_2022',
+#         'PORT':'3306',
+
+#     }
+# }
 
 AWS_ACCESS_KEY_ID = 'AKIAX3RRDD2KLDJMSWL4' 
 AWS_SECRET_ACCESS_KEY = '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'
