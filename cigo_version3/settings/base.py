@@ -27,7 +27,6 @@ SECRET_KEY = '97quixm#*05p9d5f(w%11f96nutg82dw*+lgdn)bfp$3xi@@oh'
 # Application definition
 
 INSTALLED_APPS = [
-	'qr_code',
 	'accounts.apps.AccountsConfig',
 	'setup.apps.SetupConfig',
 	'home.apps.HomeConfig',
