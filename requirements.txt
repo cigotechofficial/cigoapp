@@ -17,7 +17,6 @@ idna==3.3
 jmespath==0.10.0
 MarkupPy==1.14
 mysql
-mysql-devel
 oauthlib==3.2.0
 odfpy==1.4.1
 openpyxl==3.0.9
