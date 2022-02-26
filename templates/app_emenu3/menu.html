@@ -21,19 +21,16 @@
     href="https://unpkg.com/swiper/swiper-bundle.min.css"
     />
 <!-- --------------------------------------font-------------------------------------------- -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap" rel="stylesheet">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oxygen&family=PT+Sans+Caption&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;500;600&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="{% static 'app_emenu3\css\font.css' %}">
   </head>
   <body style="background-color:#f6f6f6">
     <!-- --------------------------------------------------nav-------------------------------------- -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="#"><img style="height:36px" src="https://cigo-statics.s3.ap-south-1.amazonaws.com/Logo.png"></a>
     
@@ -76,7 +73,7 @@
 </div>
 {% for prodlist in allProds %}
 <!-- ------------------------------------------------------card-------------------------------------------------- -->
-<p class="customfont px-3 mt-5" style="font-size: 20px; font-weight:500;" id="{{prodlist.0.category}}">{{prodlist.0.category}}</p>
+<p class="customfont px-3 mt-5" style="font-size: 22px; font-weight:700;" id="{{prodlist.0.category}}">{{prodlist.0.category}}</p>
 <div class="container-fluid">
   {% for i in prodlist %}
         <div class=" col-md-4 col-sm-6 col-12  ">
@@ -84,10 +81,10 @@
             <div class="row">
               <div class="col-md-8 col-sm-8 col-8">
                 <div class="card-body">
-                  <p style="font-size: 14px; font-weight:500;" class=" customfont card-title">{{i.product_name}} </p>
-                  <p class="card-text"><small class=" customfont text-muted">₹ {{i.price}}</small></p>
+                  <p style="font-size: 18px; font-weight:600; " class=" customfont card-title">{{i.product_name}} </p>
+                  <p style="font-size: 14px; font-weight:400;" class="card-text">₹ {{i.price}}</p>
                   
-                  <p  style="font-size: 12px;" class="customfont show-read-more text-gray-200 mt-2">{{i.description}}</p>
+                  <p  style="font-size: 13px;" class="customfont show-read-more text-gray-200 mt-2">{{i.description}}</p>
                 </div>
               </div>
               <div class="col-md-4 col-sm-4 col-4 my-auto">
