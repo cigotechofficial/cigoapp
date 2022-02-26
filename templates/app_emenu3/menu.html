@@ -14,19 +14,28 @@
     <link rel="stylesheet" href="{% static 'app_emenu3\css\swiper.css' %}">
     <link rel="stylesheet" href="{% static 'app_emenu3\css\restaurant_name.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    
+    <link rel="icon" href="https://cigo-statics.s3.ap-south-1.amazonaws.com/Logoicon.png">
     <title>Order With Cigo</title>
     <link
     rel="stylesheet"
     href="https://unpkg.com/swiper/swiper-bundle.min.css"
     />
+<!-- --------------------------------------font-------------------------------------------- -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap" rel="stylesheet">
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oxygen&family=PT+Sans+Caption&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="{% static 'app_emenu3\css\font.css' %}">
   </head>
   <body style="background-color:#f6f6f6">
     <!-- --------------------------------------------------nav-------------------------------------- -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#"><img style="height:36px" src="https://cigo-statics.s3.ap-south-1.amazonaws.com/Logo.png"></a>
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -34,30 +43,17 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class=" customfont nav-link active" aria-current="page" href="#">Home</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class=" customfont nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Dropdown
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><a class=" customfont dropdown-item" href="https://cigo.co.in">Visit Cigo Website</a></li>
           </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link disabled">Disabled</a>
-        </li>
-      </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      </ul>>
     </div>
   </div>
 </nav>
@@ -76,11 +72,11 @@
     </div>
 <!-- Swiper -->
 
-<center><h1 class="mt-5 "><span class="restaurantname">{{restaurantname}}</span></h1></center>
+<center><h1 class="mt-5 "><span class="customfont restaurantname">{{restaurantname}}</span></h1></center>
 </div>
 {% for prodlist in allProds %}
 <!-- ------------------------------------------------------card-------------------------------------------------- -->
-<p class="px-3 mt-5" style="font-size: 20px; font-weight:500;" id="{{prodlist.0.category}}">{{prodlist.0.category}}</p>
+<p class="customfont px-3 mt-5" style="font-size: 20px; font-weight:500;" id="{{prodlist.0.category}}">{{prodlist.0.category}}</p>
 <div class="container-fluid">
   {% for i in prodlist %}
         <div class=" col-md-4 col-sm-6 col-12  ">
@@ -88,10 +84,10 @@
             <div class="row">
               <div class="col-md-8 col-sm-8 col-8">
                 <div class="card-body">
-                  <p style="font-size: 14px; font-weight:500;" class="card-title">{{i.product_name}} </p>
-                  <p class="card-text"><small class="text-muted">₹ {{i.price}}</small></p>
+                  <p style="font-size: 14px; font-weight:500;" class=" customfont card-title">{{i.product_name}} </p>
+                  <p class="card-text"><small class=" customfont text-muted">₹ {{i.price}}</small></p>
                   
-                  <p  style="font-size: 12px;" class="show-read-more text-gray-200 mt-2">{{i.description}}</p>
+                  <p  style="font-size: 12px;" class="customfont show-read-more text-gray-200 mt-2">{{i.description}}</p>
                 </div>
               </div>
               <div class="col-md-4 col-sm-4 col-4 my-auto">
@@ -118,7 +114,7 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" >Customise</h5>
+        <h5 class="customfont modal-title" >Customise</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
