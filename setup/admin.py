@@ -13,7 +13,7 @@ class ItemAdmin(ImportExportModelAdmin):
 
 
 class CustomiseAdmin(ImportExportModelAdmin):
-	resource_class = ItemAdminResource
+	resource_class = CustomiseAdminResource
 	list_display=('product_id','customitemname','customitemprice')
 	list_filter=['product_id','customitemname']
 
